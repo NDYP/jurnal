@@ -214,9 +214,9 @@
         $no_hp = $this->input->post('no_hp');
         $id_user = $this->input->post('id_user');
 
-        $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+
         $data = array(
-          'password' => $password,
+
           'foto' => $file,
           'nip_nim' => $nip_nim,
           'nama' => $nama,

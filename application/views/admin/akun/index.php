@@ -1,18 +1,19 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        
-            <a href="<?= site_url('admin/akun/edit_foto'); ?>" class=""> Ubah Foto</a> |
-        
-        
-            <a href="<?= site_url('admin/akun/edit_profil'); ?>" class=""> Ubah Profil</a> |
-        
-        
-            <a href="<?= site_url('admin/akun/edit_password'); ?>" class=""> Ubah Password</a>
-        
+
+        <a href="<?= site_url('admin/akun/edit_foto'); ?>" class=""> Ubah Foto</a> |
+
+
+        <a href="<?= site_url('admin/akun/edit_profil'); ?>" class=""> Ubah Profil</a> |
+
+
+        <a href="<?= site_url('admin/akun/edit_password'); ?>" class=""> Ubah Password</a>
+
     </section>
     <!-- Main content -->
     <section class="content">
+        <?= $this->session->flashdata('message'); ?>
         <div class="row">
             <!-- /.col -->
             <div class="col-md-12">
@@ -40,26 +41,23 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <table class="table no-border">
-                                                   <?php if ($akun['id_kategori']==2) { ?>
-                                                       
-                                                    <tr>
-                                                        <th>NIM</th>
-                                                        <td> : <?= $akun['nip_nim'] ?></td>
-                                                    </tr>
+                                                    <?php if ($akun['id_kategori'] == 2) { ?>
+                                                        <tr>
+                                                            <th>NIM</th>
+                                                            <td> : <?= $akun['nip_nim'] ?></td>
+                                                        </tr>
                                                     <?php } ?>
-                                                    <?php if ($akun['id_kategori']==1) { ?>
-                                                       
-                                                    <tr>
-                                                        <th>NIP</th>
-                                                        <td> : <?= $akun['nip_nim'] ?></td>
-                                                    </tr>
+                                                    <?php if ($akun['id_kategori'] == 1) { ?>
+                                                        <tr>
+                                                            <th>NIP</th>
+                                                            <td> : <?= $akun['nip_nim'] ?></td>
+                                                        </tr>
                                                     <?php } ?>
-                                                     <?php if ($akun['nip_nim']==1) { ?>
-                                                       
-                                                    <tr>
-                                                        <th>NIP / NIM</th>
-                                                        <td> : <?= $akun['nip_nim'] ?></td>
-                                                    </tr>
+                                                    <?php if ($akun['id_kategori'] == 3) { ?>
+                                                        <tr>
+                                                            <th>Username</th>
+                                                            <td> : <?= $akun['nip_nim'] ?></td>
+                                                        </tr>
                                                     <?php } ?>
                                                     <tr>
                                                         <th>Nama Lengkap </th>
@@ -93,15 +91,15 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <table class="table no-border">
-                                                    <?php if ($akun['id_kategori']==2) { ?>
-                                                       <tr>
-                                                        <th>Pembimbing 1</th>
-                                                        <td> : <?= $akun['id_pembimbing1'] ?></td>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Pembimbing 2</th>
-                                                        <td> : <?= $akun['id_pembimbing2'] ?></td>
-                                                    </tr>
+                                                    <?php if ($akun['id_kategori'] == 2) { ?>
+                                                        <tr>
+                                                            <th>Pembimbing 1</th>
+                                                            <td> : <?= $akun['id_pembimbing1'] ?></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Pembimbing 2</th>
+                                                            <td> : <?= $akun['id_pembimbing2'] ?></td>
+                                                        </tr>
                                                     <?php } ?>
                                                     <tr>
                                                         <th>Tanggal Daftar </th>
@@ -129,7 +127,7 @@
             </div>
             <!-- /.col -->
         </div>
-        
+
     </section>
     <!-- /.content -->
 </div>

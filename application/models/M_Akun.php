@@ -33,18 +33,7 @@ class M_Akun extends CI_Model
         return $query;
     }
 
-    public function ambil_akun($id_user)
-    {
-        $this->db->select('*');
-        $this->db->from('user');
-        $this->db->join('pegawai', 'user.id_pegawai=pegawai.id_pegawai', 'left');
-        $this->db->join('role', 'user.id_role=role.id_role', 'left');
-        $this->db->join('status', 'user.id_status=status.id_status', 'left');
-        $this->db->where('user.id_user', $id_user);
-        $query = $this->db->get();
-        return $query->result();
-    }
-    public function updateusername($tabel, $data, $where)
+    public function update($tabel, $data, $where)
     {
         return $this->db->update($tabel, $data, $where);
     }

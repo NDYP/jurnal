@@ -39,12 +39,8 @@
 
                     <div class="box-body">
                         <div class="col-md-6">
-                            <input type="text" value="<?= $penulis['id_user']; ?>" name="id_user">
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="text" class="form-control" name="password" id="password">
-                                <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
-                            </div>
+                            <input type="hidden" value="<?= $penulis['id_user']; ?>" name="id_user">
+
                             <div class="form-group">
                                 <label>NIM</label>
                                 <input type="text" class="form-control" name="nip_nim" id="nip_nim" value="<?= $penulis['nip_nim']; ?>">

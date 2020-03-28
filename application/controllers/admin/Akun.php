@@ -30,7 +30,7 @@ class Akun extends CI_Controller
     {
         $data['akun'] = $this->M_Akun->login();
         $data['jk'] = $this->M_Master->jk();
-            $data['agama'] = $this->M_Master->agama();
+        $data['agama'] = $this->M_Master->agama();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/akun/edit_profil', $data);
@@ -40,13 +40,13 @@ class Akun extends CI_Controller
     {
         $data['akun'] = $this->M_Akun->login();
         $data['jk'] = $this->M_Master->jk();
-            $data['agama'] = $this->M_Master->agama();
+        $data['agama'] = $this->M_Master->agama();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/akun/edit_password', $data);
         $this->load->view('admin/template/footer', $data);
     }
- 
+
     function edit($id_jurnal)
     {
         $data['title'] = 'REVISI JURNAL SKRIPSI';
@@ -123,5 +123,130 @@ class Akun extends CI_Controller
             }
         }
     }
-    
+    function simpan()
+    {
+        if ($this->upload->do_upload('foto')) {
+            $gbr = $this->upload->data();
+            $config['image_library'] = 'gd2';
+            $config['source_image'] = './assets/foto/mhs/' . $gbr['file_name'];
+            $config['maintain_ratio'] = FALSE;
+            $config['overwrite'] = TRUE;
+            $config['max_size']  = 1024;
+            $config['new_image'] = './assets/foto/mhs/' . $gbr['file_name'];
+            $this->load->library('image_lib', $config);
+            $this->image_lib->resize();
+            $file = $gbr['file_name'];
+
+            $nip_nim = $this->input->post('nip_nim');
+            $nama = $this->input->post('nama');
+            $tempat_lahir = $this->input->post('tempat_lahir');
+            $tgl_lahir = $this->input->post('tgl_lahir');
+            $email = $this->input->post('email');
+            $id_jk = $this->input->post('id_jk');
+            $id_agama = $this->input->post('id_agama');
+            $alamat = $this->input->post('alamat');
+            $no_hp = $this->input->post('no_hp');
+            $id_user = $this->input->post('id_user');
+
+            $data = array(
+                'foto' => $file,
+
+                'nip_nim' => $nip_nim,
+                'nama' => $nama,
+                'id_jk' => $id_jk,
+                'tempat_lahir' => $tempat_lahir,
+                'tgl_lahir' => $tgl_lahir,
+                'alamat' => $alamat,
+                'no_hp' => $no_hp,
+                'email' => $email,
+                'id_agama' => $id_agama,
+            );
+            $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+            Berhasil Mengedit Data</div>');
+            redirect('admin/akun/index');
+        } else {
+            $nip_nim = $this->input->post('nip_nim');
+            $nama = $this->input->post('nama');
+            $tempat_lahir = $this->input->post('tempat_lahir');
+            $tgl_lahir = $this->input->post('tgl_lahir');
+            $email = $this->input->post('email');
+            $id_jk = $this->input->post('id_jk');
+            $id_agama = $this->input->post('id_agama');
+            $alamat = $this->input->post('alamat');
+            $no_hp = $this->input->post('no_hp');
+            $id_user = $this->input->post('id_user');
+            $data = array(
+                'nip_nim' => $nip_nim,
+                'nama' => $nama,
+                'id_jk' => $id_jk,
+                'tempat_lahir' => $tempat_lahir,
+                'tgl_lahir' => $tgl_lahir,
+                'alamat' => $alamat,
+                'no_hp' => $no_hp,
+                'email' => $email,
+                'id_agama' => $id_agama,
+            );
+            $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+            Berhasil Mengedit Data</div>');
+            redirect('admin/akun/index');
+        }
+    }
+    function simpanpassword()
+    {
+
+        $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+        $id_user = $this->input->post('id_user');
+        $data = array(
+            'password' => $password,
+        );
+        $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+        $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+            Berhasil Mengedit Data</div>');
+        redirect('admin/akun/index');
+    }
+    function simpanfoto()
+    {
+        $config['upload_path'] = './assets/foto/mhs/'; //path folder
+        $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa sesuaikan
+        $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
+
+        $this->upload->initialize($config);
+        if (!empty($_FILES['foto']['name'])) {
+            if ($this->upload->do_upload('foto')) {
+                $gbr = $this->upload->data();
+                $config['image_library'] = 'gd2';
+                $config['source_image'] = './assets/foto/mhs/' . $gbr['file_name'];
+                $config['maintain_ratio'] = FALSE;
+                $config['overwrite'] = TRUE;
+                $config['max_size']  = 1024;
+                $config['new_image'] = './assets/foto/mhs/' . $gbr['file_name'];
+                $this->load->library('image_lib', $config);
+                $this->image_lib->resize();
+                $file = $gbr['file_name'];
+
+                $nip_nim = $this->input->post('nip_nim');
+
+                $id_user = $this->input->post('id_user');
+                $data = array(
+                    'foto' => $file,
+                    'nip_nim' => $nip_nim,
+
+                );
+                $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+            Berhasil Mengedit Data</div>');
+                redirect('admin/akun/index');
+            } else {
+                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Pilih Foto</div>');
+                redirect('admin/akun/index');
+            }
+        } else {
+
+            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+         Gagal Upload</div>');
+            redirect('admin/akun/index');
+        }
+    }
 }
