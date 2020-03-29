@@ -28,7 +28,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url('assets/') ?>/index.html"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
+            <li><a href="<?= base_url('admin/dashboard') ?>"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
             <li><a href="<?= base_url('assets/') ?>/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
           </ul>
         </li>

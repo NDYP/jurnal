@@ -38,8 +38,7 @@ class Login extends CI_Controller
                     if (($cek['id_status'] == '1')) {
                         if (password_verify($password, $data['password'])) {
                             $all = [
-                                'masuk' => TRUE,
-                                'akses' => '1',
+
                                 'id_user' => $data['id_user'],
                                 'nip_nim' => $data['nip_nim'],
                                 'nama' => $data['nama'],
@@ -57,7 +56,7 @@ class Login extends CI_Controller
                                 'id_kategori' => $data['id_kategori'],
                             ];
                             $this->session->set_userdata($all);
-                            redirect('admin/Editor');
+                            redirect('admin/dashboard');
                         } else {
                             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
                             redirect('admin/login');

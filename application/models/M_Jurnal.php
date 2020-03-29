@@ -7,7 +7,6 @@ class M_Jurnal extends CI_Model
     {
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
             ->from('jurnal')
-
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
@@ -18,11 +17,39 @@ class M_Jurnal extends CI_Model
             ->result_array();
         return $query;
     }
+    public function indexpengunjung($limit, $offset)
+    {
+        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
+            ->from('jurnal')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->order_by('id_jurnal', 'asc')
+            ->limit($limit, $offset)
+            ->get();
+        return $query;
+    }
+    public function getAll()
+    {
+        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
+            ->from('jurnal')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->order_by('id_jurnal', 'asc')
+            ->get();
+        return $query;
+    }
     public function bimbingan()
     {
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
             ->from('jurnal')
-
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
@@ -37,14 +64,12 @@ class M_Jurnal extends CI_Model
     {
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
             ->from('jurnal')
-
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'right')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
-
             ->where('jurnal.id_jurnal', $id_jurnal)
             ->get()
             ->row_array();

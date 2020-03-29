@@ -38,6 +38,8 @@
 <script src="<?= base_url('assets/') ?>/plugins/tinymce/js/tinymce/tinymce.min.js"></script>
 <!-- bootstrap datepicker -->
 <script src="<?= base_url('assets/') ?>/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+<script src="<?= base_url('assets/') ?>bower_components/raphael/raphael.min.js"></script>
+<script src="<?= base_url('assets/') ?>bower_components/morris.js/morris.min.js"></script>
 <script>
   $(function() {
     $('#example1').DataTable()

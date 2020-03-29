@@ -19,7 +19,7 @@
             <div class="col-md-12">
                 <div class="box">
                     <div class="box-header bg-green">
-                        <center><text>PROFILE</text></center>
+                        <center><text>PROFIL</text></center>
                     </div>
                     <div class="box-body">
                         <div class="col-md-3">

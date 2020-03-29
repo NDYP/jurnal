@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="<?= base_url('assets/') ?>/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
   <!-- bootstrap wysihtml5 - text editor -->
   <link rel="stylesheet" href="<?= base_url('assets/') ?>/plugins/summernote/summernote.css">
+  <link rel="stylesheet" href="<?= base_url('assets/') ?>/bower_components/morris.js/morris.css">
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
   <!--[if lt IE 9]>

@@ -102,7 +102,7 @@ $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
                         'id_agama' => $id_agama,
                         'id_kategori' => '3',
                         'id_status' => '1',
-                        'tanggal_regis' => time(),
+                        'tanggal_regis' => timestamp(),
                     );
                     $this->M_Editor->tambah('user', $data);
                     $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">

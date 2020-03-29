@@ -146,10 +146,10 @@
                                                 <?php foreach ($komentar as $row) { ?>
                                                     <div class="item">
                                                         <?php if ($row['foto'] !== NULL) { ?>
-                                                            <img src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" alt="user image" class="offline">
+                                                            <img src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" alt="user image" class="img-box">
                                                         <?php } ?>
                                                         <?php if ($row['foto'] == NULL) { ?>
-                                                            <img src="<?= base_url('assets/') ?>foto/default.png" alt="user image" class="offline">
+                                                            <img src="<?= base_url('assets/') ?>foto/default.png" alt="user image" class="img-box">
                                                         <?php } ?>
                                                         <p class="message">
                                                             <a href="#" class="name">

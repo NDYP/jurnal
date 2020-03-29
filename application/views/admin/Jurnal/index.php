@@ -42,19 +42,19 @@
                     <td><a class="btn btn-md" href="<?= site_url('assets/jurnal/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a>
                     <td>
                       <center>
-                      <div class="input-group-btn">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?= $row['nama_status_jurnal']; ?>
-                          <span class="fa fa-caret-down"></span></button>
-                        <ul class="dropdown-menu">
-                          <?php if ($this->session->userdata('id_kategori') == 1) { ?>
-                            <li><a href="<?= site_url('admin/komentar/revisi_editor/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
-                            <li><a href="<?= site_url('admin/komentar/revisi_penulis/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
-                          <?php  } ?>
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?= $row['nama_status_jurnal']; ?>
+                            <span class="fa fa-caret-down"></span></button>
+                          <ul class="dropdown-menu">
+                            <?php if ($this->session->userdata('id_kategori') == 1) { ?>
+                              <li><a href="<?= site_url('admin/komentar/revisi_editor/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
+                              <li><a href="<?= site_url('admin/komentar/revisi_penulis/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
+                            <?php  } ?>
 
-                          <li><a href="<?= site_url('admin/komentar/tidak_publish/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
-                          <li><a href="<?= site_url('admin/komentar/publish/' . $row['id_jurnal']); ?>">Publish</a></li>
-                        </ul>
-                      </div>
+                            <li><a href="<?= site_url('admin/komentar/tidak_publish/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
+                            <li><a href="<?= site_url('admin/komentar/publish/' . $row['id_jurnal']); ?>">Publish</a></li>
+                          </ul>
+                        </div>
                       </center>
                     </td>
                     <td>
