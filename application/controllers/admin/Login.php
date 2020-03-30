@@ -152,6 +152,10 @@ class Login extends CI_Controller
 
     function logout()
     {
+        date_default_timezone_set("ASIA/JAKARTA");
+        $date = array('tanggal_logout' => date('Y-m-d H:i:s'));
+        $id_user = $this->session->userdata('id_user');
+        $this->M_Login->logout($date, $id_user);
         $this->session->sess_destroy();
         redirect('admin/login');
     }

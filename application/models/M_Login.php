@@ -29,4 +29,11 @@
             ->get();
         return $query;
     }
+
+
+    public function logout($date, $id_user)
+    {
+        $this->db->where('user.id_user', $id_user);
+        $this->db->update('user', $date);
+    }
 }

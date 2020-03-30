@@ -21,8 +21,8 @@
     public function simpan()
     {
         $this->form_validation->set_rules('password', 'password', 'required|trim', [
-      'required' => 'Password Tidak Boleh Kosong!'
-    ]);
+            'required' => 'Password Tidak Boleh Kosong!'
+        ]);
         $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
             'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
         ]);
@@ -86,10 +86,9 @@
                     $id_agama = $this->input->post('id_agama');
                     $alamat = $this->input->post('alamat');
                     $no_hp = $this->input->post('no_hp');
-
-$password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-          $data = array(
-            'password' => $password,
+                    $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+                    $data = array(
+                        'password' => $password,
                         'foto' => $file,
                         'nip_nim' => $nip_nim,
                         'nama' => $nama,
@@ -102,7 +101,6 @@ $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
                         'id_agama' => $id_agama,
                         'id_kategori' => '3',
                         'id_status' => '1',
-                        'tanggal_regis' => timestamp(),
                     );
                     $this->M_Editor->tambah('user', $data);
                     $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
@@ -124,9 +122,10 @@ $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
                 $alamat = $this->input->post('alamat');
                 $no_hp = $this->input->post('no_hp');
 
-     $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-          $data = array(
-            'password' => $password,
+                $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+
+                $data = array(
+                    'password' => $password,
                     'nip_nim' => $nip_nim,
                     'nama' => $nama,
                     'id_jk' => $id_jk,
@@ -138,7 +137,6 @@ $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
                     'id_agama' => $id_agama,
                     'id_kategori' => '3',
                     'id_status' => '1',
-                    'tanggal_regis' => time(),
                 );
                 $this->M_Editor->tambah('user', $data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">

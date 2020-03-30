@@ -102,7 +102,7 @@
                         'id_agama' => $id_agama,
                         'id_kategori' => '1',
                         'id_status' => '1',
-                        'tanggal_regis' => time(),
+
                     );
                     $this->M_Reviewer->tambah('user', $data);
                     $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
@@ -138,7 +138,6 @@
                     'id_agama' => $id_agama,
                     'id_kategori' => '1',
                     'id_status' => '1',
-                    'tanggal_regis' => time(),
                 );
                 $this->M_Reviewer->tambah('user', $data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">

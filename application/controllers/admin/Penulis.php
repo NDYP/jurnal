@@ -103,7 +103,6 @@
             'id_agama' => $id_agama,
             'id_kategori' => '2',
             'id_status' => '2',
-            'tanggal_regis' => time(),
           );
           $this->M_Penulis->tambah('user', $data);
           $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
@@ -139,7 +138,6 @@
           'id_agama' => $id_agama,
           'id_kategori' => '2',
           'id_status' => '2',
-          'tanggal_regis' => time(),
         );
         $this->M_Penulis->tambah('user', $data);
         $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">

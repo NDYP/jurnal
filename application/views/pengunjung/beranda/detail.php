@@ -14,7 +14,7 @@
                                     <div class="media">
                                         <div class="media-body">
                                             <h5><?= $jurnal['nama']; ?></h5>
-                                            <p><?= date('d-m-Y, H:i:s', strtotime($jurnal['tgl_upload'])); ?></p>
+                                            <p><?= date('d F Y, H:i:s', strtotime($jurnal['tgl_upload'])); ?></p>
                                         </div>
                                         <div class="d-flex">
                                             <img width="42" height="42" src="<?= base_url('assets/foto/mhs/' . $jurnal['foto']) ?>" alt="">
@@ -44,7 +44,7 @@
                                             <div class="col-md-11">
                                                 <div class="desc">
                                                     <h5><a href="#"><?= $row['nama']; ?></a></h5>
-                                                    <p class="date"><?= date('d-m-Y, H:i:s', strtotime($row['tanggal'])); ?></p>
+                                                    <p class="date"><?= date('d F Y, H:i:s', strtotime($row['tanggal'])); ?></p>
                                                     <p class="comment" align="justify">
                                                         <?= $row['komentar']; ?>
                                                     </p>

@@ -9,7 +9,7 @@
     <section class="content">
 
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
 
                 <!-- Profile Image -->
                 <div class="box">
@@ -31,7 +31,7 @@
 
             </div>
             <!-- /.col -->
-            <div class="col-md-8">
+            <div class="col-md-9">
                 <div class="box">
                     <div class="box-header bg-navy">
                         <center><text>BIODATA</text></center>
@@ -81,10 +81,6 @@
                                                 <tr>
                                                     <th>Agama</th>
                                                     <td> : <?= $reviewer['nama_agama'] ?></td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Tanggal Daftar </th>
-                                                    <td> : <?= date('d-m-Y', strtotime($reviewer['tanggal_regis'])); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Tanggal Logout </th>

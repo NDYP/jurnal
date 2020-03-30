@@ -10,7 +10,7 @@
                                 <div class="thumb">
                                     <ul class="thumb-info">
                                         <li><a href="#"><i class="ti-user"></i><?= $row['nama']; ?></a></li>
-                                        <li><a href="#"><i class="ti-notepad"></i><?= date('d-m-Y', strtotime($row['tgl_upload'])); ?></a></li>
+                                        <li><a href="#"><i class="ti-notepad"></i><?= date('d F Y', strtotime($row['tgl_upload'])); ?></a></li>
                                         <li><a href="#"><i class="ti-themify-favicon"></i>2 Comments</a></li>
                                     </ul>
                                 </div>
