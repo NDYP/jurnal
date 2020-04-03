@@ -4,15 +4,16 @@
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Editor');
-        $this->load->model('M_Master');
-        $this->load->model('M_Akun');
+        $this->load->model('M_User');
+        $this->load->model('M_Agama');
+        $this->load->model('M_Jenis_Kelamin');
+        $this->load->model('M_User');
     }
     public function index()
     {
         $data['title'] = "EDITOR JURNAL";
-        $data['editor'] = $this->M_Editor->index();
-        $data['akun'] = $this->M_Akun->login();
+        $data['editor'] = $this->M_User->index_editor();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/editor/index', $data);
@@ -51,9 +52,9 @@
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "FORM TAMBAH DATA EDITOR";
-            $data['jk'] = $this->M_Master->jk();
-            $data['agama'] = $this->M_Master->agama();
-            $data['akun'] = $this->M_Akun->login();
+            $data['jk'] = $this->M_Jenis_Kelamin->jk();
+            $data['agama'] = $this->M_Agama->agama();
+            $data['akun'] = $this->M_User->login();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/editor/tambah', $data);
@@ -102,7 +103,7 @@
                         'id_kategori' => '3',
                         'id_status' => '1',
                     );
-                    $this->M_Editor->tambah('user', $data);
+                    $this->M_User->tambah('user', $data);
                     $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Menambahkan Data</div>');
                     redirect('admin/editor/index');
@@ -138,7 +139,7 @@
                     'id_kategori' => '3',
                     'id_status' => '1',
                 );
-                $this->M_Editor->tambah('user', $data);
+                $this->M_User->tambah('user', $data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
           Berhasil Menambahkan Data</div>');
                 redirect('admin/editor/index');
@@ -147,10 +148,10 @@
     }
     public function hapus($id_user)
     {
-        $data = $this->M_Editor->get($id_user);
+        $data = $this->M_User->get_editor($id_user);
         if ($data) {
 
-            $this->M_Editor->hapus($id_user);
+            $this->M_User->hapus($id_user);
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menghapus Data</div>');
             redirect('admin/editor');
         } else {
@@ -161,8 +162,8 @@
     public function detail($id_user)
     {
         $data['title'] = "DETAIL EDITOR JURNAL";
-        $data['editor'] = $this->M_Editor->get($id_user);
-        $data['akun'] = $this->M_Akun->login();
+        $data['editor'] = $this->M_User->get_editor($id_user);
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/editor/detail', $data);
@@ -170,12 +171,12 @@
     }
     public function edit($id_user)
     {
-        $data['jk'] = $this->M_Master->jk();
-        $data['agama'] = $this->M_Master->agama();
-        $data['akun'] = $this->M_Akun->login();
+        $data['jk'] = $this->M_Jenis_Kelamin->jk();
+        $data['agama'] = $this->M_Agama->agama();
+        $data['akun'] = $this->M_User->login();
         $data['title'] = "FORM EDIT BIODATA";
-        $data['editor'] = $this->M_Editor->get($id_user);
-        $data['akun'] = $this->M_Akun->login();
+        $data['editor'] = $this->M_User->get_editor($id_user);
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/editor/edit', $data);
@@ -225,7 +226,7 @@
                     'email' => $email,
                     'id_agama' => $id_agama,
                 );
-                $this->M_Editor->edit('user', $data, array('id_user' => $id_user));
+                $this->M_User->edit('user', $data, array('id_user' => $id_user));
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Mengedit Data</div>');
                 redirect('admin/editor/index');
@@ -256,7 +257,7 @@
                 'email' => $email,
                 'id_agama' => $id_agama,
             );
-            $this->M_Editor->edit('user', $data, array('id_user' => $id_user));
+            $this->M_User->edit('user', $data, array('id_user' => $id_user));
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
           Berhasil Mengedit Data</div>');
             redirect('admin/editor/index');

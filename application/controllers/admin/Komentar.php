@@ -4,17 +4,16 @@ class Komentar extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Login');
-        $this->load->model('M_Akun');
+        $this->load->model('M_User');
         $this->load->model('M_Jurnal');
-        $this->load->model('M_Reviewer');
+        $this->load->model('M_Komentar');
         $this->load->model('M_Status_Jurnal');
     }
     function index()
     {
         $data['title'] = 'JURNAL MAHASISWA SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->index();
-        $data['akun'] = $this->M_Akun->login();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/index', $data);
@@ -36,7 +35,7 @@ class Komentar extends CI_Controller
             $data['title'] = 'UPLOAD JURNAL';
             $data['jurnal'] = $this->M_Jurnal->index();
             $data['reviewer'] = $this->M_Reviewer->index();
-            $data['akun'] = $this->M_Akun->login();
+            $data['akun'] = $this->M_User->login();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/jurnal/tambah', $data);
@@ -55,7 +54,7 @@ class Komentar extends CI_Controller
                 'id_status_jurnal' => 1,
                 'tgl_upload' => time(),
             );
-            $this->M_Status_Jurnal->tambah('komentar', $data);
+            $this->M_Komentar->tambah('komentar', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
             redirect('admin/jurnal/jurnalakun');
         }

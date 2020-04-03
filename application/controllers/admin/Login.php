@@ -4,7 +4,7 @@ class Login extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Login');
+        $this->load->model('M_User');
     }
 
     function index()
@@ -29,7 +29,7 @@ class Login extends CI_Controller
         $nip_nim = $this->input->post('nip_nim');
         $password = $this->input->post('password');
 
-        $cek_dosen = $this->M_Login->auth_dosen($nip_nim);
+        $cek_dosen = $this->M_User->auth_dosen($nip_nim);
         $cek = $cek_dosen->row_array();
         if ($cek_dosen->num_rows() > 0) { //jika login sebagai dosen
 
@@ -109,7 +109,7 @@ class Login extends CI_Controller
             }
         } else { //jika login sebagai mahasiswa
 
-            $cek_mahasiswa = $this->M_Login->auth_mahasiswa($nip_nim)->row_array();
+            $cek_mahasiswa = $this->M_User->auth_mahasiswa($nip_nim)->row_array();
             if ($data = $cek_mahasiswa) {
                 if (($data['id_status'] == '1')) {
                     if (password_verify($password, $data['password'])) {
@@ -155,7 +155,7 @@ class Login extends CI_Controller
         date_default_timezone_set("ASIA/JAKARTA");
         $date = array('tanggal_logout' => date('Y-m-d H:i:s'));
         $id_user = $this->session->userdata('id_user');
-        $this->M_Login->logout($date, $id_user);
+        $this->M_User->logout($date, $id_user);
         $this->session->sess_destroy();
         redirect('admin/login');
     }

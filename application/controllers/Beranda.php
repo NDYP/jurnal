@@ -4,11 +4,10 @@ class Beranda extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Login');
-        $this->load->model('M_Akun');
+
         $this->load->model('M_Jurnal');
-        $this->load->model('M_Reviewer');
-        $this->load->model('M_Master');
+        $this->load->model('M_User');
+        $this->load->model('M_Komentar');
     }
     function index()
     {
@@ -52,7 +51,7 @@ class Beranda extends CI_Controller
     public function detail($id_jurnal)
     {
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
-        $data['komentar'] = $this->M_Jurnal->get_komentar($id_jurnal);
+        $data['komentar'] = $this->M_Komentar->get_komentar($id_jurnal);
         $this->load->view('pengunjung/template/header', $data);
         $this->load->view('pengunjung/template/sidebar', $data);
         $this->load->view('pengunjung/beranda/detail', $data);

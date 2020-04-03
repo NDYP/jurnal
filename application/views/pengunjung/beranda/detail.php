@@ -31,7 +31,7 @@
                                 <div class="comment-list">
                                     <div class="single-comment justify-content-between d-flex">
                                         <div class="user justify-content-between d-flex">
-                                            <div class="col-md-1">
+                                            <div class="col-md-3">
                                                 <div class="thumb">
                                                     <?php if ($row['foto'] !== NULL) { ?>
                                                         <img width="42" height="42" src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" alt="user image" class="offline">
@@ -41,7 +41,7 @@
                                                     <?php } ?>
                                                 </div>
                                             </div>
-                                            <div class="col-md-11">
+                                            <div class="col-md-9">
                                                 <div class="desc">
                                                     <h5><a href="#"><?= $row['nama']; ?></a></h5>
                                                     <p class="date"><?= date('d F Y, H:i:s', strtotime($row['tanggal'])); ?></p>

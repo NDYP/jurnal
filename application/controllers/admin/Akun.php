@@ -4,15 +4,14 @@ class Akun extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Login');
-        $this->load->model('M_Akun');
+        $this->load->model('M_User');
         $this->load->model('M_Jurnal');
-        $this->load->model('M_Reviewer');
-        $this->load->model('M_Master');
+        $this->load->model('M_Agama');
+        $this->load->model('M_Jenis_Kelamin');
     }
     function index()
     {
-        $data['akun'] = $this->M_Akun->login();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/akun/index', $data);
@@ -20,7 +19,7 @@ class Akun extends CI_Controller
     }
     function edit_foto()
     {
-        $data['akun'] = $this->M_Akun->login();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/akun/edit_foto', $data);
@@ -28,9 +27,9 @@ class Akun extends CI_Controller
     }
     function edit_profil()
     {
-        $data['akun'] = $this->M_Akun->login();
-        $data['jk'] = $this->M_Master->jk();
-        $data['agama'] = $this->M_Master->agama();
+        $data['akun'] = $this->M_User->login();
+        $data['jk'] = $this->M_Jenis_Kelamin->jk();
+        $data['agama'] = $this->M_Agama->agama();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/akun/edit_profil', $data);
@@ -38,9 +37,9 @@ class Akun extends CI_Controller
     }
     function edit_password()
     {
-        $data['akun'] = $this->M_Akun->login();
-        $data['jk'] = $this->M_Master->jk();
-        $data['agama'] = $this->M_Master->agama();
+        $data['akun'] = $this->M_User->login();
+        $data['jk'] = $this->M_Jenis_Kelamin->jk();
+        $data['agama'] = $this->M_Agama->agama();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/akun/edit_password', $data);
@@ -52,7 +51,7 @@ class Akun extends CI_Controller
         $data['title'] = 'REVISI JURNAL SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['reviewer'] = $this->M_Reviewer->index();
-        $data['akun'] = $this->M_Akun->login();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/edit', $data);
@@ -161,7 +160,7 @@ class Akun extends CI_Controller
                 'email' => $email,
                 'id_agama' => $id_agama,
             );
-            $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+            $this->M_User->update('user', $data, array('id_user' => $id_user));
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Mengedit Data</div>');
             redirect('admin/akun/index');
@@ -187,7 +186,7 @@ class Akun extends CI_Controller
                 'email' => $email,
                 'id_agama' => $id_agama,
             );
-            $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+            $this->M_User->update('user', $data, array('id_user' => $id_user));
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Mengedit Data</div>');
             redirect('admin/akun/index');
@@ -201,7 +200,7 @@ class Akun extends CI_Controller
         $data = array(
             'password' => $password,
         );
-        $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+        $this->M_User->update('user', $data, array('id_user' => $id_user));
         $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Mengedit Data</div>');
         redirect('admin/akun/index');
@@ -234,7 +233,7 @@ class Akun extends CI_Controller
                     'nip_nim' => $nip_nim,
 
                 );
-                $this->M_Akun->update('user', $data, array('id_user' => $id_user));
+                $this->M_User->update('user', $data, array('id_user' => $id_user));
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Mengedit Data</div>');
                 redirect('admin/akun/index');

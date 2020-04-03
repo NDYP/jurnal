@@ -4,16 +4,15 @@ class Jurnal extends CI_Controller
     function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Login');
-        $this->load->model('M_Akun');
+        $this->load->model('M_User');
         $this->load->model('M_Jurnal');
-        $this->load->model('M_Reviewer');
+        $this->load->model('M_Komentar');
     }
     function index()
     {
         $data['title'] = 'JURNAL MAHASISWA SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->index();
-        $data['akun'] = $this->M_Akun->login();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/index', $data);
@@ -23,7 +22,7 @@ class Jurnal extends CI_Controller
     {
         $data['title'] = 'JURNAL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->bimbingan();
-        $data['akun'] = $this->M_Akun->login();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/index', $data);
@@ -33,8 +32,8 @@ class Jurnal extends CI_Controller
     {
         $data['title'] = 'JURNAL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
-        $data['komentar'] = $this->M_Jurnal->get_komentar($id_jurnal);
-        $data['akun'] = $this->M_Akun->login();
+        $data['komentar'] = $this->M_Komentar->get_komentar($id_jurnal);
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/detail', $data);
@@ -44,8 +43,8 @@ class Jurnal extends CI_Controller
     {
         $data['title'] = 'UPLOAD JURNAL SKRIPSI';
 
-        $data['akun'] = $this->M_Akun->login();
-        $data['berkas'] = $this->M_Akun->berkas();
+        $data['akun'] = $this->M_User->login();
+        $data['berkas'] = $this->M_User->berkas();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/upload', $data);
@@ -65,8 +64,8 @@ class Jurnal extends CI_Controller
 
             $data['title'] = 'UPLOAD JURNAL';
             $data['jurnal'] = $this->M_Jurnal->index();
-            $data['reviewer'] = $this->M_Reviewer->index();
-            $data['akun'] = $this->M_Akun->login();
+            $data['reviewer'] = $this->M_User->index_reviewer();
+            $data['akun'] = $this->M_User->login();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/jurnal/tambah', $data);
@@ -96,7 +95,8 @@ class Jurnal extends CI_Controller
                     $judul = $this->input->post('judul');
 
                     $abstrak = $this->input->post('abstrak');
-
+                    date_default_timezone_set("ASIA/JAKARTA");
+                    $date = date('Y-m-d H:i:s');
                     $data = array(
                         'file' => $file,
                         'judul' => $judul,
@@ -105,7 +105,7 @@ class Jurnal extends CI_Controller
                         'id_pembimbing2' => $id_pembimbing2,
                         'id_penulis' => $id_penulis,
                         'id_status_jurnal' => 1,
-                        'tgl_upload' => time(),
+                        'tgl_upload' => $date,
                     );
                     $this->M_Jurnal->tambah('jurnal', $data);
                     $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
@@ -126,8 +126,8 @@ class Jurnal extends CI_Controller
     {
         $data['title'] = 'REVISI JURNAL SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
-        $data['reviewer'] = $this->M_Reviewer->index();
-        $data['akun'] = $this->M_Akun->login();
+        $data['reviewer'] = $this->M_User->index_reviewer();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/jurnal/edit', $data);
@@ -161,7 +161,8 @@ class Jurnal extends CI_Controller
                 $judul = $this->input->post('judul');
 
                 $abstrak = $this->input->post('abstrak');
-
+                date_default_timezone_set("ASIA/JAKARTA");
+                $date = date('Y-m-d H:i:s');
                 $data = array(
                     'file' => $file,
                     'judul' => $judul,
@@ -170,7 +171,7 @@ class Jurnal extends CI_Controller
                     'id_pembimbing2' => $id_pembimbing2,
                     'id_penulis' => $id_penulis,
                     'id_status_jurnal' => 6,
-                    'tgl_edit' => time(),
+                    'tgl_edit' => $date,
                 );
                 $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
@@ -209,12 +210,14 @@ class Jurnal extends CI_Controller
             $id_jurnal = $this->input->post('id_jurnal');
             $id_user = $this->input->post('id_user');
             $komentar = $this->input->post('komentar');
+            date_default_timezone_set("ASIA/JAKARTA");
+            $date = date('Y-m-d H:i:s');
             $data = array(
 
                 'id_jurnal' => $id_jurnal,
                 'id_user' => $id_user,
                 'komentar' => $komentar,
-                'tanggal' => time(),
+                'tanggal' => $date,
             );
             $this->M_Jurnal->tambah('komentar', $data);
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');

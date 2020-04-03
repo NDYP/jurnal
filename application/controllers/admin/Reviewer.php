@@ -4,15 +4,16 @@
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('M_Reviewer');
-        $this->load->model('M_Master');
-        $this->load->model('M_Akun');
+        $this->load->model('M_User');
+        $this->load->model('M_Agama');
+        $this->load->model('M_Jenis_Kelamin');
+        $this->load->model('M_User');
     }
     public function index()
     {
         $data['title'] = "DOSEN PEMBIMBING SKRIPSI";
-        $data['reviewer'] = $this->M_Reviewer->index();
-        $data['akun'] = $this->M_Akun->login();
+        $data['reviewer'] = $this->M_User->index_reviewer();
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/reviewer/index', $data);
@@ -51,9 +52,9 @@
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "FORM TAMBAH DATA DOSEN";
-            $data['jk'] = $this->M_Master->jk();
-            $data['agama'] = $this->M_Master->agama();
-            $data['akun'] = $this->M_Akun->login();
+            $data['jk'] = $this->M_Jenis_Kelamin->jk();
+            $data['agama'] = $this->M_Agama->agama();
+            $data['akun'] = $this->M_User->login();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/reviewer/tambah', $data);
@@ -104,7 +105,7 @@
                         'id_status' => '1',
 
                     );
-                    $this->M_Reviewer->tambah('user', $data);
+                    $this->M_User->tambah('user', $data);
                     $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Menambahkan Data</div>');
                     redirect('admin/reviewer/index');
@@ -139,7 +140,7 @@
                     'id_kategori' => '1',
                     'id_status' => '1',
                 );
-                $this->M_Reviewer->tambah('user', $data);
+                $this->M_User->tambah('user', $data);
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
           Berhasil Menambahkan Data</div>');
                 redirect('admin/reviewer/index');
@@ -148,10 +149,10 @@
     }
     public function hapus($id_user)
     {
-        $data = $this->M_Reviewer->get($id_user);
+        $data = $this->M_User->get_reviewer($id_user);
         if ($data) {
 
-            $this->M_Reviewer->hapus($id_user);
+            $this->M_User->hapus($id_user);
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menghapus Data</div>');
             redirect('admin/reviewer');
         } else {
@@ -162,8 +163,8 @@
     public function detail($id_user)
     {
         $data['title'] = "DETAIL DOSEN";
-        $data['reviewer'] = $this->M_Reviewer->get($id_user);
-        $data['akun'] = $this->M_Akun->login();
+        $data['reviewer'] = $this->M_User->get_reviewer($id_user);
+        $data['akun'] = $this->M_User->login();
 
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
@@ -172,12 +173,12 @@
     }
     public function edit($id_user)
     {
-        $data['jk'] = $this->M_Master->jk();
-        $data['agama'] = $this->M_Master->agama();
+        $data['jk'] = $this->M_Jenis_Kelamin->jk();
+        $data['agama'] = $this->M_Agama->agama();
 
         $data['title'] = "FORM EDIT BIODATA";
-        $data['reviewer'] = $this->M_Reviewer->get($id_user);
-        $data['akun'] = $this->M_Akun->login();
+        $data['reviewer'] = $this->M_User->get_reviewer($id_user);
+        $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/reviewer/edit', $data);
@@ -227,7 +228,7 @@
                     'email' => $email,
                     'id_agama' => $id_agama,
                 );
-                $this->M_Reviewer->edit('user', $data, array('id_user' => $id_user));
+                $this->M_User->edit('user', $data, array('id_user' => $id_user));
                 $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
             Berhasil Mengedit Data</div>');
                 redirect('admin/reviewer/index');
@@ -258,7 +259,7 @@
                 'email' => $email,
                 'id_agama' => $id_agama,
             );
-            $this->M_Reviewer->edit('user', $data, array('id_user' => $id_user));
+            $this->M_User->edit('user', $data, array('id_user' => $id_user));
             $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
           Berhasil Mengedit Data</div>');
             redirect('admin/reviewer/index');
