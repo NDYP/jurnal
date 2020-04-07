@@ -5,7 +5,7 @@ class M_Jurnal extends CI_Model
 {
     public function index()
     {
-        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
+        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user,count(jurnal.id_jurnal) as jumlahjurnal')
             ->from('jurnal')
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
@@ -13,6 +13,21 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->get()
+            ->result_array();
+        return $query;
+    }
+    public function index2()
+    {
+        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user,count(jurnal.id_jurnal) as jumlahjurnal')
+            ->from('jurnal')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->where('status_jurnal.id_status_jurnal=', 5)
             ->get()
             ->result_array();
         return $query;
@@ -77,7 +92,7 @@ class M_Jurnal extends CI_Model
     }
     public function get_komentar($id_jurnal)
     {
-        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user,user.foto')
+        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user,user.foto,count(komentar.id_jurnal) as cx')
             ->from('komentar')
             ->join('jurnal', 'komentar.id_jurnal=jurnal.id_jurnal', 'left')
             ->join('user', 'komentar.id_user=user.id_user', 'left')

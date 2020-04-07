@@ -20,15 +20,15 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-striped">
+            <table id="example1" class="table table-bordered table-hover">
               <thead>
                 <tr class="bg-navy">
                   <th>No.</th>
+                  <th>Foto</th>
                   <th>NIP</th>
                   <th>Nama</th>
                   <th>TTL</th>
                   <th>Email</th>
-                  <th>Status Skripsi</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -37,15 +37,23 @@
                 foreach ($editor as $row) : $no++; ?>
                   <tr>
                     <td><?= $no; ?></td>
+                    <td> <?php if ($row['foto'] !== NULL) { ?>
+                        <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" style="width:70px;">
+                      <?php } ?>
+                      <?php if ($row['foto'] == NULL) { ?>
+                        <img src="<?= base_url('assets/') ?>foto/default.png" class="profile-user-img img-responsive img-box" style="width:70px;">
+                      <?php } ?>
+                    </td>
                     <td><?= $row['nip_nim']; ?></td>
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['tempat_lahir']; ?>, <?= date('d-m-Y', strtotime($row['tgl_lahir'])); ?> </td>
                     <td><?= $row['email']; ?></td>
-                    <td><?= $row['nama_status']; ?></td>
+
                     <td>
-                     <center> <a class="btn bg-navy btn-xs" title="Detail" href="<?= base_url('admin/editor/detail/' . $row['id_user']); ?>"><span class="fa fa-eye"></span></a>
-                      <a class="btn bg-red btn-xs" title="Edit" href="<?= base_url('admin/editor/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span></a>
-                      <a class="btn bg-green btn-xs" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span></center></a></td>
+                      <center> <a class="btn bg-navy btn-xs" title="Detail" href="<?= base_url('admin/editor/detail/' . $row['id_user']); ?>"><span class="fa fa-eye"></span></a>
+                        <a class="btn bg-red btn-xs" title="Edit" href="<?= base_url('admin/editor/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span></a>
+                        <a class="btn bg-green btn-xs" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span></center></a>
+                    </td>
                   </tr>
                 <?php endforeach; ?>
             </table>

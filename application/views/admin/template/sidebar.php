@@ -20,17 +20,10 @@
         <center>MAIN NAVIGATION</center>
       </li>
       <?php if ($this->session->userdata('id_kategori') == 3 || $this->session->userdata('id_kategori') == 1) { ?>
-        <li class="treeview">
-          <a href="#">
+        <li class="<?= ($hal == 'Jurnal') ? 'active' : ''; ?>">
+          <a href="<?= base_url('admin/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
-            <span class="pull-right-container">
-              <i class="fa fa-angle-left pull-right"></i>
-            </span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="<?= base_url('admin/dashboard') ?>"><i class="fa fa-circle-o"></i> Dashboard v1</a></li>
-            <li><a href="<?= base_url('assets/') ?>/index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>

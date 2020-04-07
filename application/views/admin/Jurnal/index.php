@@ -21,6 +21,7 @@
               <thead>
                 <tr class="bg-navy">
                   <th>No.</th>
+                  <th>Foto</th>
                   <th>NIM</th>
                   <th>Penulis</th>
                   <th>Pembimbing 1</th>
@@ -35,6 +36,13 @@
                 foreach ($jurnal as $row) : $no++; ?>
                   <tr>
                     <td><?= $no; ?></td>
+                    <td> <?php if ($row['foto'] !== NULL) { ?>
+                        <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" style="width:70px;">
+                      <?php } ?>
+                      <?php if ($row['foto'] == NULL) { ?>
+                        <img src="<?= base_url('assets/') ?>foto/default.png" class="profile-user-img img-responsive img-box" style="width:70px;">
+                      <?php } ?>
+                    </td>
                     <td><?= $row['nip_nim']; ?></td>
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['id_pembimbing1']; ?></td>

@@ -3,6 +3,19 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_User extends CI_Model
 {
+    public function index()
+    {
+        $query = $this->db->select('*, count(user.id_user) as jumlahuser')
+            ->from('user')
+            ->order_by('id_user', 'ASC')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->get()
+            ->result_array();
+        return $query;
+    }
     public function login()
     {
         $query = $this->db->select('*,user.id_user')

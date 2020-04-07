@@ -26,7 +26,10 @@
                         </div>
                         <hr>
                         <div class="comments-area">
-                            <h4>05 Komentar Penguji</h4>
+                            <h4><?php $no = 0;
+                                foreach ($komentar as $row) : $no++; ?>
+                                    <?= $row['cx']; ?>
+                                <?php endforeach; ?></span> Komentar Penguji</h4>
                             <?php foreach ($komentar as $row) { ?>
                                 <div class="comment-list">
                                     <div class="single-comment justify-content-between d-flex">

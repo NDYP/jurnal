@@ -3,7 +3,6 @@
     <section class="content-header">
         <h1>
             Dashboard
-
         </h1>
 
     </section>
@@ -18,20 +17,27 @@
 
                     <div class="info-box-content">
                         <span class="info-box-text">Jurnal</span>
-                        <span class="info-box-number">90<small>%</small></span>
+                        <span class="info-box-number">
+                            <?php $no = 0;
+                            foreach ($jurnal as $row) : $no++; ?>
+                                <?= $row['jumlahjurnal']; ?>
+                            <?php endforeach; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
                 <!-- /.info-box -->
             </div>
-            <!-- /.col -->
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-red"><i class="fa fa-users"></i></span>
+                    <span class="info-box-icon bg-green"><i class="ion ion-ios-book-outline"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">User</span>
-                        <span class="info-box-number">41,410</span>
+                        <span class="info-box-text">Jurnal Publish</span>
+                        <span class="info-box-number">
+                            <?php $no = 0;
+                            foreach ($jurnal2 as $row) : $no++; ?>
+                                <?= $row['jumlahjurnal']; ?>
+                            <?php endforeach; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -44,11 +50,14 @@
 
             <div class="col-md-3 col-sm-6 col-xs-12">
                 <div class="info-box">
-                    <span class="info-box-icon bg-green"><i class="ion ion-ios-cart-outline"></i></span>
+                    <span class="info-box-icon bg-purple"><i class="ion ion-ios-people-outline"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text">Sales</span>
-                        <span class="info-box-number">760</span>
+                        <span class="info-box-text">User</span>
+                        <span class="info-box-number"><?php $no = 0;
+                                                        foreach ($user as $row) : $no++; ?>
+                                <?= $row['jumlahuser']; ?>
+                            <?php endforeach; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>
@@ -83,13 +92,10 @@
                     <div class="box-body">
                         <div class="row">
                             <div class="col-md-8">
-                                <p class="text-center">
-                                    <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
-                                </p>
-
-                                <div class="chart">
-                                    <!-- Sales Chart Canvas -->
-                                    <canvas id="salesChart" style="height: 180px;"></canvas>
+                                <div class="chart-container">
+                                    <div class="bar-chart-container">
+                                        <canvas id="bar-chart" style="height: 180px;"></canvas>
+                                    </div>
                                 </div>
                                 <!-- /.chart-responsive -->
                             </div>
