@@ -28,7 +28,7 @@
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>
         <li class="<?= ($hal == 'Jurnal') ? 'active' : ''; ?>">
-          <a href="<?= base_url('admin/Jurnal') ?>">
+          <a href="<?= base_url('admin/Jurnal/index') ?>">
             <i class="fa fa-book"></i> <span>Jurnal</span>
           </a>
         </li>

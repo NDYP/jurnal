@@ -8,6 +8,7 @@ class Komentar extends CI_Controller
         $this->load->model('M_Jurnal');
         $this->load->model('M_Komentar');
         $this->load->model('M_Status_Jurnal');
+        tidak();
     }
     function index()
     {

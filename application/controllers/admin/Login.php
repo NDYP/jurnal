@@ -38,7 +38,6 @@ class Login extends CI_Controller
                     if (($cek['id_status'] == '1')) {
                         if (password_verify($password, $data['password'])) {
                             $all = [
-
                                 'id_user' => $data['id_user'],
                                 'nip_nim' => $data['nip_nim'],
                                 'nama' => $data['nama'],
@@ -54,8 +53,14 @@ class Login extends CI_Controller
                                 'tanggal_logout' => $data['tanggal_logout'],
                                 'nama_status' => $data['nama_status'],
                                 'id_kategori' => $data['id_kategori'],
+                                'online' => $data['online'],
                             ];
                             $this->session->set_userdata($all);
+                            $date = array(
+                                'online' => '1'
+                            );
+                            $id_user = $this->session->userdata('id_user');
+                            $this->M_User->logout($date, $id_user);
                             redirect('admin/dashboard');
                         } else {
                             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
@@ -91,8 +96,14 @@ class Login extends CI_Controller
                                 'tanggal_logout' => $data['tanggal_logout'],
                                 'nama_status' => $data['nama_status'],
                                 'id_kategori' => $data['id_kategori'],
+                                'online' => $data['online'],
                             ];
                             $this->session->set_userdata($all);
+                            $date = array(
+                                'online' => '1'
+                            );
+                            $id_user = $this->session->userdata('id_user');
+                            $this->M_User->logout($date, $id_user);
                             redirect('admin/jurnal/review');
                         } else {
                             $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
@@ -132,8 +143,14 @@ class Login extends CI_Controller
                             'tanggal_logout' => $data['tanggal_logout'],
                             'nama_status' => $data['nama_status'],
                             'id_kategori' => $data['id_kategori'],
+                            'online' => $data['online'],
                         ];
                         $this->session->set_userdata($all);
+                        $date = array(
+                            'online' => '1'
+                        );
+                        $id_user = $this->session->userdata('id_user');
+                        $this->M_User->logout($date, $id_user);
                         redirect('admin/jurnal/jurnalakun');
                     } else {
                         $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
@@ -153,9 +170,13 @@ class Login extends CI_Controller
     function logout()
     {
         date_default_timezone_set("ASIA/JAKARTA");
-        $date = array('tanggal_logout' => date('Y-m-d H:i:s'));
+        $date = array(
+            'tanggal_logout' => date('Y-m-d H:i:s'),
+            'online' => '0'
+        );
         $id_user = $this->session->userdata('id_user');
         $this->M_User->logout($date, $id_user);
+
         $this->session->sess_destroy();
         redirect('admin/login');
     }

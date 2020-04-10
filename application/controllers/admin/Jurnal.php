@@ -10,6 +10,7 @@ class Jurnal extends CI_Controller
     }
     function index()
     {
+
         $data['title'] = 'JURNAL MAHASISWA SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->index();
         $data['akun'] = $this->M_User->login();
@@ -20,6 +21,7 @@ class Jurnal extends CI_Controller
     }
     function review()
     {
+
         $data['title'] = 'JURNAL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->bimbingan();
         $data['akun'] = $this->M_User->login();
@@ -41,6 +43,7 @@ class Jurnal extends CI_Controller
     }
     function jurnalakun()
     {
+        akses_penulis();
         $data['title'] = 'UPLOAD JURNAL SKRIPSI';
 
         $data['akun'] = $this->M_User->login();

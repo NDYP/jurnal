@@ -8,6 +8,7 @@
         $this->load->model('M_Agama');
         $this->load->model('M_Jenis_Kelamin');
         $this->load->model('M_User');
+        tidak();
     }
     public function index()
     {

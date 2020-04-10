@@ -101,10 +101,7 @@
                                                             <td> : <?= $akun['id_pembimbing2'] ?></td>
                                                         </tr>
                                                     <?php } ?>
-                                                    <tr>
-                                                        <th>Tanggal Daftar </th>
-                                                        <td> : <?= date('d-m-Y', strtotime($akun['tanggal_regis'])); ?></td>
-                                                    </tr>
+
                                                     <tr>
                                                         <th>Tanggal Logout </th>
                                                         <td> : <?= date('d-m-Y', strtotime($akun['tanggal_logout'])); ?></td>

@@ -36,7 +36,7 @@
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="hold-transition skin-green fixed sidebar-mini">
+<body class="hold-transition skin-black-light fixed sidebar-mini">
   <div class="wrapper">
 
     <header class="main-header">
@@ -83,7 +83,7 @@
                   <?php } ?>
                   <p>
                     <?= $this->session->userdata('nama'); ?>
-                    <small>Tanggal Regis <?= date('d-m-Y', strtotime($akun['tanggal_regis'])); ?></small>
+                    <small>Logout <?= date('d-m-Y', strtotime($akun['tanggal_logout'])); ?></small>
                   </p>
                 </li>
                 <!-- Menu Body -->

@@ -17,7 +17,7 @@
                             <li class="nav-item active"><a class="nav-link" href="index.html">Beranda</a></li>
                             <li class="nav-item"><a class="nav-link" href="archive.html">Tentang</a></li>
                             <li class="nav-item"><a class="nav-link" href="category.html">Contact</a>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Login</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?= base_url('Login_Pengunjung') ?>">Login</a></li>
                         </ul>
 
                     </div>

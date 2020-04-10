@@ -86,6 +86,18 @@ class M_User extends CI_Model
             ->get();
         return $query;
     }
+    function auth($nip_nim)
+    {
+        $query = $this->db->select('*')
+            ->from('user')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('user.nip_nim', $nip_nim)
+            ->get();
+        return $query;
+    }
 
 
     public function logout($date, $id_user)
@@ -168,7 +180,6 @@ class M_User extends CI_Model
             ->result_array();
         return $query;
     }
-
     public function get_editor($id_user)
     {
         $query = $this->db->select('*')
@@ -181,6 +192,93 @@ class M_User extends CI_Model
             ->where('id_user', $id_user)
             ->get()
             ->row_array();
+        return $query;
+    }
+    public function indexeditor($limit, $offset)
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('kategori.nama_kategori="Editor"')
+            ->order_by('id_user', 'asc')
+            ->limit($limit, $offset)
+            ->get();
+        return $query;
+    }
+    public function getAlleditor()
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('kategori.nama_kategori="Editor"')
+            ->order_by('id_user', 'asc')
+            ->get();
+        return $query;
+    }
+    public function indexreviewer($limit, $offset)
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('kategori.nama_kategori="Reviewer"')
+            ->order_by('id_user', 'asc')
+            ->limit($limit, $offset)
+            ->get();
+        return $query;
+    }
+    public function getAllreviewer()
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('kategori.nama_kategori="Reviewer"')
+            ->order_by('id_user', 'asc')
+            ->get();
+        return $query;
+    }
+    public function indexpenulis($limit, $offset)
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('kategori.nama_kategori="Penulis"')
+            ->order_by('id_user', 'asc')
+            ->limit($limit, $offset)
+            ->get();
+        return $query;
+    }
+    public function getAllpenulis()
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
+            ->join('status', 'user.id_status=status.id_status', 'right')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
+            ->where('kategori.nama_kategori="Penulis"')
+            ->order_by('id_user', 'asc')
+            ->get();
         return $query;
     }
 }

@@ -11,8 +11,7 @@ class M_Komentar extends CI_Model
             ->join('jurnal', 'komentar.id_jurnal=jurnal.id_jurnal', 'left')
             ->join('user', 'komentar.id_user=user.id_user', 'left')
             ->where('komentar.id_jurnal', $id_jurnal)
-            ->get()
-            ->result_array();
+            ->get();
         return $query;
     }
     public function tambah($tabel, $params)
