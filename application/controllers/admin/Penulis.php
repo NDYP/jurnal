@@ -153,10 +153,10 @@
     $data = $this->M_User->get_penulis($id_user);
     if ($data) {
       $this->M_User->hapus($id_user);
-      $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menghapus Data</div>');
+      $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menghapus Data</div>');
       redirect('admin/penulis');
     } else {
-      $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Data yang dipilih tidak ada</div>');
+      $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Data yang dipilih tidak ada</div>');
       redirect('admin/penulis');
     }
   }
@@ -231,11 +231,11 @@
 
         );
         $this->M_User->edit('user', $data, array('id_user' => $id_user));
-        $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
             Berhasil Mengedit Data</div>');
         redirect('admin/penulis/index');
       } else {
-        $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Gagal Menambahkan Data</div>');
+        $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Gagal Menambahkan Data</div>');
         redirect('admin/penulis/index');
       }
     } else {
@@ -265,7 +265,7 @@
 
       );
       $this->M_User->edit('user', $data, array('id_user' => $id_user));
-      $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+      $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
           Berhasil Mengedit Data</div>');
       redirect('admin/penulis/index');
     }

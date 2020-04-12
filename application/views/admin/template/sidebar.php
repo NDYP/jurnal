@@ -20,28 +20,35 @@
         <center>MAIN NAVIGATION</center>
       </li>
       <?php if ($this->session->userdata('id_kategori') == 3 || $this->session->userdata('id_kategori') == 1) { ?>
-        <li class="<?= ($hal == 'Jurnal') ? 'active' : ''; ?>">
+        <li class="<?= ($hal == 'dashboard') ? 'active' : ''; ?>">
           <a href="<?= base_url('admin/dashboard') ?>">
             <i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>
-        <li class="<?= ($hal == 'Jurnal') ? 'active' : ''; ?>">
-          <a href="<?= base_url('admin/Jurnal/index') ?>">
+        <li class="<?= ($hal == 'jurnal') ? 'active' : ''; ?>">
+          <a href="<?= base_url('admin/jurnal/index') ?>">
             <i class="fa fa-book"></i> <span>Jurnal</span>
           </a>
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 1) { ?>
-        <li class="<?= $this->uri->segment(3) == 'review' ? 'active' : ''; ?>">
-          <a href="<?= base_url('admin/Jurnal/review') ?>">
+        <li class="<?= $this->uri->segment(2) == 'jurnal' ? 'active' : ''; ?>">
+          <a href="<?= base_url('admin/jurnal/review') ?>">
+            <i class="fa fa-book"></i> <span>Jurnal</span>
+          </a>
+        </li>
+      <?php } ?>
+      <?php if ($this->session->userdata('id_kategori') == 2) { ?>
+        <li class="<?= $this->uri->segment(2) == 'jurnal' ? 'active' : ''; ?>">
+          <a href="<?= base_url('admin/jurnal/jurnalakun') ?>">
             <i class="fa fa-book"></i> <span>Jurnal</span>
           </a>
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>
-        <li class="treeview <?= ($hal == 'Editor' || $hal == 'Reviewer' || $hal == 'penulis') ? 'active' : ''; ?>">
+        <li class="treeview <?= ($hal == 'editor' ||  $hal == 'reviewer' || $hal == 'penulis') ? 'active' : ''; ?>">
           <a href="#">
             <i class="fa fa-users"></i> <span>User</span>
             <span class="pull-right-container">
@@ -50,13 +57,27 @@
           </a>
           <ul class="treeview-menu">
 
-            <li class="<?= ($hal == 'Editor') ? 'active' : ''; ?>"><a href="<?= base_url('admin/Editor') ?>"><i class="fa fa-circle-o"></i> Editor</a></li>
-            <li class="<?= ($hal == 'Reviewer') ? 'active' : ''; ?>"><a href="<?= base_url('admin/Reviewer') ?>"><i class=" fa fa-circle-o"></i> Reviewer</a></li>
+            <li class="<?= ($hal == 'editor') ? 'active' : ''; ?>"><a href="<?= base_url('admin/editor') ?>"><i class="fa fa-circle-o"></i> Editor</a></li>
+            <li class="<?= ($hal == 'reviewer') ? 'active' : ''; ?>"><a href="<?= base_url('admin/reviewer') ?>"><i class=" fa fa-circle-o"></i> Reviewer</a></li>
             <li class="<?= ($hal == 'penulis') ? 'active' : ''; ?>"><a href="<?= base_url('admin/penulis') ?>"><i class="fa fa-circle-o"></i> Penulis</a></li>
           </ul>
         </li>
       <?php } ?>
-      <li class="treeview <?= $this->uri->segment(2) == 'profil' || $this->uri->segment(3) == 'jurnalakun' ? 'active' : ''; ?>">
+      <?php if ($this->session->userdata('id_kategori' == 1 || 'id_kategori' == 2)) { ?>
+        <li class="treeview <?= $this->uri->segment(1) == 'layanan' || $hal == 'template_jurnal' ? 'active' : ''; ?>">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Master</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li class="<?= $this->uri->segment(1) == 'layanan' ? 'active' : ''; ?>"><a href="<?= base_url('layanan/index2') ?>"><i class="fa fa-circle-o"></i> Layanan</a></li>
+            <li class="<?= ($hal == 'template_jurnal') ? 'active' : ''; ?>"><a href="<?= base_url('admin/template_jurnal') ?>"><i class=" fa fa-circle-o"></i> Template Jurnal</a></li>
+          </ul>
+        </li>
+      <?php } ?>
+      <li class="treeview <?= ($hal == 'akun') ? 'active' : ''; ?>">
         <a href="#">
           <i class="fa fa-user"></i> <span>Akun</span>
           <span class="pull-right-container">
@@ -64,10 +85,7 @@
           </span>
         </a>
         <ul class="treeview-menu">
-          <li class="<?= $this->uri->segment(2) == 'profil' ? 'active' : ''; ?>"><a href="<?= base_url('admin/akun') ?>"><i class="fa fa-circle-o"></i> Profil</a></li>
-          <?php if ($this->session->userdata('id_kategori') == 2) { ?>
-            <li class="<?= $this->uri->segment(3) == 'jurnalakun' ? 'active' : ''; ?>"><a href="<?= base_url('admin/jurnal/jurnalakun') ?>"><i class=" fa fa-circle-o"></i> Upload Jurnal</a></li>
-          <?php } ?>
+          <li class="<?= ($hal == 'akun') ? 'active' : ''; ?>"><a href="<?= base_url('admin/akun') ?>"><i class="fa fa-circle-o"></i> Profil</a></li>
         </ul>
       </li>
     </ul>

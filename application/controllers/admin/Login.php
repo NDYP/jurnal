@@ -71,7 +71,7 @@ class Login extends CI_Controller
                         redirect('admin/login');
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun TIdak Terdaftar</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Terdaftar</div>');
                     redirect('admin/login');
                 }
             } else { //akses dosen
@@ -114,7 +114,7 @@ class Login extends CI_Controller
                         redirect('admin/login');
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun TIdak Terdaftar</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Terdaftar</div>');
                     redirect('admin/login');
                 }
             }

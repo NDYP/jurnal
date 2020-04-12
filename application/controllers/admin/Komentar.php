@@ -56,7 +56,7 @@ class Komentar extends CI_Controller
                 'tgl_upload' => time(),
             );
             $this->M_Komentar->tambah('komentar', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
             redirect('admin/jurnal/jurnalakun');
         }
     }

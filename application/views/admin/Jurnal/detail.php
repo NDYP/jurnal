@@ -83,10 +83,7 @@
                                                         <th>Pembimbing 2</th>
                                                         <td> : <?= $jurnal['id_pembimbing2'] ?></td>
                                                     </tr>
-                                                    <tr>
-                                                        <th>Tanggal Daftar </th>
-                                                        <td> : <?= date('d-m-Y', strtotime($jurnal['tanggal_regis'])); ?></td>
-                                                    </tr>
+
                                                     <tr>
                                                         <th>Tanggal Logout </th>
                                                         <td> : <?= date('d-m-Y', strtotime($jurnal['tanggal_logout'])); ?></td>

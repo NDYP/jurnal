@@ -201,7 +201,7 @@ class Akun extends CI_Controller
             'password' => $password,
         );
         $this->M_User->update('user', $data, array('id_user' => $id_user));
-        $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+        $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
             Berhasil Mengedit Data</div>');
         redirect('admin/akun/index');
     }
@@ -234,16 +234,16 @@ class Akun extends CI_Controller
 
                 );
                 $this->M_User->update('user', $data, array('id_user' => $id_user));
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
             Berhasil Mengedit Data</div>');
                 redirect('admin/akun/index');
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Pilih Foto</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Pilih Foto</div>');
                 redirect('admin/akun/index');
             }
         } else {
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
          Gagal Upload</div>');
             redirect('admin/akun/index');
         }

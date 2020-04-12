@@ -82,8 +82,8 @@
                                                     <td> : <?= $penulis['nama_agama'] ?></td>
                                                 </tr>
                                                 <tr>
-                                                    <th>Tanggal Daftar </th>
-                                                    <td> : <?= date('d-m-Y', strtotime($penulis['tanggal_regis'])); ?></td>
+                                                    <th>Tanggal Logout </th>
+                                                    <td> : <?= date('d-m-Y', strtotime($penulis['tanggal_logout'])); ?></td>
                                                 </tr>
                                                 <tr>
                                                     <th>Status Akun</th>

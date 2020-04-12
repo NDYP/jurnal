@@ -21,7 +21,7 @@
                     </div>
                     <div class="box-body box-profile">
                         <?php if ($reviewer['foto'] !== NULL) { ?>
-                            <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $penulis['foto']) ?>" style="width: 100%">
+                            <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $reviewer['foto']) ?>" style="width: 100%">
                         <?php } ?>
                         <?php if ($reviewer['foto'] == NULL) { ?>
                             <img src="<?= base_url('assets/') ?>foto/default.png" class="profile-user-img img-responsive img-box" style="width: 100%">

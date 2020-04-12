@@ -34,7 +34,7 @@ class Jurnal extends CI_Controller
     {
         $data['title'] = 'JURNAL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
-        $data['komentar'] = $this->M_Komentar->get_komentar($id_jurnal);
+        $data['komentar'] = $this->M_Komentar->get_komentar($id_jurnal)->result_array();
         $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
@@ -111,15 +111,15 @@ class Jurnal extends CI_Controller
                         'tgl_upload' => $date,
                     );
                     $this->M_Jurnal->tambah('jurnal', $data);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
                     redirect('admin/jurnal/jurnalakun');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Gagal Menambahkan Data</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Gagal Menambahkan Data</div>');
                     redirect('admin/jurnal/jurnalakun');
                 }
             } else {
 
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
+                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
           File Tidak Boleh Kosong</div>');
                 redirect('admin/jurnal/jurnalakun');
             }
@@ -223,7 +223,7 @@ class Jurnal extends CI_Controller
                 'tanggal' => $date,
             );
             $this->M_Jurnal->tambah('komentar', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
+            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
             redirect('admin/jurnal/review');
         }
     }

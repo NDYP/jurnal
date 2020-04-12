@@ -9,6 +9,7 @@ class Beranda extends CI_Controller
         $this->load->model('M_User');
         $this->load->model('M_Komentar');
         $this->load->model('M_Statistik');
+        $this->load->model('M_Layanan');
     }
     public function ip_user()
     {
@@ -181,6 +182,8 @@ class Beranda extends CI_Controller
         $this->pagination->initialize($config);
         $data['halaman'] = $this->pagination->create_links();
         $data['jurnal'] = $this->M_Jurnal->indexpengunjung($perpage, $offset)->result_array();
+
+        $data['layanan'] = $this->M_Layanan->index()->result_array();
 
         $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();
         $data['reviewer_total'] = $this->M_User->getAllreviewer()->num_rows();
