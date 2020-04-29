@@ -2,13 +2,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <?php if ($this->session->userdata('id_kategori') == 1) { ?>
-            <a href="<?= site_url('admin/jurnal/review'); ?>" class="btn bg-yellow btn-sm"><span class="fa fa-arrow-circle-left"></span> Kembali</a>
+            <a href="<?= site_url('admin/jurnal/review'); ?>" class=""><span class="fa fa-arrow-circle-left"></span> Kembali</a>
         <?php } ?>
         <?php if ($this->session->userdata('id_kategori') == 3) { ?>
-            <a href="<?= site_url('admin/jurnal/index'); ?>" class="btn bg-yellow btn-sm"><span class="fa fa-arrow-circle-left"></span> Kembali</a>
+            <a href="<?= site_url('admin/jurnal/index'); ?>" class=""><span class="fa fa-arrow-circle-left"></span> Kembali</a>
         <?php } ?>
         <?php if ($this->session->userdata('id_kategori') == 2) { ?>
-            <a href="<?= site_url('admin/jurnal/jurnalakun'); ?>" class="btn bg-yellow btn-sm"><span class="fa fa-arrow-circle-left"></span> Kembali</a>
+            <a href="<?= site_url('admin/jurnal/jurnalakun'); ?>" class=""><span class="fa fa-arrow-circle-left"></span> Kembali</a>
         <?php } ?>
     </section>
     <!-- Main content -->

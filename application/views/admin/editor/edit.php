@@ -2,7 +2,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <a class="btn bg-yellow btn-sm" href="<?= base_url('admin/editor'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+        <a class="" href="<?= base_url('admin/editor'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
 
     </section>
 

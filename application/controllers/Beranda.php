@@ -200,6 +200,8 @@ class Beranda extends CI_Controller
     }
     public function detail($id_jurnal)
     {
+        $data['layanan'] = $this->M_Layanan->index()->result_array();
+
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
         $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();

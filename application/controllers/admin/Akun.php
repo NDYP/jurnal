@@ -97,28 +97,28 @@ class Akun extends CI_Controller
                     'tgl_edit' => time(),
                 );
                 $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
+                echo "<script>alert('Berhasil Upload Jurnal')</script>";
                 if ($akun['id_kategori'] == 2) {
-                    redirect('admin/jurnal/jurnalakun');
+                    redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    redirect('admin/jurnal/');
+                    redirect('admin/jurnal/', 'refresh');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Gagal Menambahkan Data</div>');
+                echo "<script>alert('Gagal Upload Jurnal')</script>";
                 if ($akun['id_kategori'] == 2) {
-                    redirect('admin/jurnal/jurnalakun');
+                    redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    redirect('admin/jurnal/');
+                    redirect('admin/jurnal/', 'refresh');
                 }
             }
         } else {
 
-            $this->session->set_flashdata('message', '<div class="alert alert-danger col-md-3" role="alert">
-          File Tidak Boleh Kosong</div>');
+            echo "<script>alert('File Tdak Boleh Kosong')</script>";
             if ($akun['id_kategori'] == 2) {
-                redirect('admin/jurnal/jurnalakun');
+
+                redirect('admin/jurnal/jurnalakun', 'refresh');
             } else {
-                redirect('admin/jurnal/');
+                redirect('admin/jurnal/', 'refresh');
             }
         }
     }
@@ -161,9 +161,8 @@ class Akun extends CI_Controller
                 'id_agama' => $id_agama,
             );
             $this->M_User->update('user', $data, array('id_user' => $id_user));
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
-            Berhasil Mengedit Data</div>');
-            redirect('admin/akun/index');
+            echo "<script>alert('Berhasil Ubah Profil')</script>";
+            redirect('admin/akun/index', 'refresh');
         } else {
             $nip_nim = $this->input->post('nip_nim');
             $nama = $this->input->post('nama');
@@ -187,24 +186,37 @@ class Akun extends CI_Controller
                 'id_agama' => $id_agama,
             );
             $this->M_User->update('user', $data, array('id_user' => $id_user));
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">
-            Berhasil Mengedit Data</div>');
-            redirect('admin/akun/index');
+            echo "<script>alert('Berhasil Ubah Profil')</script>";
+            redirect('admin/akun/index', 'refresh');
         }
     }
     function simpanpassword()
     {
 
-        $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-        $id_user = $this->input->post('id_user');
-        $data = array(
-            'password' => $password,
-        );
-        $this->M_User->update('user', $data, array('id_user' => $id_user));
-        $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
-            Berhasil Mengedit Data</div>');
-        redirect('admin/akun/index');
+        $this->form_validation->set_rules('password', 'password', 'required|trim', [
+            'required' => 'Password Tidak Boleh Kosong!'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $data['akun'] = $this->M_User->login();
+            $data['jk'] = $this->M_Jenis_Kelamin->jk();
+            $data['agama'] = $this->M_Agama->agama();
+            $this->load->view('admin/template/header', $data);
+            $this->load->view('admin/template/sidebar', $data);
+            $this->load->view('admin/akun/edit_password', $data);
+            $this->load->view('admin/template/footer', $data);
+        } else {
+            $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+            $id_user = $this->input->post('id_user');
+            $data = array(
+                'password' => $password,
+            );
+            $this->M_User->update('user', $data, array('id_user' => $id_user));
+            echo "<script>alert('Berhasil Ubah Password')</script>";
+            redirect('admin/akun/index', 'refresh');
+        }
     }
+
     function simpanfoto()
     {
         $config['upload_path'] = './assets/foto/mhs/'; //path folder
@@ -234,18 +246,16 @@ class Akun extends CI_Controller
 
                 );
                 $this->M_User->update('user', $data, array('id_user' => $id_user));
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
-            Berhasil Mengedit Data</div>');
-                redirect('admin/akun/index');
+                echo "<script>alert('Gagal Upload Foto Profil')</script>";
+                redirect('admin/akun/index', 'refresh');
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Pilih Foto</div>');
-                redirect('admin/akun/index');
+                echo "<script>alert('Gagal Upload Foto Profil')</script>";
+                redirect('admin/akun/index', 'refresh');
             }
         } else {
 
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
-         Gagal Upload</div>');
-            redirect('admin/akun/index');
+            echo "<script>alert('Gagal Upload Foto Profil')</script>";
+            redirect('admin/akun/index', 'refresh');
         }
     }
 }

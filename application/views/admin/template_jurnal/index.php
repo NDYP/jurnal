@@ -16,32 +16,30 @@
                 <!-- /.box -->
                 <div class="box">
                     <div class="box-header">
-                        <a class="btn bg-red btn-sm" href="<?= base_url('admin/template_jurnal/simpan'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
+                        <a class="" href="<?= base_url('admin/template_jurnal/simpan'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-hover">
                             <thead>
-                                <tr class="bg-navy">
-
+                                <tr class="bg-green">
                                     <th>Judul</th>
                                     <th>File</th>
                                     <th>Aksi</th>
-
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $no = 0;
                                 foreach ($jurnal as $row) : $no++; ?>
-                                    <tr>
+                                    <tr align="center">
 
                                         <td><?= $row['judul']; ?></td>
-                                        <td><a class="btn btn-md" href="<?= site_url('assets/jurnal/template/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a></td>
+                                        <td><a class="btn btn-lg" href="<?= site_url('assets/jurnal/template/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a></td>
 
                                         <td>
                                             <center>
-                                                <a class="btn bg-red btn-xs" title="Edit" href="<?= base_url('admin/template_jurnal/edit/' . $row['id_template_jurnal']); ?>"><span class="fa fa-edit"></span></a>
-                                                <a class="btn bg-green btn-xs" title="Hapus" href="<?= base_url('admin/template_jurnal/hapus/' . $row['id_template_jurnal']); ?>"><span class="fa fa-trash"></span></a>
+                                                <a class="" title="Edit" href="<?= base_url('admin/template_jurnal/edit/' . $row['id_template_jurnal']); ?>"><span class="fa fa-edit"></span> Edit |</a>
+                                                <a class="" title="Hapus" href="<?= base_url('admin/template_jurnal/hapus/' . $row['id_template_jurnal']); ?>"><span class="fa fa-trash"> Hapus</span></a>
 
                                             </center></a>
                                         </td>

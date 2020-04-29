@@ -5,10 +5,10 @@
         <?php if ($akun['id_kategori'] == 2) { ?>
             # code...
 
-            <a class="btn bg-yellow btn-md" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
+            <a class="" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
         <?php  } ?>
         <?php if ($akun['id_kategori'] == 3) { ?>
-            <a class="btn bg-yellow btn-md" href="<?= base_url('admin/jurnal/'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
+            <a class="" href="<?= base_url('admin/jurnal/'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
         <?php  } ?>
     </section>
     <!-- Main content -->

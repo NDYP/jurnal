@@ -2,7 +2,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <a class="btn bg-yellow btn-md" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
+    <a class="" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
   </section>
   <!-- Main content -->
   <section class="content">

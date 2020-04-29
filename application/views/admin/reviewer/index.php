@@ -16,13 +16,13 @@
         <!-- /.box -->
         <div class="box">
           <div class="box-header">
-            <a class="btn bg-red btn-sm" href="<?= base_url('admin/reviewer/simpan'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
+            <a class="" href="<?= base_url('admin/reviewer/simpan'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
           </div>
           <!-- /.box-header -->
           <div class="box-body">
             <table id="example1" class="table table-bordered table-hover">
               <thead>
-                <tr class="bg-navy">
+                <tr class="bg-green">
                   <th>No.</th>
                   <th>Foto</th>
                   <th>NIP</th>
@@ -51,9 +51,9 @@
                     <td><?= $row['email']; ?></td>
 
                     <td>
-                      <center> <a class="btn bg-navy btn-xs" title="Detail" href="<?= base_url('admin/reviewer/detail/' . $row['id_user']); ?>"><span class="fa fa-eye"></span></a>
-                        <a class="btn bg-red btn-xs" title="Edit" href="<?= base_url('admin/reviewer/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span></a>
-                        <a class="btn bg-green btn-xs" title="Hapus" href="<?= base_url('admin/reviewer/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span></a>
+                      <center> <a class="" title="Detail" href="<?= base_url('admin/reviewer/detail/' . $row['id_user']); ?>"><span class="fa fa-eye"></span> Lihat |</a>
+                        <a class="" title="Edit" href="<?= base_url('admin/reviewer/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span> Edit |</a>
+                        <a class="" title="Hapus" href="<?= base_url('admin/reviewer/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span> Hapus</a>
                       </center>
                     </td>
                   </tr>

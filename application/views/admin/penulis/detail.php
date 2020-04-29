@@ -1,7 +1,7 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <a href="<?= site_url('admin/penulis'); ?>" class="btn bg-yellow btn-sm"><span class="fa fa-arrow-circle-left"></span> Kembali</a>
+        <a href="<?= site_url('admin/penulis'); ?>" class=""><span class="fa fa-arrow-circle-left"></span> Kembali</a>
     </section>
 
     <!-- Main content -->

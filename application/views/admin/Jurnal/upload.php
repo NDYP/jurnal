@@ -15,7 +15,12 @@
                 <div class="box box-default">
                     <?php if ($berkas['file'] == NULL) { ?>
                         <div class="box-header with-border">
-                            <a class="btn bg-red btn-sm" href="<?= base_url('admin/jurnal/tambah'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
+                            <a class="" href="<?= base_url('admin/jurnal/tambah'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
+                        </div>
+                    <?php } ?>
+                    <?php if ($berkas['id_status_jurnal'] == 5 || $berkas['id_status_jurnal'] == 6) { ?>
+                        <div class="box-header with-border">
+                            <a class="" href="<?= base_url('admin/jurnal/cetak'); ?>" title="cetak"><span class="fa fa-print"></span> Cetak</a>
                         </div>
                     <?php } ?>
                     <!-- /.box-header -->
@@ -23,7 +28,7 @@
                         <div class="box-body">
                             <table id="example1" class="table table-bordered table-striped">
                                 <thead>
-                                    <tr class="bg-navy">
+                                    <tr class="bg-green">
                                         <th>NIM</th>
                                         <th>Penulis</th>
                                         <th>Pembimbing 1</th>
@@ -46,9 +51,9 @@
                                         <td><?= $berkas['nama_status_jurnal']; ?></td>
                                         <td>
                                             <center>
-                                                <a class="btn bg-purple btn-xs" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $berkas['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
+                                                <a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $berkas['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                                                 <?php if ($berkas['id_status_jurnal'] == 3) { ?>
-                                                    <a class="btn btn-danger btn-xs" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $berkas['id_jurnal']); ?>"><span class="fa fa-edit"> Edit </span></a>
+                                                    <a class="" title="Edit" href="<?= base_url('admin/jurnal/edit/' . $berkas['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
                                                 <?php } ?>
                                             </center>
                                         </td>

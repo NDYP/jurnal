@@ -19,7 +19,7 @@
           <div class="box-body">
             <table id="example1" class="table table-bordered table-striped">
               <thead>
-                <tr class="bg-navy">
+                <tr class="bg-green">
                   <th>No.</th>
                   <th>Foto</th>
                   <th>NIM</th>
@@ -66,10 +66,10 @@
                       </center>
                     </td>
                     <td>
-                      <center><a class="btn bg-purple btn-xs" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
+                      <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
                           <?php if ($row['id_status_jurnal'] == 2) { ?>
-                            <a class="btn btn-danger btn-xs" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit"> Edit </span></a>
+                            <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
                           <?php } ?>
                         <?php } ?>
                       </center>

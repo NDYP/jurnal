@@ -14,7 +14,9 @@
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
                         <ul class="nav navbar-nav menu_nav justify-content-center">
-                            <li class="nav-item active"><a class="nav-link" href="<?= base_url('beranda'); ?>">Beranda</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?= base_url('beranda'); ?>">Beranda</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?= base_url('tentang'); ?>">Tentang Kami</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?= base_url('layanan'); ?>">Kontak</a></li>
                             <li class="nav-item"><a class="nav-link" href="<?= base_url('Login_Pengunjung') ?>">Login</a></li>
                         </ul>
 

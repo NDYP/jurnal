@@ -227,4 +227,13 @@ class Jurnal extends CI_Controller
             redirect('admin/jurnal/review');
         }
     }
+    public function cetak()
+    {
+        $data['akun'] = $this->M_User->login();
+        $data['berkas'] = $this->M_User->berkas();
+        $this->load->library('pdf');
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "laporan.pdf";
+        $this->pdf->load_view('admin/jurnal/cetak', $data);
+    }
 }

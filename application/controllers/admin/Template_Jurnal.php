@@ -57,36 +57,36 @@ class Template_Jurnal extends CI_Controller
                         'file' => $file,
                     );
                     $this->M_Template_Jurnal->tambah('template_jurnal', $data);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
-                    redirect('admin/template_jurnal/index');
+                    echo "<script>alert('Berhasil Tambah Data')</script>";
+                    redirect('admin/template_jurnal/index', 'refresh');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Gagal Menambahkan Data</div>');
-                    redirect('admin/template_jurnal/index');
+                    echo "<script>alert('Gagal Tambah Data')</script>";
+                    redirect('admin/template_jurnal/index', 'refresh');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Pilih File Menambahkan Data</div>');
-                redirect('admin/template_jurnal/index');
+                echo "<script>alert('Upload Gagal, Pilih File')</script>";
+                redirect('admin/template_jurnal/index', 'refresh');
             }
         }
     }
-    public function hapus($id_layanan)
+    public function hapus($id_template_jurnal)
     {
-        $data = $this->M_Template_Jurnal->get($id_layanan);
+        $data = $this->M_Template_Jurnal->get($id_template_jurnal);
         if ($data) {
 
-            $this->M_Template_Jurnal->hapus($id_layanan);
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menghapus Data</div>');
-            redirect('admin/template_jurnal/index');
+            $this->M_Template_Jurnal->hapus($id_template_jurnal);
+            echo "<script>alert('Berhasil Hapus Data')</script>";
+            redirect('admin/template_jurnal/index', 'refresh');
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Data yang dipilih tidak ada</div>');
-            redirect('admin/template_jurnal/index');
+            echo "<script>alert('Gagal Hapus Data')</script>";
+            redirect('admin/template_jurnal/index', 'refresh');
         }
     }
 
-    public function edit($id_layanan)
+    public function edit($id_template_jurnal)
     {
         $data['title'] = "FORM EDIT LAYANAN";
-        $data['layanan'] = $this->M_Template_Jurnal->get($id_layanan);
+        $data['layanan'] = $this->M_Template_Jurnal->get($id_template_jurnal);
         $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
@@ -111,6 +111,7 @@ class Template_Jurnal extends CI_Controller
                 $config['new_image'] = './assets/jurnal/template/' . $gbr['file_name'];
                 $this->load->library('image_lib', $config);
                 $this->image_lib->resize();
+
                 $file = $gbr['file_name'];
                 $judul = $this->input->post('judul');
                 $id_template_jurnal = $this->input->post('id_template_jurnal');
@@ -119,15 +120,21 @@ class Template_Jurnal extends CI_Controller
                     'file' => $file,
                 );
                 $this->M_Template_Jurnal->update('template_jurnal', $data, array('id_template_jurnal' => $id_template_jurnal));
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
-                redirect('admin/template_jurnal/index');
+                echo "<script>alert('Berhasil Upload')</script>";
+                redirect('admin/template_jurnal/index', 'refresh');
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Gagal Menambahkan Data</div>');
-                redirect('admin/template_jurnal/index');
+                echo "<script>alert('Gagal Upload, Pilih File')</script>";
+                redirect('admin/template_jurnal/index', 'refresh');
             }
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Pilih File</div>');
-            redirect('admin/template_jurnal/index');
+            $judul = $this->input->post('judul');
+            $id_template_jurnal = $this->input->post('id_template_jurnal');
+            $data = array(
+                'judul' => $judul,
+            );
+            $this->M_Template_Jurnal->update('template_jurnal', $data, array('id_template_jurnal' => $id_template_jurnal));
+            echo "<script>alert('Berhasil Ubah Judul')</script>";
+            redirect('admin/template_jurnal/index', 'refresh');
         }
     }
 }

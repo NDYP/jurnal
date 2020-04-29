@@ -123,7 +123,7 @@ class Login extends CI_Controller
             $cek_mahasiswa = $this->M_User->auth_mahasiswa($nip_nim)->row_array();
             if ($data = $cek_mahasiswa) {
                 if (($data['id_status'] == '1')) {
-                    if (password_verify($password, $data['password'])) {
+                    if ($password == $data['password']) {
 
                         $all = [
                             'masuk' => TRUE,
@@ -161,7 +161,7 @@ class Login extends CI_Controller
                     redirect('admin/login');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Belum Terdaftar</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Ditemukan</div>');
                 redirect('admin/login');
             }
         }
@@ -178,6 +178,7 @@ class Login extends CI_Controller
         $this->M_User->logout($date, $id_user);
 
         $this->session->sess_destroy();
-        redirect('admin/login');
+        echo "<script>alert('Silahkan Login Kembali')</script>";
+        redirect('admin/login', 'refresh');
     }
 }

@@ -2,7 +2,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <a class="btn bg-yellow btn-md" href="<?= base_url('admin/akun'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+    <a class="" href="<?= base_url('admin/akun'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
 
   </section>
 
@@ -21,8 +21,9 @@
                   <input type="hidden" class="form-control" name="id_user" value="<?= $akun['id_user']; ?>">
                   <label>Password Baru</label>
                   <input type="password" class="form-control" name="password">
+                  <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
                 </div>
-                <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
+
               </div>
             </div>
           </div>

@@ -2,7 +2,7 @@
 <div class="content-wrapper">
   <!-- Content Header (Page header) -->
   <section class="content-header">
-    <a class="btn bg-yellow btn-sm" href="<?= base_url('admin/editor'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
+    <a class="" href="<?= base_url('admin/editor'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
 
   </section>
 
@@ -21,10 +21,10 @@
           <div class="col-md-6">
             <div class="col-md-6">
               <div class="form-group">
-              <label>NIP</label>
-              <input type="text" class="form-control" name="nip_nim" id="nip_nim">
-              <?= form_error('nip_nim', '<small class="text-danger pl-1">', '</small>'); ?>
-            </div>
+                <label>NIP</label>
+                <input type="text" class="form-control" name="nip_nim" id="nip_nim">
+                <?= form_error('nip_nim', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
             <div class="col-md-6">
               <div class="form-group">
@@ -33,37 +33,37 @@
                 <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
               </div>
             </div>
-            
+
             <!-- /.form-group -->
             <div class="col-md-12">
               <div class="form-group">
-              <label>Nama</label>
-              <input type="text" class="form-control" name="nama">
-              <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
-            </div>
-            </div>
-            <!-- /.form-group -->
-            <div class="col-md-6">
-            <div class="form-group">
-              <label>Tempat Lahir</label>
-              <input type="text" class="form-control" name="tempat_lahir">
-              <?= form_error('tempat_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
-            </div>
+                <label>Nama</label>
+                <input type="text" class="form-control" name="nama">
+                <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
             <!-- /.form-group -->
             <div class="col-md-6">
-            <div class="form-group">
-              <label>Tanggal Lahir</label>
-              <input type="text" class="form-control" id="datepicker" name="tgl_lahir">
-              <?= form_error('tgl_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
+              <div class="form-group">
+                <label>Tempat Lahir</label>
+                <input type="text" class="form-control" name="tempat_lahir">
+                <?= form_error('tempat_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
+            <!-- /.form-group -->
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Tanggal Lahir</label>
+                <input type="text" class="form-control" id="datepicker" name="tgl_lahir">
+                <?= form_error('tgl_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
             <div class="col-md-12">
-            <div class="form-group">
-              <label>Alamat</label>
-              <input type="text" class="form-control" name="alamat">
-              <?= form_error('alamat', '<small class="text-danger pl-1">', '</small>'); ?>
-            </div>
+              <div class="form-group">
+                <label>Alamat</label>
+                <input type="text" class="form-control" name="alamat">
+                <?= form_error('alamat', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
             <!-- /.form-group -->
           </div>
@@ -71,37 +71,37 @@
 
           <div class="col-md-6">
             <div class="col-md-6">
-            <div class="form-group">
-              <label>No.Hp</label>
-              <input type="text" class="form-control" name="no_hp">
-              <?= form_error('no_hp', '<small class="text-danger pl-1">', '</small>'); ?>
-            </div>
+              <div class="form-group">
+                <label>No.Hp</label>
+                <input type="text" class="form-control" name="no_hp">
+                <?= form_error('no_hp', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
             <!-- /.form-group -->
             <div class="col-md-6">
-            <div class="form-group">
-              <label>Email</label>
-              <input type="text" class="form-control" name="email">
-              <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
-            </div>
+              <div class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email">
+                <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
+              </div>
             </div>
             <!-- /.form-group -->
 
             <!-- /.form-group -->
             <div class="col-md-6">
-            <div class="form-group">
-              <div class="checkbox">
-                <h5><b>Jenis Kelamin</b></h5>
-                <?php foreach ($jk as $row) : ?>
-                  <label>
-                    <input name="id_jk" type="checkbox" class="minimal-red" value="<?= $row['id_jk']; ?>"><?= $row['nama_jk']; ?>
-                  </label>
-                <?php endforeach; ?>
+              <div class="form-group">
+                <div class="checkbox">
+                  <h5><b>Jenis Kelamin</b></h5>
+                  <?php foreach ($jk as $row) : ?>
+                    <label>
+                      <input name="id_jk" type="checkbox" class="minimal-red" value="<?= $row['id_jk']; ?>"><?= $row['nama_jk']; ?>
+                    </label>
+                  <?php endforeach; ?>
+                </div>
+                <?= form_error('id_jk', '<small class="text-danger pl-1">', '</small>'); ?>
               </div>
-              <?= form_error('id_jk', '<small class="text-danger pl-1">', '</small>'); ?>
             </div>
-          </div>
-              <div class="col-md-6">
+            <div class="col-md-6">
               <div class="form-group">
                 <label>Agama</label>
                 <select name="id_agama" class="form-control select2" style="width: 100%;">
@@ -110,24 +110,24 @@
                   <?php endforeach; ?>
                 </select>
               </div>
-              </div>
-              <div class="col-md-12">
+            </div>
+            <div class="col-md-12">
               <div class="form-group">
                 <label>Foto</label>
                 <div>
-                <?= form_upload('foto'); ?>
+                  <?= form_upload('foto'); ?>
                 </div>
               </div>
-              </div>
             </div>
-            <!-- /.form-group -->
           </div>
-          <!-- /.col -->
+          <!-- /.form-group -->
         </div>
-        <div class="box-footer">
+        <!-- /.col -->
+      </div>
+      <div class="box-footer">
         <button type="submit" class="btn bg-green btn-sm" title="simpan"><span class="fa fa-save"></span> Simpan</button>
       </div>
-        <!-- /.row -->
+      <!-- /.row -->
     </div>
     <?= form_close(); ?>
     <!-- /.box -->

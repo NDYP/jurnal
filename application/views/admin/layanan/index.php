@@ -20,7 +20,7 @@
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-hover">
                             <thead>
-                                <tr class="bg-navy">
+                                <tr class="bg-green">
 
                                     <th>Alamat</th>
                                     <th>Email</th>
@@ -44,7 +44,7 @@
                                         <td><?= $row['no_telepon']; ?></td>
                                         <td>
                                             <center>
-                                                <a class="btn bg-red btn-xs" title="Edit" href="<?= base_url('layanan/edit/' . $row['id_layanan']); ?>"><span class="fa fa-edit"></span></a>
+                                                <a class="" title="Edit" href="<?= base_url('layanan/edit/' . $row['id_layanan']); ?>"><span class="fa fa-edit"></span> Edit</a>
 
                                             </center></a>
                                         </td>

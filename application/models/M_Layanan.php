@@ -8,7 +8,6 @@ class M_Layanan extends CI_Model
         $query = $this->db->select('*')
             ->from('layanan')
             ->get();
-
         return $query;
     }
     public function get($id_layanan)
