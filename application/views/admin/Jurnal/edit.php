@@ -3,12 +3,12 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <?php if ($akun['id_kategori'] == 2) { ?>
-            # code...
 
-            <a class="" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
+
+            <a class="" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
         <?php  } ?>
         <?php if ($akun['id_kategori'] == 3) { ?>
-            <a class="" href="<?= base_url('admin/jurnal/'); ?>"><i class="fa fa-arakun-circle-left"></i> Kembali</a>
+            <a class="" href="<?= base_url('admin/jurnal/'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
         <?php  } ?>
     </section>
     <!-- Main content -->
@@ -64,6 +64,18 @@
                                             <option name="id_pembimbing2" value="<?= $akun['nama']; ?>" selected><?= $akun['nama']; ?></option>
                                         <?php else : ?>
                                             <option name="id_pembimbing2" value="<?= $akun['nama']; ?>"><?= $akun['nama']; ?></option>
+                                        <?php endif; ?>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Kategori</label>
+                                <select name="id_kategori_skripsi" class="form-control select2" style="width: 100%;">
+                                    <?php foreach ($kategori_skripsi as $akun) : ?>
+                                        <?php if ($jurnal['id_kategori_skripsi'] == $akun['id_kategori_skripsi']) : ?>
+                                            <option name="id_kategori_skripsi" value="<?= $akun['id_kategori_skripsi']; ?>" selected><?= $akun['nama_kategori']; ?></option>
+                                        <?php else : ?>
+                                            <option name="id_kategori_skripsi" value="<?= $akun['id_kategori_skripsi']; ?>"><?= $akun['nama_kategori']; ?></option>
                                         <?php endif; ?>
                                     <?php endforeach; ?>
                                 </select>

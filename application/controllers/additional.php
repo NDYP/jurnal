@@ -9,12 +9,14 @@ class Additional extends CI_Controller
         $this->load->model('M_User');
         $this->load->model('M_Komentar');
         $this->load->model('M_Statistik');
+        $this->load->model('M_Template_Jurnal');
+        $this->load->model('M_Kategori_Skripsi');
     }
 
     public function editor()
     {
-
-        $perpage = 12;
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
+        $perpage = 9;
         $offset = $this->uri->segment(3);
         $config['total_rows'] = $this->M_User->getAlleditor()->num_rows();
         $config['per_page'] = $perpage;
@@ -41,23 +43,20 @@ class Additional extends CI_Controller
         $data['halaman'] = $this->pagination->create_links();
         $data['editor'] = $this->M_User->indexeditor($perpage, $offset)->result_array();
 
-        $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();
-        $data['reviewer_total'] = $this->M_User->getAllreviewer()->num_rows();
-        $data['penulis_total'] = $this->M_User->getAllpenulis()->num_rows();
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
 
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
-
-        $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/template/sidebar', $data);
-        $this->load->view('pengunjung/additional/index', $data);
-        $this->load->view('pengunjung/template/rightbar', $data);
-        $this->load->view('pengunjung/template/footer', $data);
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $this->load->view('pengunjung/template/header1', $data);
+        $this->load->view('pengunjung/additional/index1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
     }
     public function reviewer()
     {
-
-        $perpage = 12;
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
+        $perpage = 9;
         $offset = $this->uri->segment(3);
         $config['total_rows'] = $this->M_User->getAllreviewer()->num_rows();
         $config['per_page'] = $perpage;
@@ -84,23 +83,20 @@ class Additional extends CI_Controller
         $data['halaman'] = $this->pagination->create_links();
         $data['editor'] = $this->M_User->indexreviewer($perpage, $offset)->result_array();
 
-        $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();
-        $data['reviewer_total'] = $this->M_User->getAllreviewer()->num_rows();
-        $data['penulis_total'] = $this->M_User->getAllpenulis()->num_rows();
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
 
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
-
-        $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/template/sidebar', $data);
-        $this->load->view('pengunjung/additional/index', $data);
-        $this->load->view('pengunjung/template/rightbar', $data);
-        $this->load->view('pengunjung/template/footer', $data);
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $this->load->view('pengunjung/template/header1', $data);
+        $this->load->view('pengunjung/additional/index1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
     }
     public function penulis()
     {
-
-        $perpage = 12;
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
+        $perpage = 9;
         $offset = $this->uri->segment(3);
         $config['total_rows'] = $this->M_User->getAllpenulis()->num_rows();
         $config['per_page'] = $perpage;
@@ -127,17 +123,15 @@ class Additional extends CI_Controller
         $data['halaman'] = $this->pagination->create_links();
         $data['editor'] = $this->M_User->indexpenulis($perpage, $offset)->result_array();
 
-        $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();
-        $data['reviewer_total'] = $this->M_User->getAllreviewer()->num_rows();
-        $data['penulis_total'] = $this->M_User->getAllpenulis()->num_rows();
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
 
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
 
-        $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/template/sidebar', $data);
-        $this->load->view('pengunjung/additional/index', $data);
-        $this->load->view('pengunjung/template/rightbar', $data);
-        $this->load->view('pengunjung/template/footer', $data);
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $this->load->view('pengunjung/template/header1', $data);
+        $this->load->view('pengunjung/additional/index1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
     }
 }

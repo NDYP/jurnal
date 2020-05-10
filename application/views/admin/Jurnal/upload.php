@@ -53,7 +53,7 @@
                                             <center>
                                                 <a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $berkas['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                                                 <?php if ($berkas['id_status_jurnal'] == 3) { ?>
-                                                    <a class="" title="Edit" href="<?= base_url('admin/jurnal/edit/' . $berkas['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
+                                                    <a class="" title="Edit" href="<?= base_url('admin/jurnal/edit/' . $berkas['id_jurnal']); ?>">| <span class="fa fa-edit"> Edit </span></a>
                                                 <?php } ?>
                                             </center>
                                         </td>

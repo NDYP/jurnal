@@ -64,7 +64,7 @@
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>
-        <li class="treeview <?= $this->uri->segment(1) == 'layanan' || $hal == 'template_jurnal' || $hal == 'tentang' ? 'active' : ''; ?>">
+        <li class="treeview <?= $this->uri->segment(1) == 'layanan' || $hal == 'template_jurnal' || $hal == 'tentang' || $hal == 'kategori_skripsi' ? 'active' : ''; ?>">
           <a href="#">
             <i class="fa fa-user"></i> <span>Master</span>
             <span class="pull-right-container">
@@ -75,6 +75,7 @@
             <li class="<?= $this->uri->segment(1) == 'layanan' ? 'active' : ''; ?>"><a href="<?= base_url('layanan/index2') ?>"><i class="fa fa-circle-o"></i> Layanan</a></li>
             <li class="<?= ($hal == 'template_jurnal') ? 'active' : ''; ?>"><a href="<?= base_url('admin/template_jurnal') ?>"><i class=" fa fa-circle-o"></i> Template Jurnal</a></li>
             <li class="<?= ($hal == 'tentang') ? 'active' : ''; ?>"><a href="<?= base_url('admin/tentang') ?>"><i class=" fa fa-circle-o"></i> Tentang Jurnal</a></li>
+            <li class="<?= ($hal == 'kategori_skripsi') ? 'active' : ''; ?>"><a href="<?= base_url('admin/kategori_skripsi') ?>"><i class=" fa fa-circle-o"></i> Kategori Skripsi</a></li>
           </ul>
         </li>
       <?php } ?>

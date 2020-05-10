@@ -12,7 +12,8 @@ class M_Jurnal extends CI_Model
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
-            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->join('jenis_kelamin', 'jurnal.id_jk=jenis_kelamin.id_jk', 'left')
+            ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
             ->get()
             ->result_array();
         return $query;
@@ -27,6 +28,7 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->join('jenis_kelamin', 'jurnal.id_jk=jenis_kelamin.id_jk', 'left')
             ->where('status_jurnal.id_status_jurnal=', 5)
             ->get()
             ->result_array();
@@ -57,6 +59,7 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
             ->order_by('id_jurnal', 'asc')
             ->get();
         return $query;
@@ -85,6 +88,7 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
             ->where('jurnal.id_jurnal', $id_jurnal)
             ->get()
             ->row_array();

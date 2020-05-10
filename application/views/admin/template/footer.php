@@ -67,6 +67,7 @@
     $('#abstrak').summernote({
       height: "200px",
       styleWithSpan: false
+
     });
   });
 </script>

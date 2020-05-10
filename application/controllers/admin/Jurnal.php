@@ -7,6 +7,7 @@ class Jurnal extends CI_Controller
         $this->load->model('M_User');
         $this->load->model('M_Jurnal');
         $this->load->model('M_Komentar');
+        $this->load->model('M_Kategori_Skripsi');
     }
     function index()
     {
@@ -69,6 +70,7 @@ class Jurnal extends CI_Controller
             $data['jurnal'] = $this->M_Jurnal->index();
             $data['reviewer'] = $this->M_User->index_reviewer();
             $data['akun'] = $this->M_User->login();
+            $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index()->result_array();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/jurnal/tambah', $data);
@@ -95,6 +97,7 @@ class Jurnal extends CI_Controller
                     $id_penulis = $this->input->post('id_penulis');
                     $id_pembimbing1 = $this->input->post('id_pembimbing1');
                     $id_pembimbing2 = $this->input->post('id_pembimbing2');
+                    $id_kategori_skripsi = $this->input->post('id_kategori_skripsi');
                     $judul = $this->input->post('judul');
 
                     $abstrak = $this->input->post('abstrak');
@@ -108,25 +111,26 @@ class Jurnal extends CI_Controller
                         'id_pembimbing2' => $id_pembimbing2,
                         'id_penulis' => $id_penulis,
                         'id_status_jurnal' => 1,
+                        'id_kategori_skripsi' => $id_kategori_skripsi,
                         'tgl_upload' => $date,
                     );
                     $this->M_Jurnal->tambah('jurnal', $data);
-                    $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
-                    redirect('admin/jurnal/jurnalakun');
+                    echo "<script>alert('Berhasil Upload Jurnal')</script>";
+                    redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Gagal Menambahkan Data</div>');
-                    redirect('admin/jurnal/jurnalakun');
+                    echo "<script>alert('Gagal Upload Jurnal')</script>";
+                    redirect('admin/jurnal/jurnalakun', 'refresh');
                 }
             } else {
 
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">
-          File Tidak Boleh Kosong</div>');
-                redirect('admin/jurnal/jurnalakun');
+                echo "<script>alert('File Tidak Boleh Kosong')</script>";
+                redirect('admin/jurnal/jurnalakun', 'refresh');
             }
         }
     }
     function edit($id_jurnal)
     {
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index()->result_array();
         $data['title'] = 'REVISI JURNAL SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['reviewer'] = $this->M_User->index_reviewer();
@@ -139,6 +143,7 @@ class Jurnal extends CI_Controller
 
     function revisi_penulis()
     {
+
         $config['upload_path'] = './assets/jurnal/'; //path folder
         $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa sesuaikan
         $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
@@ -162,7 +167,7 @@ class Jurnal extends CI_Controller
                 $id_pembimbing1 = $this->input->post('id_pembimbing1');
                 $id_pembimbing2 = $this->input->post('id_pembimbing2');
                 $judul = $this->input->post('judul');
-
+                $id_kategori_skripsi = $this->input->post('id_kategori_skripsi');
                 $abstrak = $this->input->post('abstrak');
                 date_default_timezone_set("ASIA/JAKARTA");
                 $date = date('Y-m-d H:i:s');
@@ -175,30 +180,29 @@ class Jurnal extends CI_Controller
                     'id_penulis' => $id_penulis,
                     'id_status_jurnal' => 6,
                     'tgl_edit' => $date,
+                    'id_kategori_skripsi' => $id_kategori_skripsi,
                 );
                 $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
-                $this->session->set_flashdata('message', '<div class="alert alert-success col-md-3" role="alert">Berhasil Menambahkan Data</div>');
-                if ($akun['id_kategori'] == 2) {
-                    redirect('admin/jurnal/jurnalakun');
+                echo "<script>alert('Berhasil Edit Data')</script>";
+                if ($this->session->userdata('id_kategori') == 2) {
+                    redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    redirect('admin/jurnal/');
+                    redirect('admin/jurnal/', 'refresh');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-3" role="alert">Gagal Menambahkan Data</div>');
-                if ($akun['id_kategori'] == 2) {
-                    redirect('admin/jurnal/jurnalakun');
+                echo "<script>alert('Gagal Edit Data')</script>";
+                if ($this->session->userdata('id_kategori') == 2) {
+                    redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    redirect('admin/jurnal/');
+                    redirect('admin/jurnal/', 'refresh');
                 }
             }
         } else {
-
-            $this->session->set_flashdata('message', '<div class="alert alert-danger col-md-3" role="alert">
-          File Tidak Boleh Kosong</div>');
-            if ($akun['id_kategori'] == 2) {
-                redirect('admin/jurnal/jurnalakun');
+            echo "<script>alert('Silahkan Pilih File')</script>";
+            if ($this->session->userdata('id_kategori') == 2) {
+                redirect('admin/jurnal/jurnalakun', 'refresh');
             } else {
-                redirect('admin/jurnal/');
+                redirect('admin/jurnal/', 'refresh');
             }
         }
     }
@@ -213,11 +217,13 @@ class Jurnal extends CI_Controller
             $id_jurnal = $this->input->post('id_jurnal');
             $id_user = $this->input->post('id_user');
             $komentar = $this->input->post('komentar');
+
             date_default_timezone_set("ASIA/JAKARTA");
             $date = date('Y-m-d H:i:s');
             $data = array(
 
                 'id_jurnal' => $id_jurnal,
+
                 'id_user' => $id_user,
                 'komentar' => $komentar,
                 'tanggal' => $date,

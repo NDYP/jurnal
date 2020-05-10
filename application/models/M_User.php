@@ -240,15 +240,11 @@ class M_User extends CI_Model
     }
     public function getAllreviewer()
     {
-        $query = $this->db->select('*') // pilih semua
-            ->from('user') // dari tabel user
-            ->order_by('id_user', 'ASC') // susun berdasarkan id
-            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
-            ->join('status', 'user.id_status=status.id_status', 'right')
-            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
-            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
-            ->where('kategori.nama_kategori="Reviewer"')
+        $query = $this->db->select('nama_kategori,kategori.id_kategori,count(*) as total') // pilih semua
+            ->from('kategori') // dari tabel user
+            ->join('user', 'kategori.id_kategori=user.id_kategori', 'left')
             ->order_by('id_user', 'asc')
+            ->group_by('kategori.id_kategori', 'asc')
             ->get();
         return $query;
     }

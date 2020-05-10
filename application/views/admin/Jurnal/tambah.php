@@ -39,31 +39,39 @@
           </div>
           <!-- /.col -->
           <div class="col-md-6">
+
             <div class="form-group">
-              <div class="form-group">
-                <label>Pembimbing 1</label>
-                <select name="id_pembimbing1" class="form-control select2" style="width: 100%;">
-                  <?php foreach ($reviewer as $akun) : ?>
-                    <option name="id_pembimbing1" value="<?= $akun['nama']; ?>"><?= $akun['nama']; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <?= form_error('id_jk', '<small class="text-danger pl-1">', '</small>'); ?>
-              <div class="form-group">
-                <label>Pembimbing 2</label>
-                <select name="id_pembimbing2" class="form-control select2" style="width: 100%;">
-                  <?php foreach ($reviewer as $akun) : ?>
-                    <option name="id_pembimbing2" value="<?= $akun['nama']; ?>"><?= $akun['nama']; ?></option>
-                  <?php endforeach; ?>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>File Jurnal</label>
-                <div>
-                  <?= form_upload('file'); ?>
-                </div>
+              <label>Pembimbing 1</label>
+              <select name="id_pembimbing1" class="form-control select2" style="width: 100%;">
+                <?php foreach ($reviewer as $akun) : ?>
+                  <option name="id_pembimbing1" value="<?= $akun['nama']; ?>"><?= $akun['nama']; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <?= form_error('id_jk', '<small class="text-danger pl-1">', '</small>'); ?>
+            <div class="form-group">
+              <label>Pembimbing 2</label>
+              <select name="id_pembimbing2" class="form-control select2" style="width: 100%;">
+                <?php foreach ($reviewer as $akun) : ?>
+                  <option name="id_pembimbing2" value="<?= $akun['nama']; ?>"><?= $akun['nama']; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Kategori</label>
+              <select name="id_kategori_skripsi" class="form-control select2" style="width: 100%;">
+                <?php foreach ($kategori_skripsi as $akun) : ?>
+                  <option name="id_kategori_skripsi" value="<?= $akun['id_kategori_skripsi']; ?>"><?= $akun['nama_kategori']; ?></option>
+                <?php endforeach; ?>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>File Jurnal</label>
+              <div>
+                <?= form_upload('file'); ?>
               </div>
             </div>
+
             <!-- /.form-group -->
           </div>
           <!-- /.col -->

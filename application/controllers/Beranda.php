@@ -10,6 +10,8 @@ class Beranda extends CI_Controller
         $this->load->model('M_Komentar');
         $this->load->model('M_Statistik');
         $this->load->model('M_Layanan');
+        $this->load->model('M_Template_Jurnal');
+        $this->load->model('M_Kategori_Skripsi');
     }
     public function ip_user()
     {
@@ -185,35 +187,86 @@ class Beranda extends CI_Controller
 
         $data['layanan'] = $this->M_Layanan->index()->result_array();
 
-        $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();
-        $data['reviewer_total'] = $this->M_User->getAllreviewer()->num_rows();
-        $data['penulis_total'] = $this->M_User->getAllpenulis()->num_rows();
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
 
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
+        $data['title'] = "Daftar Jurnal";
+        $data['title2'] = "Status Publish";
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
 
-        $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/template/sidebar', $data);
-        $this->load->view('pengunjung/beranda/index', $data);
-        $this->load->view('pengunjung/template/rightbar', $data);
-        $this->load->view('pengunjung/template/footer', $data);
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+
+        $this->load->view('pengunjung/template/header1', $data);
+
+        $this->load->view('pengunjung/beranda/index1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
+    }
+    public function kategori($nama_kategori)
+    {
+
+        $perpage = 5;
+        $offset = $this->uri->segment(3);
+        $config['total_rows'] = $this->M_Jurnal->getAll()->num_rows();
+        $config['per_page'] = $perpage;
+        $config['base_url'] = site_url('beranda/index');
+        $config['first_link']       = 'Pertama';
+        $config['last_link']        = 'Terakhir';
+        $config['next_link']        = 'Selanjutnya';
+        $config['prev_link']        = 'Sebelumnya';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+        $this->pagination->initialize($config);
+        $data['halaman'] = $this->pagination->create_links();
+
+
+        $data['layanan'] = $this->M_Layanan->index()->result_array();
+
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
+
+        $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
+        $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
+        $data['title'] = "Daftar Jurnal";
+        $data['title2'] = "Status Publish";
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
+
+        $data['jurnal'] = $this->M_Kategori_Skripsi->get($nama_kategori);
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $this->load->view('pengunjung/template/header1', $data);
+
+        $this->load->view('pengunjung/beranda/index1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
     }
     public function detail($id_jurnal)
     {
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
         $data['layanan'] = $this->M_Layanan->index()->result_array();
-
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
-        $data['editor_total'] = $this->M_User->getAlleditor()->num_rows();
-        $data['reviewer_total'] = $this->M_User->getAllreviewer()->num_rows();
-        $data['penulis_total'] = $this->M_User->getAllpenulis()->num_rows();
+
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
+
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['komentar'] = $this->M_Komentar->get_komentar($id_jurnal)->result_array();
         $data['jumlah'] = $this->M_Komentar->get_komentar($id_jurnal)->num_rows();
-        $this->load->view('pengunjung/template/header', $data);
-        $this->load->view('pengunjung/template/sidebar', $data);
-        $this->load->view('pengunjung/beranda/detail', $data);
-        $this->load->view('pengunjung/template/rightbar', $data);
-        $this->load->view('pengunjung/template/footer', $data);
+        $this->load->view('pengunjung/template/header1', $data);
+        $this->load->view('pengunjung/beranda/detail1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
     }
 }
