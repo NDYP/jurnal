@@ -25,7 +25,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Kategori</label>
-                                    <input type="text" class="form-control" name="id_kategori_skripsi" value="<?= $kategori_skripsi['id_kategori_skripsi']; ?>">
+                                    <input type="hidden" class="form-control" name="id_kategori_skripsi" value="<?= $kategori_skripsi['id_kategori_skripsi']; ?>">
                                     <input type="text" class="form-control" name="nama_kategori" value="<?= $kategori_skripsi['nama_kategori']; ?>">
 
                                 </div>

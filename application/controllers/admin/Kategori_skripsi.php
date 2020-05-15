@@ -12,7 +12,7 @@ class Kategori_skripsi extends CI_Controller
     {
         $data['title'] = "Kategori Skripsi";
         $data['akun'] = $this->M_User->login();
-        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index()->result_array();
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/kategori_skripsi/index', $data);
@@ -21,14 +21,13 @@ class Kategori_skripsi extends CI_Controller
 
     public function hapus($id_kategori_skripsi)
     {
-        $data = $this->M_Kategori_Skripsi->get($id_kategori_skripsi);
+        $data = $this->M_Kategori_Skripsi->get1($id_kategori_skripsi);
         if ($data) {
-
             $this->M_Kategori_Skripsi->hapus($id_kategori_skripsi);
             echo "<script>alert('Berhasil Hapus Data')</script>";
             redirect('admin/kategori_skripsi/index', 'refresh');
         } else {
-            echo "<script>alert('Berhasil Ubah Data')</script>";
+            echo "<script>alert('Gagal Hapus Data')</script>";
             redirect('admin/kategori_skripsi/index', 'refresh');
         }
     }
@@ -36,7 +35,7 @@ class Kategori_skripsi extends CI_Controller
     public function edit($id_kategori_skripsi)
     {
         $data['title'] = "FORM EDIT kategori_skripsi";
-        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->get($id_kategori_skripsi);
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->get1($id_kategori_skripsi);
         $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);

@@ -10,6 +10,14 @@
             ->result_array();
         return $query;
     }
+    public function get1($id_kategori_skripsi) //menampilkan sesuai ketagori yang dipilih
+    {
+        $query = $this->db->from('kategori_skripsi')
+            ->where('kategori_skripsi.id_kategori_skripsi', $id_kategori_skripsi)
+            ->get()
+            ->row_array();
+        return $query;
+    }
     public function get($nama_kategori) //menampilkan sesuai ketagori yang dipilih
     {
         $category_id = $this->db->get_where('kategori_skripsi', array('nama_kategori' => $nama_kategori))->row('id_kategori_skripsi');

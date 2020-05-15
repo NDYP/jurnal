@@ -8,12 +8,12 @@ class M_Jurnal extends CI_Model
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user,count(jurnal.id_jurnal) as jumlahjurnal')
             ->from('jurnal')
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
-            ->join('jenis_kelamin', 'jurnal.id_jk=jenis_kelamin.id_jk', 'left')
-            ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
+
             ->get()
             ->result_array();
         return $query;
@@ -28,7 +28,7 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
-            ->join('jenis_kelamin', 'jurnal.id_jk=jenis_kelamin.id_jk', 'left')
+
             ->where('status_jurnal.id_status_jurnal=', 5)
             ->get()
             ->result_array();
