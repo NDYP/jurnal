@@ -32,7 +32,7 @@
                          <ul class="list-unstyled mb-0">
                              <?php foreach ($kategori_skripsi as $x) { ?>
                                  <li>
-                                     <a class="d-flex justify-content-between" href="<?= site_url('beranda/kategori/' . $x['nama_kategori']); ?>">
+                                     <a class="d-flex justify-content-between" href="<?= site_url('beranda/kategori/' . $x['id_kategori_skripsi']); ?>">
                                          <p><?= $x['nama_kategori'] ?></p> <span>(<?= $x['total'] ?>)</span>
 
                                      </a>

@@ -203,7 +203,7 @@ class Beranda extends CI_Controller
         $this->load->view('pengunjung/template/sidebar1', $data);
         $this->load->view('pengunjung/template/footer1', $data);
     }
-    public function kategori($nama_kategori)
+    public function kategori($id_kategori_skripsi)
     {
 
         $perpage = 5;
@@ -243,7 +243,7 @@ class Beranda extends CI_Controller
         $data['title2'] = "Status Publish";
         $data['template'] = $this->M_Template_Jurnal->index()->result_array();
 
-        $data['jurnal'] = $this->M_Kategori_Skripsi->get($nama_kategori);
+        $data['jurnal'] = $this->M_Kategori_Skripsi->get($id_kategori_skripsi);
         $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
         $this->load->view('pengunjung/template/header1', $data);
 
