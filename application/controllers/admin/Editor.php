@@ -98,10 +98,11 @@
                         'id_status' => '1',
                     );
                     $this->M_User->tambah('user', $data);
-                    echo "<script>alert('Berhasil Tambah Data')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
+
                     redirect('admin/editor/index', 'refresh');
                 } else {
-                    echo "<script>alert('Gagal Tambah Data')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/editor/index', 'refresh');
                 }
             } else {
@@ -133,7 +134,7 @@
                     'id_status' => '1',
                 );
                 $this->M_User->tambah('user', $data);
-                echo "<script>alert('Berhasil Tambah Data')</script>";
+                $this->session->set_flashdata('flash', 'Ditambah');
                 redirect('admin/editor/index', 'refresh');
             }
         }
@@ -144,10 +145,10 @@
         if ($data) {
 
             $this->M_User->hapus($id_user);
-            echo "<script>alert('Berhasil Hapus Data')</script>";
+            $this->session->set_flashdata('flash', 'Ditambah');
             redirect('admin/editor/index', 'refresh');
         } else {
-            echo "<script>alert('Gagal Hapus Data')</script>";
+            $this->session->set_flashdata('flash', 'Ditambah');
             redirect('admin/editor/index', 'refresh');
         }
     }
@@ -219,10 +220,10 @@
                     'id_agama' => $id_agama,
                 );
                 $this->M_User->edit('user', $data, array('id_user' => $id_user));
-                echo "<script>alert('Berhasil Ubah Data')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/editor/index', 'refresh');
             } else {
-                echo "<script>alert('Gagal Ubah Data')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/editor/index', 'refresh');
             }
         } else {
@@ -249,7 +250,7 @@
                 'id_agama' => $id_agama,
             );
             $this->M_User->edit('user', $data, array('id_user' => $id_user));
-            echo "<script>alert('Berhasil Ubah Data Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/editor/index', 'refresh');
         }
     }

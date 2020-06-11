@@ -5,19 +5,20 @@ class M_User extends CI_Model
 {
     public function index()
     {
-        $query = $this->db->select('*, count(user.id_user) as jumlahuser')
-            ->from('user')
-            ->order_by('id_user', 'ASC')
-            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+        $query = $this->db->select('*, count(user.id_user) as jumlahuser') //pilih semua
+            ->from('user') //dari tbel user
+            ->order_by('id_user', 'ASC') //urut berdasarkan id
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left') //gabung tabel kategori
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
             ->get()
-            ->result_array();
+            ->result_array(); //ditampilkan dalam bentuk array
         return $query;
     }
     public function login()
     {
+        //menampilkan data user sesuai dengan sesi login
         $query = $this->db->select('*,user.id_user')
             ->from('user')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
@@ -26,13 +27,12 @@ class M_User extends CI_Model
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
             ->join('jurnal', 'user.id_user=jurnal.id_penulis', 'left')
             ->where('user.id_user=', $this->session->userdata('id_user'))->get()->row_array();
-
         return $query;
     }
 
     public function berkas()
     {
-
+        //menampilkan data jurnal sesuai dengan sesi login
         $query = $this->db->select('*,jurnal.id_jurnal')
             ->from('user')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
@@ -47,6 +47,7 @@ class M_User extends CI_Model
     }
     public function hapus($id_user)
     {
+        //menghapus data user sesuai id yang dipilih
         $this->db->where('id_user', $id_user);
         $this->db->delete('user');
     }

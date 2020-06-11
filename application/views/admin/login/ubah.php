@@ -33,41 +33,34 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="<?= site_url('assets'); ?>/index2.html"><b><i>E-Journal</i></b></a>
+            <a href="<?= site_url('assets'); ?>/index2.html"><b><i>E-Journal-</i></b>TI</a>
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
             <center><a href="http://localhost/xxx/assets//index2.html"><img width="150px" height="150px" src="<?= base_url('assets/foto/logo.jpg'); ?>"></a></center>
-
+            <p class="login-box-msg"><?= $this->session->userdata('reset_password') ?></p>
             <?= $this->session->flashdata('message'); ?>
-            <form action="<?= base_url('admin/login'); ?>" method="post">
+            <form action="<?= base_url('admin/login/ubahpassword'); ?>" method="post">
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="NIP / NIM" name="nip_nim">
-                    <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
-                </div>
-                <?= form_error('nip_nim', '<small class="text-danger pl-1">', '</small>'); ?>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
+                    <input type="password" class="form-control" placeholder="Masukkan Password Baru" name="password1">
                     <span class="glyphicon glyphicon-lock form-control-feedback"></span>
                 </div>
-                <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
+                <?= form_error('password1', '<small class="text-danger pl-1">', '</small>'); ?>
+                <div class="form-group has-feedback">
+                    <input type="password" class="form-control" placeholder="Masukkan Ulang Password Baru" name="password2">
+                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                </div>
+                <?= form_error('password2', '<small class="text-danger pl-1">', '</small>'); ?>
                 <div class="row">
                     <div class="col-xs-8">
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Send</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
-            <div class="social-auth-links text-center">
-                <p>- OR -</p>
-
-            </div>
-            <!-- /.social-auth-links -->
-
-            <a href="<?= base_url('admin/login/lupa_password'); ?>">Lupa Password</a><br>
 
         </div>
         <!-- /.login-box-body -->

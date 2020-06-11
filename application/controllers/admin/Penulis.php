@@ -83,7 +83,8 @@
           $alamat = $this->input->post('alamat');
           $no_hp = $this->input->post('no_hp');
 
-          $password = $this->input->post('password');
+          $password =
+            password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
           $data = array(
             'password' => $password,
             'foto' => $file,
@@ -100,10 +101,10 @@
             'id_status' => '1',
           );
           $this->M_User->tambah('user', $data);
-          echo "<script>alert('Berhasil Tambah Data')</script>";
+          $this->session->set_flashdata('flash', 'Ditambah');
           redirect('admin/penulis', 'refresh');
         } else {
-          echo "<script>alert('Gagal Tambah Data')</script>";
+          $this->session->set_flashdata('flash', 'Ditambah');
           redirect('admin/penulis', 'refresh');
         }
       } else {
@@ -117,10 +118,10 @@
         $id_agama = $this->input->post('id_agama');
         $alamat = $this->input->post('alamat');
         $no_hp = $this->input->post('no_hp');
-        $password = $this->input->post('password');
+        $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
         $data = array(
           'password' => $password,
-                    'nip_nim' => $nip_nim,
+          'nip_nim' => $nip_nim,
           'nama' => $nama,
           'id_jk' => $id_jk,
           'tempat_lahir' => $tempat_lahir,
@@ -133,7 +134,7 @@
           'id_status' => '1',
         );
         $this->M_User->tambah('user', $data);
-        echo "<script>alert('Berhasil Tambah Data')</script>";
+        $this->session->set_flashdata('flash', 'Ditambah');
         redirect('admin/penulis', 'refresh');
       }
     }
@@ -218,10 +219,10 @@
           'id_agama' => $id_agama,
         );
         $this->M_User->edit('user', $data, array('id_user' => $id_user));
-        echo "<script>alert('Berhasil Mengubah Data')</script>";
+        $this->session->set_flashdata('flash', 'Diubah');
         redirect('admin/penulis', 'refresh');
       } else {
-        echo "<script>alert('Gagal Mengubah Data')</script>";
+        $this->session->set_flashdata('flash', 'Diubah');
         redirect('admin/penulis', 'refresh');
       }
     } else {
@@ -235,9 +236,9 @@
       $alamat = $this->input->post('alamat');
       $no_hp = $this->input->post('no_hp');
       $id_user = $this->input->post('id_user');
-      $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+
       $data = array(
-        'password' => $password,
+
         'nip_nim' => $nip_nim,
         'nama' => $nama,
         'id_jk' => $id_jk,
@@ -249,7 +250,7 @@
         'id_agama' => $id_agama,
       );
       $this->M_User->edit('user', $data, array('id_user' => $id_user));
-      echo "<script>alert('Berhasil Mengubah Data')</script>";
+      $this->session->set_flashdata('flash', 'Diubah');
       redirect('admin/penulis', 'refresh');
     }
   }

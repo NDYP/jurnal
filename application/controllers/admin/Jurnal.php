@@ -73,8 +73,8 @@ class Jurnal extends CI_Controller
             $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
-         $this->load->view('admin/jurnal/tambah', $data);
-           $this->load->view('admin/template/footer', $data);
+            $this->load->view('admin/jurnal/tambah', $data);
+            $this->load->view('admin/template/footer', $data);
         } else {
             $config['upload_path'] = './assets/jurnal/'; //path folder
             $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa sesuaikan
@@ -115,15 +115,15 @@ class Jurnal extends CI_Controller
                         'tgl_upload' => $date,
                     );
                     $this->M_Jurnal->tambah('jurnal', $data);
-                    echo "<script>alert('Berhasil Upload Jurnal')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    echo "<script>alert('Gagal Upload Jurnal')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 }
             } else {
 
-                echo "<script>alert('File Tidak Boleh Kosong')</script>";
+                $this->session->set_flashdata('flash', 'Ditambah');
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             }
         }
@@ -183,14 +183,14 @@ class Jurnal extends CI_Controller
                     'id_kategori_skripsi' => $id_kategori_skripsi,
                 );
                 $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
-                echo "<script>alert('Berhasil Edit Data')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 if ($this->session->userdata('id_kategori') == 2) {
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
                     redirect('admin/jurnal/', 'refresh');
                 }
             } else {
-                echo "<script>alert('Gagal Edit Data')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 if ($this->session->userdata('id_kategori') == 2) {
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
@@ -198,7 +198,7 @@ class Jurnal extends CI_Controller
                 }
             }
         } else {
-            echo "<script>alert('Silahkan Pilih File')</script>";
+            $this->session->set_flashdata('error', 'Diubah');
             if ($this->session->userdata('id_kategori') == 2) {
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             } else {
@@ -229,7 +229,7 @@ class Jurnal extends CI_Controller
                 'tanggal' => $date,
             );
             $this->M_Jurnal->tambah('komentar', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menambahkan Data</div>');
+            $this->session->set_flashdata('flash', 'Ditambah');
             redirect('admin/jurnal/review');
         }
     }

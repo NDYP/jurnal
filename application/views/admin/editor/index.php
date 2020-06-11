@@ -10,7 +10,13 @@
 
   <!-- Main content -->
   <section class="content">
-    <?= $this->session->flashdata('message'); ?>
+
+
+    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
+
+
+
+
     <div class="row">
       <div class="col-xs-12">
         <!-- /.box -->
@@ -52,7 +58,7 @@
                     <td>
                       <center> <a class="" title="Detail" href="<?= base_url('admin/editor/detail/' . $row['id_user']); ?>"> <span class="fa fa-eye"></span> Lihat |</a>
                         <a class="" title="Edit" href="<?= base_url('admin/editor/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span> Edit |</a>
-                        <a class="" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span> Hapus</a></center>
+                        <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span> Hapus</a></center>
                     </td>
                   </tr>
                 <?php endforeach; ?>

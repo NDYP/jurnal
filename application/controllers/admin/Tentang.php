@@ -56,10 +56,10 @@
                     'isi' => $isi,
                 );
                 $this->M_Tentang->edit('tentang', $data, array('id_tentang' => $id_tentang));
-                echo "<script>alert('Berhasil Ubah Data')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/tentang/index', 'refresh');
             } else {
-                echo "<script>alert('Gagal Ubah Data')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/tentang/index', 'refresh');
             }
         } else {
@@ -69,7 +69,7 @@
                 'isi' => $isi,
             );
             $this->M_Tentang->edit('tentang', $data, array('id_tentang' => $id_tentang));
-            echo "<script>alert('Berhasil Ubah Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/tentang/index', 'refresh');
         }
     }
@@ -107,17 +107,15 @@
                     $file = $gbr['file_name'];
 
                     $isi = $this->input->post('isi');
-
                     $data = array(
                         'isi' => $isi,
                         'foto' => $file,
-
                     );
                     $this->M_User->tambah('tentang', $data);
-                    echo "<script>alert('Berhasil Tambah Data')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/tentang/index', 'refresh');
                 } else {
-                    echo "<script>alert('Gagal Tambah Data')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/tentang/index', 'refresh');
                 }
             } else {
@@ -125,7 +123,7 @@
                     'isi' => $isi,
                 );
                 $this->M_User->tambah('tentang', $data);
-                echo "<script>alert('Berhasil Tambah Data')</script>";
+                $this->session->set_flashdata('flash', 'Ditambah');
                 redirect('admin/tentang/index', 'refresh');
             }
         }

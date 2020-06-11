@@ -61,7 +61,7 @@ class Kategori_skripsi extends CI_Controller
                 'nama_kategori' => $nama_kategori,
             );
             $this->M_Kategori_Skripsi->tambah('kategori_skripsi', $data);
-            echo "<script>alert('Berhasil Tambah Data')</script>";
+            $this->session->set_flashdata('flash', 'Ditambah');
             redirect('admin/kategori_skripsi/index', 'refresh');
         }
     }
@@ -75,10 +75,10 @@ class Kategori_skripsi extends CI_Controller
         );
         $x = $this->M_Kategori_Skripsi->update('kategori_skripsi', $data, array('id_kategori_skripsi' => $id_kategori_skripsi));
         if ($x) {
-            echo "<script>alert('Berhasil Ubah Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/kategori_skripsi/index', 'refresh');
         } else {
-            echo "<script>alert('Gagal Ubah Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/kategori_skripsi/index', 'refresh');
         };
     }

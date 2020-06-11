@@ -38,25 +38,21 @@
         <!-- /.login-logo -->
         <div class="login-box-body">
             <center><a href="http://localhost/xxx/assets//index2.html"><img width="150px" height="150px" src="<?= base_url('assets/foto/logo.jpg'); ?>"></a></center>
-
+            <p class="login-box-msg">Masukkan Email Terdaftar</p>
             <?= $this->session->flashdata('message'); ?>
-            <form action="<?= base_url('admin/login'); ?>" method="post">
+            <form action="<?= base_url('admin/login/lupa_password'); ?>" method="post">
                 <div class="form-group has-feedback">
-                    <input type="text" class="form-control" placeholder="NIP / NIM" name="nip_nim">
+                    <input type="text" class="form-control" placeholder="Masukkan Email" name="email">
                     <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
                 </div>
-                <?= form_error('nip_nim', '<small class="text-danger pl-1">', '</small>'); ?>
-                <div class="form-group has-feedback">
-                    <input type="password" class="form-control" placeholder="Password" name="password">
-                    <span class="glyphicon glyphicon-lock form-control-feedback"></span>
-                </div>
-                <?= form_error('password', '<small class="text-danger pl-1">', '</small>'); ?>
+                <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
+
                 <div class="row">
                     <div class="col-xs-8">
                     </div>
                     <!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-primary btn-block btn-flat">Send</button>
                     </div>
                     <!-- /.col -->
                 </div>
@@ -67,8 +63,7 @@
             </div>
             <!-- /.social-auth-links -->
 
-            <a href="<?= base_url('admin/login/lupa_password'); ?>">Lupa Password</a><br>
-
+            <a href="<?= base_url('admin/login'); ?>">Login</a><br>
         </div>
         <!-- /.login-box-body -->
     </div>

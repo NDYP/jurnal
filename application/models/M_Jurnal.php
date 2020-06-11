@@ -14,9 +14,9 @@ class M_Jurnal extends CI_Model
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
             ->order_by('id_jurnal', 'desc')
-        
+
             ->get()
-             ->result_array();
+            ->result_array();
         return $query;
     }
     public function index2()
