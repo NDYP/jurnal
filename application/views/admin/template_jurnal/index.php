@@ -5,12 +5,10 @@
         <h4>
             <?= $title; ?>
         </h4>
-
     </section>
-
     <!-- Main content -->
     <section class="content">
-        <?= $this->session->flashdata('message'); ?>
+        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
         <div class="row">
             <div class="col-xs-12">
                 <!-- /.box -->
@@ -32,15 +30,12 @@
                                 <?php $no = 0;
                                 foreach ($jurnal as $row) : $no++; ?>
                                     <tr align="center">
-
                                         <td><?= $row['judul']; ?></td>
                                         <td><a class="btn btn-lg" href="<?= site_url('assets/jurnal/template/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a></td>
-
                                         <td>
                                             <center>
                                                 <a class="" title="Edit" href="<?= base_url('admin/template_jurnal/edit/' . $row['id_template_jurnal']); ?>"><span class="fa fa-edit"></span> Edit |</a>
-                                                <a class="" title="Hapus" href="<?= base_url('admin/template_jurnal/hapus/' . $row['id_template_jurnal']); ?>"><span class="fa fa-trash"> Hapus</span></a>
-
+                                                <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/template_jurnal/hapus/' . $row['id_template_jurnal']); ?>"><span class="fa fa-trash"> Hapus</span></a>
                                             </center></a>
                                         </td>
                                     </tr>

@@ -15,10 +15,7 @@
                     <div class="info-box-content">
                         <span class="info-box-text">Jurnal</span>
                         <span class="info-box-number">
-                            <?php $no = 0;
-                            foreach ($jurnal as $row) : $no++; ?>
-                                <?= $row['jumlahjurnal']; ?>
-                            <?php endforeach; ?></span>
+                            <?= $jumlahjurnal; ?></span>
                     </div>
                     <!-- /.info-box-content -->
                 </div>

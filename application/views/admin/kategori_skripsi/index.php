@@ -10,7 +10,7 @@
 
     <!-- Main content -->
     <section class="content">
-        <?= $this->session->flashdata('message'); ?>
+        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
         <div class="row">
             <div class="col-xs-12">
                 <!-- /.box -->
@@ -32,14 +32,14 @@
                                 <?php $no = 0;
                                 foreach ($kategori_skripsi as $row) : $no++; ?>
                                     <tr align="center">
-<td><?= $no; ?></td>
+                                        <td><?= $no; ?></td>
                                         <td><?= $row['nama_kategori']; ?></td>
-                                       
+
 
                                         <td>
                                             <center>
                                                 <a class="" title="Edit" href="<?= base_url('admin/kategori_skripsi/edit/' . $row['id_kategori_skripsi']); ?>"><span class="fa fa-edit"></span> Edit |</a>
-                                                <a class="" title="Hapus" href="<?= base_url('admin/kategori_skripsi/hapus/' . $row['id_kategori_skripsi']); ?>"><span class="fa fa-trash"> Hapus</span></a>
+                                                <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/kategori_skripsi/hapus/' . $row['id_kategori_skripsi']); ?>"><span class="fa fa-trash"> Hapus</span></a>
 
                                             </center></a>
                                         </td>

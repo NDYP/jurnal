@@ -19,6 +19,13 @@ class M_Jurnal extends CI_Model
             ->result_array();
         return $query;
     }
+    public function jumlahjurnal()
+    {
+        $query = $this->db->select('*')
+            ->from('jurnal')
+            ->get();
+        return $query;
+    }
     public function index2()
     {
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user,count(jurnal.id_jurnal) as jumlahjurnal')

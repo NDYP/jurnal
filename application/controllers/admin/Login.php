@@ -213,8 +213,9 @@ class Login extends CI_Controller
     {
         $config = [
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.googlemail.com',
-            'smtp_user' => 'NDYP20062019@gmail.com',
+            'smtp_host' => 'ssl://smtp.gmail.com',
+            //'smtp_host' => 'ssl://smtp.googlemail.com',//
+            'smtp_user' => 'ndyp20062019@gmail.com',
             'smtp_pass' => 'yuliandi20062019',
             'smtp_port' => '465',
             'mailtype' => 'html',
@@ -223,7 +224,7 @@ class Login extends CI_Controller
         ];
 
         $this->load->library('email', $config);
-        $this->email->from('NDYP20062019@gmail.com');
+        $this->email->from('ndyp20062019@gmail.com');
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {

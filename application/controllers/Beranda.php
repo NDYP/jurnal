@@ -207,10 +207,10 @@ class Beranda extends CI_Controller
     {
 
         $perpage = 5;
-        $offset = $this->uri->segment(3);
-        $config['total_rows'] = $this->M_Jurnal->getAll()->num_rows();
+        $offset = $this->uri->segment(4);
+        $config['total_rows'] = $this->db->get_where('jurnal', array('id_kategori_skripsi' => $id_kategori_skripsi))->num_rows();
         $config['per_page'] = $perpage;
-        $config['base_url'] = site_url('beranda/index');
+        $config['base_url'] = base_url('beranda/kategori/');
         $config['first_link']       = 'Pertama';
         $config['last_link']        = 'Terakhir';
         $config['next_link']        = 'Selanjutnya';
@@ -243,7 +243,7 @@ class Beranda extends CI_Controller
         $data['title2'] = "Status Publish";
         $data['template'] = $this->M_Template_Jurnal->index()->result_array();
 
-        $data['jurnal'] = $this->M_Kategori_Skripsi->get($id_kategori_skripsi);
+        $data['jurnal'] = $this->M_Kategori_Skripsi->get($id_kategori_skripsi, $perpage, $offset);
         $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
         $this->load->view('pengunjung/template/header1', $data);
 

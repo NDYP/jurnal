@@ -49,10 +49,10 @@ class Layanan extends CI_Controller
         if ($data) {
 
             $this->M_Layanan->hapus($id_layanan);
-            $this->session->set_flashdata('message', '<div class="alert alert-success col-md-12" role="alert">Berhasil Menghapus Data</div>');
+            $this->session->set_flashdata('flash', 'Dihapus');
             redirect('layanan/index2');
         } else {
-            $this->session->set_flashdata('message', '<div class="alert alert-warning col-md-12" role="alert">Data yang dipilih tidak ada</div>');
+            $this->session->set_flashdata('flash', 'Dihapus');
             redirect('layanan/index2');
         }
     }
@@ -87,10 +87,10 @@ class Layanan extends CI_Controller
         );
         $x = $this->M_Layanan->update('layanan', $data, array('id_layanan' => $id_layanan));
         if ($x) {
-            echo "<script>alert('Berhasil Ubah Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('layanan/index2', 'refresh');
         } else {
-            echo "<script>alert('Gagal Ubah Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('layanan/index2', 'refresh');
         };
     }

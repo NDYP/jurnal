@@ -15,7 +15,7 @@ class Dashboard extends CI_Controller
 
         $query =  $this->db->query("SELECT COUNT(id_jurnal) as count,MONTHNAME(tgl_upload) 
         as month_name FROM jurnal WHERE YEAR(tgl_upload) = '" . date('Y') . "'
-      GROUP BY YEAR(tgl_upload),MONTH(tgl_upload)");
+    GROUP BY YEAR(tgl_upload),MONTH(tgl_upload)");
         $record = $query->result();
         $data = [];
 
@@ -28,6 +28,7 @@ class Dashboard extends CI_Controller
         $data['akun'] = $this->M_User->login();
         $data['user'] = $this->M_User->index();
         $data['jurnal'] = $this->M_Jurnal->index();
+        $data['jumlahjurnal'] = $this->M_Jurnal->jumlahjurnal()->num_rows();
         $data['jurnal2'] = $this->M_Jurnal->index2();
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['user_online'] = $this->M_Statistik->user_online()->num_rows();

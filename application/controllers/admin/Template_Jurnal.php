@@ -57,14 +57,14 @@ class Template_Jurnal extends CI_Controller
                         'file' => $file,
                     );
                     $this->M_Template_Jurnal->tambah('template_jurnal', $data);
-                    echo "<script>alert('Berhasil Tambah Data')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/template_jurnal/index', 'refresh');
                 } else {
-                    echo "<script>alert('Gagal Tambah Data')</script>";
+                    $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/template_jurnal/index', 'refresh');
                 }
             } else {
-                echo "<script>alert('Upload Gagal, Pilih File')</script>";
+                $this->session->set_flashdata('flash', 'Ditambah');
                 redirect('admin/template_jurnal/index', 'refresh');
             }
         }
@@ -75,10 +75,10 @@ class Template_Jurnal extends CI_Controller
         if ($data) {
 
             $this->M_Template_Jurnal->hapus($id_template_jurnal);
-            echo "<script>alert('Berhasil Hapus Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/template_jurnal/index', 'refresh');
         } else {
-            echo "<script>alert('Gagal Hapus Data')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/template_jurnal/index', 'refresh');
         }
     }
@@ -120,10 +120,10 @@ class Template_Jurnal extends CI_Controller
                     'file' => $file,
                 );
                 $this->M_Template_Jurnal->update('template_jurnal', $data, array('id_template_jurnal' => $id_template_jurnal));
-                echo "<script>alert('Berhasil Upload')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/template_jurnal/index', 'refresh');
             } else {
-                echo "<script>alert('Gagal Upload, Pilih File')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/template_jurnal/index', 'refresh');
             }
         } else {
@@ -133,7 +133,7 @@ class Template_Jurnal extends CI_Controller
                 'judul' => $judul,
             );
             $this->M_Template_Jurnal->update('template_jurnal', $data, array('id_template_jurnal' => $id_template_jurnal));
-            echo "<script>alert('Berhasil Ubah Judul')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/template_jurnal/index', 'refresh');
         }
     }

@@ -144,10 +144,10 @@
     $data = $this->M_User->get_penulis($id_user);
     if ($data) {
       $this->M_User->hapus($id_user);
-      echo "<script>alert('Berhasil Hapus Data')</script>";
+      $this->session->set_flashdata('flash', 'Dihapus');
       redirect('admin/penulis', 'refresh');
     } else {
-      echo "<script>alert('Gagal Hapus Data')</script>";
+      $this->session->set_flashdata('flash', 'Dihapus');
       redirect('admin/penulis', 'refresh');
     }
   }

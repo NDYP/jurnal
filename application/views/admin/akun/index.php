@@ -13,7 +13,7 @@
     </section>
     <!-- Main content -->
     <section class="content">
-        <?= $this->session->flashdata('message'); ?>
+        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
         <div class="row">
             <!-- /.col -->
             <div class="col-md-12">

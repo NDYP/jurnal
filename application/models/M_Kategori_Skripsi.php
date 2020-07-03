@@ -18,13 +18,14 @@
             ->row_array();
         return $query;
     }
-    public function get($id_kategori_skripsi) //menampilkan sesuai ketagori yang dipilih
+    public function get($id_kategori_skripsi, $perpage, $offset) //menampilkan sesuai ketagori yang dipilih
     {
         $category_id = $this->db->get_where('kategori_skripsi', array('id_kategori_skripsi' => $id_kategori_skripsi))->row('id_kategori_skripsi');
         return $this->db->order_by('id_kategori_skripsi', 'desc')
             ->from('jurnal')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->where('id_kategori_skripsi', $category_id)
+            ->limit($perpage, $offset)
             ->get()
             ->result_array();
     }

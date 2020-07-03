@@ -40,9 +40,9 @@
               </thead>
               <tbody>
                 <?php $no = 0;
-                foreach ($editor as $row) : $no++; ?>
+                foreach ($editor as $row) :  ?>
                   <tr>
-                    <td><?= $no; ?></td>
+                    <td><?= $no++; ?></td>
                     <td> <?php if ($row['foto'] !== NULL) { ?>
                         <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" style="width:70px;">
                       <?php } ?>
@@ -54,11 +54,18 @@
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['tempat_lahir']; ?>, <?= date('d-m-Y', strtotime($row['tgl_lahir'])); ?> </td>
                     <td><?= $row['email']; ?></td>
-
                     <td>
-                      <center> <a class="" title="Detail" href="<?= base_url('admin/editor/detail/' . $row['id_user']); ?>"> <span class="fa fa-eye"></span> Lihat |</a>
-                        <a class="" title="Edit" href="<?= base_url('admin/editor/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span> Edit |</a>
-                        <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span> Hapus</a></center>
+                      <center> <a class="" title="Detail" href="<?= base_url('admin/editor/detail/' . $row['id_user']); ?>">
+                          <span class="fa fa-eye"></span>
+                          Lihat |</a>
+                        <a class="" title="Edit" href="<?= base_url('admin/editor/edit/' . $row['id_user']); ?>">
+                          <span class="fa fa-edit"></span>
+                          Edit |
+                        </a>
+                        <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>">
+                          <span class="fa fa-trash"></span>
+                          Hapus</a>
+                      </center>
                     </td>
                   </tr>
                 <?php endforeach; ?>

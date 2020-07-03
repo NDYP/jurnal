@@ -1,6 +1,5 @@
 <?php class Editor extends CI_Controller
 {
-
     public function __construct()
     {
         parent::__construct();
@@ -145,10 +144,10 @@
         if ($data) {
 
             $this->M_User->hapus($id_user);
-            $this->session->set_flashdata('flash', 'Ditambah');
+            $this->session->set_flashdata('flash', 'Dihapus');
             redirect('admin/editor/index', 'refresh');
         } else {
-            $this->session->set_flashdata('flash', 'Ditambah');
+            $this->session->set_flashdata('flash', 'Dihapus');
             redirect('admin/editor/index', 'refresh');
         }
     }

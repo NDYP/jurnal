@@ -10,7 +10,7 @@
 
   <!-- Main content -->
   <section class="content">
-    <?= $this->session->flashdata('message'); ?>
+    <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <div class="row">
       <div class="col-xs-12">
         <!-- /.box -->
@@ -69,7 +69,7 @@
                       <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
                           <?php if ($row['id_status_jurnal'] == 2) { ?>
-                            <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
+                            <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
                           <?php } ?>
                         <?php } ?>
                       </center>
