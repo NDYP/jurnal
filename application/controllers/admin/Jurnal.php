@@ -130,7 +130,7 @@ class Jurnal extends CI_Controller
     }
     function edit($id_jurnal)
     {
-        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index()->result_array();
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
         $data['title'] = 'REVISI JURNAL SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['reviewer'] = $this->M_User->index_reviewer();

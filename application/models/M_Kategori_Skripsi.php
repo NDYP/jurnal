@@ -5,6 +5,8 @@
         $query = $this->db->select('nama_kategori,kategori_skripsi.id_kategori_skripsi,count(*) as total') //menampilkan kategori
             ->from('kategori_skripsi')
             ->join('jurnal', 'kategori_skripsi.id_kategori_skripsi=jurnal.id_kategori_skripsi', 'left')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->where('status_jurnal.id_status_jurnal=', 5)
             ->group_by('nama_kategori', 'asc')
             ->get()
             ->result_array();
@@ -24,6 +26,8 @@
         return $this->db->order_by('id_kategori_skripsi', 'desc')
             ->from('jurnal')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->where('status_jurnal.id_status_jurnal=', 5)
             ->where('id_kategori_skripsi', $category_id)
             ->limit($perpage, $offset)
             ->get()

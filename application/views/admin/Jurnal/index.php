@@ -69,7 +69,7 @@
                       <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
                           <?php if ($row['id_status_jurnal'] == 2) { ?>
-                            <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
+                            <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
                           <?php } ?>
                         <?php } ?>
                       </center>

@@ -121,7 +121,7 @@ class Login extends CI_Controller
             $cek_mahasiswa = $this->M_User->auth_mahasiswa($nip_nim)->row_array();
             if ($data = $cek_mahasiswa) {
                 if (($data['id_status'] == '1')) {
-                    if ($password == $data['password']) {
+                    if (password_verify($password, $data['password'])) {
 
                         $all = [
                             'masuk' => TRUE,

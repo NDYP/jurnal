@@ -84,7 +84,7 @@
           $no_hp = $this->input->post('no_hp');
 
           $password =
-            password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+            password_hash($this->input->post('password'), PASSWORD_DEFAULT);
           $data = array(
             'password' => $password,
             'foto' => $file,
@@ -118,7 +118,7 @@
         $id_agama = $this->input->post('id_agama');
         $alamat = $this->input->post('alamat');
         $no_hp = $this->input->post('no_hp');
-        $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
+        $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
         $data = array(
           'password' => $password,
           'nip_nim' => $nip_nim,

@@ -14,7 +14,6 @@ class M_Jurnal extends CI_Model
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
             ->order_by('id_jurnal', 'desc')
-
             ->get()
             ->result_array();
         return $query;
@@ -52,6 +51,7 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->where('status_jurnal.id_status_jurnal=', 5)
             ->order_by('id_jurnal', 'desc')
             ->limit($limit, $offset)
             ->get();
@@ -83,6 +83,7 @@ class M_Jurnal extends CI_Model
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
             ->where('jurnal.id_pembimbing1=', $this->session->userdata('nama'))
+            ->order_by('id_jurnal', 'desc')
             ->or_where('jurnal.id_pembimbing2=', $this->session->userdata('nama'))->get()->result_array();
         return $query;
     }
