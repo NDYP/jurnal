@@ -12,7 +12,7 @@ class Kategori_skripsi extends CI_Controller
     {
         $data['title'] = "Kategori Skripsi";
         $data['akun'] = $this->M_User->login();
-        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index1();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
         $this->load->view('admin/kategori_skripsi/index', $data);

@@ -12,6 +12,18 @@
             ->result_array();
         return $query;
     }
+    public function index1()
+    {
+        $query = $this->db->select('nama_kategori,kategori_skripsi.id_kategori_skripsi,count(*) as total') //menampilkan kategori
+            ->from('kategori_skripsi')
+            ->join('jurnal', 'kategori_skripsi.id_kategori_skripsi=jurnal.id_kategori_skripsi', 'left')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+
+            ->group_by('nama_kategori', 'asc')
+            ->get()
+            ->result_array();
+        return $query;
+    }
     public function get1($id_kategori_skripsi) //menampilkan sesuai ketagori yang dipilih
     {
         $query = $this->db->from('kategori_skripsi')

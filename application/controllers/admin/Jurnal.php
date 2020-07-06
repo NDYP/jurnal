@@ -46,7 +46,6 @@ class Jurnal extends CI_Controller
     {
         akses_penulis();
         $data['title'] = 'UPLOAD JURNAL SKRIPSI';
-
         $data['akun'] = $this->M_User->login();
         $data['berkas'] = $this->M_User->berkas();
         $this->load->view('admin/template/header', $data);
@@ -70,7 +69,7 @@ class Jurnal extends CI_Controller
             $data['jurnal'] = $this->M_Jurnal->index();
             $data['reviewer'] = $this->M_User->index_reviewer();
             $data['akun'] = $this->M_User->login();
-            $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+            $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index1();
             $this->load->view('admin/template/header', $data);
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/jurnal/tambah', $data);
@@ -237,7 +236,7 @@ class Jurnal extends CI_Controller
     {
         $data['akun'] = $this->M_User->login();
         $data['berkas'] = $this->M_User->berkas();
-        $this->load->library('pdf');
+        $this->load->library('Pdf');
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "laporan.pdf";
         $this->pdf->load_view('admin/jurnal/cetak', $data);

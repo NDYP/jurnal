@@ -1,4 +1,5 @@
 <?php
+
 function ya()
 {
     $ci = &get_instance();

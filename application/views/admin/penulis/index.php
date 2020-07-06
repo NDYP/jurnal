@@ -20,7 +20,7 @@
           </div>
           <!-- /.box-header -->
           <div class="box-body">
-            <table id="example1" class="table table-bordered table-hover">
+            <table id="example2" class="table table-bordered table-hover">
               <thead>
                 <tr class="bg-green">
                   <th>No.</th>
@@ -38,7 +38,8 @@
                 foreach ($penulis as $row) : $no++; ?>
                   <tr>
                     <td><?= $no; ?></td>
-                    <td> <?php if ($row['foto'] !== NULL) { ?>
+                    <td>
+                      <?php if ($row['foto'] !== NULL) { ?>
                         <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" style="width:70px;">
                       <?php } ?>
                       <?php if ($row['foto'] == NULL) { ?>

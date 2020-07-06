@@ -142,7 +142,7 @@ class M_User extends CI_Model
     {
         $query = $this->db->select('*')
             ->from('user')
-            ->order_by('id_user', 'ASC')
+            ->order_by('id_user', 'desc')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
             ->join('status', 'user.id_status=status.id_status', 'right')
             ->join('agama', 'user.id_agama=agama.id_agama', 'right')
@@ -171,12 +171,13 @@ class M_User extends CI_Model
     {
         $query = $this->db->select('*') // pilih semua
             ->from('user') // dari tabel user
-            ->order_by('id_user', 'ASC') // susun berdasarkan id
+            ->order_by('id_user', 'desc') // susun berdasarkan id
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
             ->join('status', 'user.id_status=status.id_status', 'right')
             ->join('agama', 'user.id_agama=agama.id_agama', 'right')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
             ->where('kategori.nama_kategori="Editor"')
+
             ->get()
             ->result_array();
         return $query;
