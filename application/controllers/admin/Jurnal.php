@@ -197,7 +197,7 @@ class Jurnal extends CI_Controller
                 }
             }
         } else {
-            $this->session->set_flashdata('error', 'Diubah');
+            $this->session->set_flashdata('flash', 'Gagal');
             if ($this->session->userdata('id_kategori') == 2) {
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             } else {

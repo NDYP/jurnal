@@ -119,7 +119,7 @@
       title: {
         display: true,
         position: "top",
-        text: "Jurnal Terupload Per Bulan",
+        text: "Artikel Terupload Per Bulan",
         fontSize: 15,
         fontColor: "#111"
       },

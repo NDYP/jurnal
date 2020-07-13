@@ -12,47 +12,52 @@
             border: 0;
             border-style: inset;
             border-top: 1px solid #000;
+            margin: 1px;
+            margin-bottom: 1px;
         }
 
-        .table-bordered {
+        .x {
             font-size: 1.5mm;
-            border: 1px solid #000;
+            margin: 1px;
+            margin-bottom: 1px;
         }
     </style>
 </head>
 
 <body>
-    <img src="assets/img/profile/logo.jpg" style="position: absolute; width: 95px; height: auto;">
-    <table style="width: 100%;">
+    <img src="assets/img/profile/logo.jpg" style="padding:0%;position: absolute; width: 100px; height: auto;">
+    <table class="x" style="width: 100%;">
         <tr>
             <td align="center">
                 <span style="line-height: 1; font-weight: bold;">
-                    <font face="Arial Rounded MT Bold" font size="2">
-                        KEMENTERIAN RISET, TEKNOLOGI DAN PENDIDIKAN TINGGI
-                        <br>UNIVERSITAS PALANGKA RAYA
-                        <br>FAKULTAS KEDOKTERAN
-                        <br>
+                    <font style="line-height: 0.5;" face="Arial Rounded MT Bold" font size="3">
+                        KEMENTERIAN PENDIDIKAN DAN KEBUDAYAAN</font>
+                    <font face="Arial Rounded MT Bold" font size="3">
+                        <br>UNIVERSITAS PALANGKA RAYA</font>
+                    <font style="color:blue" face="Arial Rounded MT Bold" font size="5">
+                        <br>FAKULTAS TEKNIK</font>
 
                 </span>
-                <small style="line-height: 1;">
-                    <font face="Arial Rounded MT Bold" font size="2">
-                        Kampus UPR Tunjung Nyaho, Jalan Hendrik Timang, Palangka Raya, Kalimantan Tengah
-                        <br>Telepon (0536) 4215402, 4215277, 4215277, 4215179
-                        <p>
-                            Laman: FK-upr.ac.id; Pos-el (<i>E-mail</i>): f.ked.upr@gmail.com
-                        </p>
-                </small>
+                <p style="line-height: 1; margin:1px;">
+                    <font face="Arial Rounded MT Bold" font size="1">
+                        Kampussssxx Kampus UPR Tunjung Nyaho, Jalan Yos Sudarso Kotak Pos 2/PLKUP Palangka Raya 73112 Kalimantan Tengah - INDONESIA
+                        <br>Telepon/Fax: +62 536-3226487; Laman: <a href="about.html">www.upr.ac.id</a> E-mail: <a href="about.html">fakultas_teknik@eng.upr.ac.id</a>
+
+                </p>
             </td>
+
         </tr>
+        <hr class="line-title">
     </table>
-    <hr class=" line-title">
+    <br>
     <p align="center">
         <font face="Arial Rounded MT Bold" font size="2"> <b> <u>
-                    SURAT PERNYATAAN</u></b><br>
+                    BUKTI PENGUMPULAN JURNAL SKRIPSI</u></b><br>
+            <b>No. Seri :</b>
     </p>
     <p align="justify">
         <font face="Arial Rounded MT Bold" font size="2">
-            Yang bertanda tangan dibawah ini :<br>
+            Kepada YTH :<br>
     </p>
     <div class="table-responsive">
         <table style="width: 100%;">
@@ -98,7 +103,7 @@
     <br>
     <p align="justify">
         <font face="Arial Rounded MT Bold" font size="2">
-            Dinyatakan telah mengumpulkan Jurnal Skripsi ke Jurusan Teknik Informatik, Fakultas Teknik, Universitas Palangkaraya.<br>
+            Kami sampaikan terimakasih karena telah mengumpulkan jurnal skripsi di jurusan Teknik Informatika Fakultas Teknik UPR pada <?= date('d-m-Y H:i:s'); ?>.<br>
     </p>
     <br>
     <br>
@@ -121,7 +126,7 @@
                 <td width="300">
                     <center>
                         <font face="Arial Rounded MT Bold" font size="2">Mengetahui,<br>Ketua Jurusan Teknik Informatika <br> <br><br><br>
-                            <p><b><u>Abertun Sagit Sahay, ST.,M.Eng</u></b><br>NIP.
+                            <p><b><u>Abertun Sagit Sahay, ST.,M.Eng<br></u></b>NIP.
                 </td>
                 <td width="190" height="120">
                     <center>

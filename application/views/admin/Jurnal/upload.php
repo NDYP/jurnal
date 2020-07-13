@@ -9,7 +9,7 @@
     <!-- Main content -->
     <section class="content">
         <!-- SELECT2 EXAMPLE -->
-        <?= $this->session->flashdata('message'); ?>
+        <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-default">

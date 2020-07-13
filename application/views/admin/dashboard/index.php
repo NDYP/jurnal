@@ -13,7 +13,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-aqua"><i class="ion ion-ios-book-outline"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Jurnal</span>
+                        <span class="info-box-text">Artikel</span>
                         <span class="info-box-number">
                             <?= $jumlahjurnal; ?></span>
                     </div>
@@ -25,7 +25,7 @@
                 <div class="info-box">
                     <span class="info-box-icon bg-green"><i class="ion ion-ios-book-outline"></i></span>
                     <div class="info-box-content">
-                        <span class="info-box-text">Jurnal Publish</span>
+                        <span class="info-box-text">Artikel Publish</span>
                         <span class="info-box-number">
                             <?php $no = 0;
                             foreach ($jurnal2 as $row) : $no++; ?>

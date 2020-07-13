@@ -11,6 +11,7 @@
   <!-- Main content -->
   <section class="content">
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
+    <div class="flash-data1" data-flashdata="<?= $this->session->flashdata('error'); ?>"></div>
     <div class="row">
       <div class="col-xs-12">
         <!-- /.box -->
