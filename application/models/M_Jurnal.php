@@ -3,11 +3,37 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Jurnal extends CI_Model
 {
+    public function cari($cari, $limit, $offset)
+    {
+
+        $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
+            ->from('jurnal')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('status_jurnal1', 'jurnal.id_status_jurnal1=status_jurnal1.id_status_jurnal1', 'left')
+            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->like('user.nama', $cari)
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
+            ->or_like('jurnal.id_penulis', $cari)
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
+            ->or_where('jurnal.no_seri', $cari)
+            ->order_by('id_jurnal', 'desc')
+            ->limit($limit, $offset)
+            ->get()
+            ->result_array();
+        return $query;
+    }
     public function index()
     {
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
             ->from('jurnal')
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('status_jurnal1', 'jurnal.id_status_jurnal1=status_jurnal1.id_status_jurnal1', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
             ->join('status', 'user.id_status=status.id_status', 'left')
@@ -51,7 +77,8 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
-            ->where('status_jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
             ->order_by('id_jurnal', 'desc')
             ->limit($limit, $offset)
             ->get();
@@ -67,8 +94,9 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
-            ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
-            ->order_by('id_jurnal', 'asc')
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
+            ->order_by('id_jurnal', 'desc')
             ->get();
         return $query;
     }
@@ -77,6 +105,7 @@ class M_Jurnal extends CI_Model
         $query = $this->db->select('*,jurnal.id_jurnal,user.id_user')
             ->from('jurnal')
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('status_jurnal1', 'jurnal.id_status_jurnal1=status_jurnal1.id_status_jurnal1', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
             ->join('status', 'user.id_status=status.id_status', 'left')

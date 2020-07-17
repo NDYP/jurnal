@@ -4,7 +4,9 @@ class Beranda extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-
+        header('Cache-Control: no-cache,must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0,false');
+        header('Pragma: no-cache');
         $this->load->model('M_Jurnal');
         $this->load->model('M_User');
         $this->load->model('M_Komentar');
@@ -191,7 +193,7 @@ class Beranda extends CI_Controller
 
         $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
         $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
-        $data['title'] = "Daftar Jurnal";
+        $data['title'] = "Daftar Artikel";
         $data['title2'] = "Status Publish";
         $data['template'] = $this->M_Template_Jurnal->index()->result_array();
 
@@ -208,7 +210,8 @@ class Beranda extends CI_Controller
 
         $perpage = 5;
         $offset = $this->uri->segment(4);
-        $config['total_rows'] = $this->db->get_where('jurnal', array('id_kategori_skripsi' => $id_kategori_skripsi))->num_rows();
+        //
+        $config['total_rows'] = $this->M_Kategori_Skripsi->get2($id_kategori_skripsi);
         $config['per_page'] = $perpage;
         $config['base_url'] = base_url('beranda/kategori/');
         $config['first_link']       = 'Pertama';
@@ -266,6 +269,81 @@ class Beranda extends CI_Controller
         $data['jumlah'] = $this->M_Komentar->get_komentar($id_jurnal)->num_rows();
         $this->load->view('pengunjung/template/header1', $data);
         $this->load->view('pengunjung/beranda/detail1', $data);
+        $this->load->view('pengunjung/template/sidebar1', $data);
+        $this->load->view('pengunjung/template/footer1', $data);
+    }
+    public function cari()
+    {
+        $ip      = $this->ip_user();
+        $browser = $this->browser_user();
+        $os      = $this->os_user();
+
+        unset($_COOKIE['VISITOR']);
+
+        if (!isset($_COOKIE['VISITOR'])) {
+
+            // Masa akan direkam kembali
+            // Tujuan untuk menghindari merekam pengunjung yang sama dihari yang sama.
+            // Cookie akan disimpan selama 24 jam
+            $duration = time() + 60 * 60 * 24;
+
+            // simpan kedalam cookie browser
+            setcookie('VISITOR', $browser, $duration);
+
+            // current time
+            $dateTime = date('Y-m-d H:i:s');
+
+            $data = array(
+                'ip' => $ip,
+                'os' => $os,
+                'browser' => $browser,
+                'tanggal' => $dateTime
+            );
+            $this->M_Jurnal->tambah('statistik', $data);
+        }
+
+        $perpage = 5;
+        $offset = $this->uri->segment(3);
+        $config['total_rows'] = $this->M_Jurnal->getAll()->num_rows();
+        $config['per_page'] = $perpage;
+        $config['base_url'] = site_url('beranda/cari');
+        $config['first_link']       = 'Pertama';
+        $config['last_link']        = 'Terakhir';
+        $config['next_link']        = 'Selanjutnya';
+        $config['prev_link']        = 'Sebelumnya';
+        $config['full_tag_open']    = '<div class="pagging text-center"><nav><ul class="pagination justify-content-center">';
+        $config['full_tag_close']   = '</ul></nav></div>';
+        $config['num_tag_open']     = '<li class="page-item"><span class="page-link">';
+        $config['num_tag_close']    = '</span></li>';
+        $config['cur_tag_open']     = '<li class="page-item active"><span class="page-link">';
+        $config['cur_tag_close']    = '<span class="sr-only">(current)</span></span></li>';
+        $config['next_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['next_tagl_close']  = '<span aria-hidden="true">&raquo;</span></span></li>';
+        $config['prev_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['prev_tagl_close']  = '</span>Next</li>';
+        $config['first_tag_open']   = '<li class="page-item"><span class="page-link">';
+        $config['first_tagl_close'] = '</span></li>';
+        $config['last_tag_open']    = '<li class="page-item"><span class="page-link">';
+        $config['last_tagl_close']  = '</span></li>';
+        $this->pagination->initialize($config);
+        $data['halaman'] = $this->pagination->create_links();
+
+
+        $data['layanan'] = $this->M_Layanan->index()->result_array();
+
+        $data['reviewer_total'] = $this->M_User->getAllreviewer()->result_array();
+
+        $data['jumlah_pengunjung'] = $this->M_Statistik->pengunjung()->num_rows();
+        $data['jumlah_today'] = $this->M_Statistik->pengunjung1()->num_rows();
+        $data['title'] = "Daftar Jurnal";
+        $data['title2'] = "Status Publish";
+        $data['template'] = $this->M_Template_Jurnal->index()->result_array();
+
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $cari = $this->input->post('cari');
+        $data['jurnal'] = $this->M_Jurnal->cari($cari, $perpage, $offset);
+        $this->load->view('pengunjung/template/header1', $data);
+        $this->load->view('pengunjung/beranda/cari', $data);
         $this->load->view('pengunjung/template/sidebar1', $data);
         $this->load->view('pengunjung/template/footer1', $data);
     }

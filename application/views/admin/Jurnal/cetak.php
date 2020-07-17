@@ -53,7 +53,7 @@
     <p align="center">
         <font face="Arial Rounded MT Bold" font size="2"> <b> <u>
                     BUKTI PENGUMPULAN JURNAL SKRIPSI</u></b><br>
-            <b>No. Seri :</b>
+            <b>NOMOR : <?= $berkas['no_seri']; ?></b>
     </p>
     <p align="justify">
         <font face="Arial Rounded MT Bold" font size="2">

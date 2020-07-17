@@ -9,6 +9,9 @@ class Komentar extends CI_Controller
         $this->load->model('M_Komentar');
         $this->load->model('M_Status_Jurnal');
         tidak();
+        header('Cache-Control: no-cache,must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0,false');
+        header('Pragma: no-cache');
     }
     function index()
     {
@@ -126,6 +129,76 @@ class Komentar extends CI_Controller
         $id_jurnal = $this->uri->segment(4);
         $data = array(
             'id_status_jurnal' => 6,
+        );
+        $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+        redirect("admin/jurnal/review");
+    }
+
+    public function belum_review1($id)
+    {
+        $id_jurnal = $this->uri->segment(4);
+        $data = array(
+            'id_status_jurnal1' => 1,
+        );
+        $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+        redirect("admin/jurnal/review");
+    }
+
+    public function revisi_editor1()
+    {
+        $id_jurnal = $this->uri->segment(4);
+        $data = array(
+            'id_status_jurnal1' => 2,
+        );
+        $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+        if ($this->session->userdata('id_kategori') == 3) {
+            redirect("admin/jurnal/");    # code...
+        } else {
+            redirect("admin/jurnal/review");    # code...
+        }
+    }
+    public function revisi_penulis1($id)
+    {
+        $id_jurnal = $this->uri->segment(4);
+        $data = array(
+            'id_status_jurnal1' => 3,
+        );
+        $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+        redirect("admin/jurnal/review");
+    }
+    public function tidak_publish1($id)
+    {
+        $id_jurnal = $this->uri->segment(4);
+        $data = array(
+            'id_status_jurnal1' => 4,
+        );
+        $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+
+        if ($this->session->userdata('id_kategori') == 3) {
+            redirect("admin/jurnal/");    # code...
+        } else {
+            redirect("admin/jurnal/review");
+        }
+    }
+    public function publish1($id)
+    {
+        $id_jurnal = $this->uri->segment(4);
+        $data = array(
+            'id_status_jurnal1' => 6,
+        );
+        $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+
+        if ($this->session->userdata('id_kategori') == 3) {
+            redirect("admin/jurnal/");    # code...
+        } else {
+            redirect("admin/jurnal/review");
+        }
+    }
+    public function sudah_revisi1($id)
+    {
+        $id_jurnal = $this->uri->segment(4);
+        $data = array(
+            'id_status_jurnal1' => 5,
         );
         $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
         redirect("admin/jurnal/review");

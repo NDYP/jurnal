@@ -37,13 +37,35 @@
         $category_id = $this->db->get_where('kategori_skripsi', array('id_kategori_skripsi' => $id_kategori_skripsi))->row('id_kategori_skripsi');
         return $this->db->order_by('id_kategori_skripsi', 'desc')
             ->from('jurnal')
-            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
             ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
-            ->where('status_jurnal.id_status_jurnal=', 5)
+            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
             ->where('id_kategori_skripsi', $category_id)
             ->limit($perpage, $offset)
             ->get()
             ->result_array();
+    }
+    public function get2($id_kategori_skripsi) //menampilkan sesuai ketagori yang dipilih
+    {
+        $category_id = $this->db->get_where('kategori_skripsi', array('id_kategori_skripsi' => $id_kategori_skripsi))->row('id_kategori_skripsi');
+        return $this->db->order_by('id_kategori_skripsi', 'desc')
+            ->from('jurnal')
+            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
+            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'left')
+            ->join('status', 'user.id_status=status.id_status', 'left')
+            ->join('agama', 'user.id_agama=agama.id_agama', 'left')
+            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
+            ->where('id_kategori_skripsi', $category_id)
+            ->get()
+            ->num_rows();
     }
     public function tambah($tabel, $params)
     {

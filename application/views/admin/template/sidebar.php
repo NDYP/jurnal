@@ -29,21 +29,21 @@
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>
         <li class="<?= ($hal == 'jurnal') ? 'active' : ''; ?>">
           <a href="<?= base_url('admin/jurnal/index') ?>">
-            <i class="fa fa-book"></i> <span>Jurnal</span>
+            <i class="fa fa-book"></i> <span>Artikel</span>
           </a>
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 1) { ?>
         <li class="<?= $this->uri->segment(2) == 'jurnal' ? 'active' : ''; ?>">
           <a href="<?= base_url('admin/jurnal/review') ?>">
-            <i class="fa fa-book"></i> <span>Jurnal</span>
+            <i class="fa fa-book"></i> <span>Artikel</span>
           </a>
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 2) { ?>
         <li class="<?= $this->uri->segment(2) == 'jurnal' ? 'active' : ''; ?>">
           <a href="<?= base_url('admin/jurnal/jurnalakun') ?>">
-            <i class="fa fa-book"></i> <span>Jurnal</span>
+            <i class="fa fa-book"></i> <span>Artikel</span>
           </a>
         </li>
       <?php } ?>

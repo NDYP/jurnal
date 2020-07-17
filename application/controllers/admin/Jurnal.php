@@ -8,11 +8,14 @@ class Jurnal extends CI_Controller
         $this->load->model('M_Jurnal');
         $this->load->model('M_Komentar');
         $this->load->model('M_Kategori_Skripsi');
+        header('Cache-Control: no-cache,must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0,false');
+        header('Pragma: no-cache');
     }
     function index()
     {
 
-        $data['title'] = 'JURNAL MAHASISWA SKRIPSI';
+        $data['title'] = 'ARTIKEL MAHASISWA SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->index();
         $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
@@ -23,7 +26,7 @@ class Jurnal extends CI_Controller
     function review()
     {
 
-        $data['title'] = 'JURNAL MAHASISWA BIMBINGAN SKRIPSI';
+        $data['title'] = 'ARTIKEL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->bimbingan();
         $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
@@ -33,7 +36,7 @@ class Jurnal extends CI_Controller
     }
     function detail($id_jurnal)
     {
-        $data['title'] = 'JURNAL MAHASISWA BIMBINGAN SKRIPSI';
+        $data['title'] = 'ARTIKEL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['komentar'] = $this->M_Komentar->get_komentar($id_jurnal)->result_array();
         $data['akun'] = $this->M_User->login();
@@ -45,7 +48,7 @@ class Jurnal extends CI_Controller
     function jurnalakun()
     {
         akses_penulis();
-        $data['title'] = 'UPLOAD JURNAL SKRIPSI';
+        $data['title'] = 'UPLOAD ARTIKEL SKRIPSI';
         $data['akun'] = $this->M_User->login();
         $data['berkas'] = $this->M_User->berkas();
         $this->load->view('admin/template/header', $data);
@@ -65,7 +68,7 @@ class Jurnal extends CI_Controller
 
         if ($this->form_validation->run() == FALSE) {
 
-            $data['title'] = 'UPLOAD JURNAL';
+            $data['title'] = 'UPLOAD ARTIKEL';
             $data['jurnal'] = $this->M_Jurnal->index();
             $data['reviewer'] = $this->M_User->index_reviewer();
             $data['akun'] = $this->M_User->login();
@@ -100,6 +103,8 @@ class Jurnal extends CI_Controller
                     $judul = $this->input->post('judul');
 
                     $abstrak = $this->input->post('abstrak');
+                    $no_seri = base64_encode(random_bytes(7));
+
                     date_default_timezone_set("ASIA/JAKARTA");
                     $date = date('Y-m-d H:i:s');
                     $data = array(
@@ -110,8 +115,10 @@ class Jurnal extends CI_Controller
                         'id_pembimbing2' => $id_pembimbing2,
                         'id_penulis' => $id_penulis,
                         'id_status_jurnal' => 1,
+                        'id_status_jurnal1' => 1,
                         'id_kategori_skripsi' => $id_kategori_skripsi,
                         'tgl_upload' => $date,
+                        'no_seri' => $no_seri,
                     );
                     $this->M_Jurnal->tambah('jurnal', $data);
                     $this->session->set_flashdata('flash', 'Ditambah');
@@ -130,7 +137,7 @@ class Jurnal extends CI_Controller
     function edit($id_jurnal)
     {
         $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
-        $data['title'] = 'REVISI JURNAL SKRIPSI';
+        $data['title'] = 'REVISI ARTIKEL SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['reviewer'] = $this->M_User->index_reviewer();
         $data['akun'] = $this->M_User->login();
@@ -178,6 +185,7 @@ class Jurnal extends CI_Controller
                     'id_pembimbing2' => $id_pembimbing2,
                     'id_penulis' => $id_penulis,
                     'id_status_jurnal' => 6,
+                    'id_status_jurnal1' => 5,
                     'tgl_edit' => $date,
                     'id_kategori_skripsi' => $id_kategori_skripsi,
                 );

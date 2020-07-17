@@ -27,8 +27,8 @@
                   <th>Penulis</th>
                   <th>Pembimbing 1</th>
                   <th>Pembimbing 2</th>
+                  <th>No. Seri</th>
                   <th>File</th>
-                  <th>Status</th>
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -46,14 +46,14 @@
                     </td>
                     <td><?= $row['nip_nim']; ?></td>
                     <td><?= $row['nama']; ?></td>
-                    <td><?= $row['id_pembimbing1']; ?></td>
-                    <td><?= $row['id_pembimbing2']; ?></td>
-                    <td><a class="btn btn-md" href="<?= site_url('assets/jurnal/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a>
-                    <td>
+                    <td><?= $row['id_pembimbing1']; ?>
+                      <br>
                       <center>
                         <div class="input-group-btn">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><?= $row['nama_status_jurnal']; ?>
-                            <span class="fa fa-caret-down"></span></button>
+                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown"><?= $row['nama_status_jurnal']; ?>
+                            <?php if ($this->session->userdata('nama') == $row['id_pembimbing1'] || $this->session->userdata('id_kategori') == 3) { ?>
+                              <span class="fa fa-caret-down"></span></button>
+
                           <ul class="dropdown-menu">
                             <?php if ($this->session->userdata('id_kategori') == 1) { ?>
                               <li><a href="<?= site_url('admin/komentar/revisi_editor/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
@@ -63,9 +63,31 @@
                             <li><a href="<?= site_url('admin/komentar/tidak_publish/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
                             <li><a href="<?= site_url('admin/komentar/publish/' . $row['id_jurnal']); ?>">Publish</a></li>
                           </ul>
+                        <?php  } ?>
                         </div>
                       </center>
                     </td>
+                    <td><?= $row['id_pembimbing2']; ?><br>
+                      <center>
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown"><?= $row['nama_status_jurnal1']; ?>
+                            <?php if ($this->session->userdata('nama') == $row['id_pembimbing2'] || $this->session->userdata('id_kategori') == 3) { ?>
+                              <span class="fa fa-caret-down"></span></button>
+                          <ul class="dropdown-menu">
+                            <?php if ($this->session->userdata('id_kategori') == 1) { ?>
+                              <li><a href="<?= site_url('admin/komentar/revisi_editor1/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
+                              <li><a href="<?= site_url('admin/komentar/revisi_penulis1/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
+                            <?php  } ?>
+                            <li><a href="<?= site_url('admin/komentar/tidak_publish1/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
+                            <li><a href="<?= site_url('admin/komentar/publish1/' . $row['id_jurnal']); ?>">Publish</a></li>
+                          </ul>
+                        <?php  } ?>
+                        </div>
+                      </center>
+                    </td>
+                    <td><?= $row['no_seri']; ?></td>
+                    <td><a class="btn btn-md" href="<?= site_url('assets/jurnal/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a>
+
                     <td>
                       <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
