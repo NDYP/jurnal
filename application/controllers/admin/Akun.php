@@ -97,14 +97,14 @@ class Akun extends CI_Controller
                     'tgl_edit' => time(),
                 );
                 $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
-                echo "<script>alert('Berhasil Upload Jurnal')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 if ($akun['id_kategori'] == 2) {
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
                     redirect('admin/jurnal/', 'refresh');
                 }
             } else {
-                echo "<script>alert('Gagal Upload Jurnal')</script>";
+                $this->session->set_flashdata('gagal', 'Diubah');
                 if ($akun['id_kategori'] == 2) {
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
@@ -113,7 +113,7 @@ class Akun extends CI_Controller
             }
         } else {
 
-            echo "<script>alert('File Tdak Boleh Kosong')</script>";
+            $this->session->set_flashdata('gagal', 'Diubah');
             if ($akun['id_kategori'] == 2) {
 
                 redirect('admin/jurnal/jurnalakun', 'refresh');
@@ -190,7 +190,7 @@ class Akun extends CI_Controller
             );
             //data array dupdate kedalam tabel user dengan id user yang dipilih
             $this->M_User->update('user', $data, array('id_user' => $id_user));
-            echo "<script>alert('Berhasil Ubah Profil')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/akun/index', 'refresh');
         }
     }
@@ -224,7 +224,7 @@ class Akun extends CI_Controller
             );
 
             $this->M_User->update('user', $data, array('id_user' => $id_user));
-            echo "<script>alert('Berhasil Ubah Password')</script>";
+            $this->session->set_flashdata('flash', 'Diubah');
             redirect('admin/akun/index', 'refresh');
         }
     }
@@ -258,15 +258,15 @@ class Akun extends CI_Controller
 
                 );
                 $this->M_User->update('user', $data, array('id_user' => $id_user));
-                echo "<script>alert('Gagal Upload Foto Profil')</script>";
+                $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/akun/index', 'refresh');
             } else {
-                echo "<script>alert('Gagal Upload Foto Profil')</script>";
+                $this->session->set_flashdata('gagal', 'Diubah');
                 redirect('admin/akun/index', 'refresh');
             }
         } else {
 
-            echo "<script>alert('Gagal Upload Foto Profil')</script>";
+            $this->session->set_flashdata('gagal', 'Diubah');
             redirect('admin/akun/index', 'refresh');
         }
     }
