@@ -8,7 +8,7 @@ class Komentar extends CI_Controller
         $this->load->model('M_Jurnal');
         $this->load->model('M_Komentar');
         $this->load->model('M_Status_Jurnal');
-        tidak();
+        login();
         header('Cache-Control: no-cache,must-revalidate, max-age=0');
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');

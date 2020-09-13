@@ -21,7 +21,7 @@ class M_Jurnal extends CI_Model
             ->or_like('jurnal.id_penulis', $cari)
             ->where('jurnal.id_status_jurnal=', 5)
             ->where('jurnal.id_status_jurnal1=', 6)
-            ->or_where('jurnal.no_seri', $cari)
+            ->or_like('jurnal.no_seri', $cari)
             ->order_by('id_jurnal', 'desc')
             ->limit($limit, $offset)
             ->get()
@@ -62,7 +62,8 @@ class M_Jurnal extends CI_Model
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
 
-            ->where('status_jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
             ->get()
             ->result_array();
         return $query;

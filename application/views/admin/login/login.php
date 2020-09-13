@@ -21,8 +21,8 @@
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
 
     <!-- Google Font -->
@@ -37,7 +37,7 @@
         </div>
         <!-- /.login-logo -->
         <div class="login-box-body">
-            <center><a href="http://localhost/xxx/assets//index2.html"><img width="150px" height="150px" src="<?= base_url('assets/foto/logo.jpg'); ?>"></a></center>
+            <center><a href="<?= base_url('admin/login'); ?>"><img width="150px" height="150px" src="<?= base_url('assets/foto/logo.jpg'); ?>"></a></center>
 
             <?= $this->session->flashdata('message'); ?>
             <form action="<?= base_url('admin/login'); ?>" method="post">

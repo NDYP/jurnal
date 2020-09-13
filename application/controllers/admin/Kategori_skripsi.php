@@ -4,6 +4,8 @@ class Kategori_skripsi extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        login();
+        akses_editor();
         $this->load->model('M_Kategori_Skripsi');
         $this->load->model('M_User');
         header('Cache-Control: no-cache,must-revalidate, max-age=0');

@@ -8,6 +8,7 @@ class Akun extends CI_Controller
         $this->load->model('M_Jurnal');
         $this->load->model('M_Agama');
         $this->load->model('M_Jenis_Kelamin');
+        login();
     }
     function index()
     {
@@ -58,73 +59,12 @@ class Akun extends CI_Controller
         $this->load->view('admin/template/footer', $data);
     }
 
-    function revisi_penulis()
-    {
-        $config['upload_path'] = './assets/jurnal/'; //path folder
-        $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa sesuaikan
-        $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
 
-        $this->upload->initialize($config);
-        if (!empty($_FILES['file']['name'])) {
-            if ($this->upload->do_upload('file')) {
-                $gbr = $this->upload->data();
-                $config['image_library'] = 'gd2';
-                $config['source_image'] = './assets/jurnal/' . $gbr['file_name'];
-                $config['maintain_ratio'] = FALSE;
-                $config['overwrite'] = TRUE;
-                $config['max_size']  = 1024;
-                $config['new_image'] = './assets/jurnal/' . $gbr['file_name'];
-                $this->load->library('image_lib', $config);
-                $this->image_lib->resize();
-
-                $file = $gbr['file_name'];
-                $id_jurnal = $this->input->post('id_jurnal');
-                $id_penulis = $this->input->post('id_penulis');
-                $id_pembimbing1 = $this->input->post('id_pembimbing1');
-                $id_pembimbing2 = $this->input->post('id_pembimbing2');
-                $judul = $this->input->post('judul');
-
-                $abstrak = $this->input->post('abstrak');
-
-                $data = array(
-                    'file' => $file,
-                    'judul' => $judul,
-                    'abstrak' => $abstrak,
-                    'id_pembimbing1' => $id_pembimbing1,
-                    'id_pembimbing2' => $id_pembimbing2,
-                    'id_penulis' => $id_penulis,
-                    'id_status_jurnal' => 6,
-                    'tgl_edit' => time(),
-                );
-                $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
-                $this->session->set_flashdata('flash', 'Diubah');
-                if ($akun['id_kategori'] == 2) {
-                    redirect('admin/jurnal/jurnalakun', 'refresh');
-                } else {
-                    redirect('admin/jurnal/', 'refresh');
-                }
-            } else {
-                $this->session->set_flashdata('gagal', 'Diubah');
-                if ($akun['id_kategori'] == 2) {
-                    redirect('admin/jurnal/jurnalakun', 'refresh');
-                } else {
-                    redirect('admin/jurnal/', 'refresh');
-                }
-            }
-        } else {
-
-            $this->session->set_flashdata('gagal', 'Diubah');
-            if ($akun['id_kategori'] == 2) {
-
-                redirect('admin/jurnal/jurnalakun', 'refresh');
-            } else {
-                redirect('admin/jurnal/', 'refresh');
-            }
-        }
-    }
+    //Edit Profil
     function simpan()
     {
-        if ($this->upload->do_upload('foto')) { //jika terdapat foto yang diupload
+        //jika terdapat foto yang diupload
+        if ($this->upload->do_upload('foto')) {
             $gbr = $this->upload->data(); //upload dimasukkan kedalam variabel baru
             $config['image_library'] = 'gd2'; //konfigurasi librari upload foto
             $config['source_image'] = './assets/foto/mhs/' . $gbr['file_name']; //konfigurasi folder tempat foto disimpan
@@ -166,7 +106,9 @@ class Akun extends CI_Controller
             echo "<script>alert('Berhasil Ubah Profil')</script>";
             //kembali ke method index
             redirect('admin/akun/index', 'refresh');
-        } else { //jika tidak terdapat upload foto
+        }
+        //jika tidak terdapat upload foto
+        else {
             $nip_nim = $this->input->post('nip_nim');
             $nama = $this->input->post('nama');
             $tempat_lahir = $this->input->post('tempat_lahir');
@@ -194,6 +136,8 @@ class Akun extends CI_Controller
             redirect('admin/akun/index', 'refresh');
         }
     }
+
+    //Edit Paswword
     function simpanpassword()
     {
 
@@ -203,7 +147,7 @@ class Akun extends CI_Controller
         ]);
         //jika form error jalan
         if ($this->form_validation->run() == FALSE) {
-            //kembali ke form
+            //kembali ke form atau form kosong
             $data['akun'] = $this->M_User->login();
             $data['jk'] = $this->M_Jenis_Kelamin->jk();
             $data['agama'] = $this->M_Agama->agama();
@@ -229,6 +173,7 @@ class Akun extends CI_Controller
         }
     }
 
+    //Edit Foto
     function simpanfoto()
     {
         $config['upload_path'] = './assets/foto/mhs/'; //path folder tempat disimpan
@@ -236,6 +181,7 @@ class Akun extends CI_Controller
         $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
 
         $this->upload->initialize($config);
+        //jika file upload tidak kosong
         if (!empty($_FILES['foto']['name'])) {
             if ($this->upload->do_upload('foto')) {
                 $gbr = $this->upload->data();
@@ -264,8 +210,9 @@ class Akun extends CI_Controller
                 $this->session->set_flashdata('gagal', 'Diubah');
                 redirect('admin/akun/index', 'refresh');
             }
-        } else {
-
+        }
+        //jika file foto tidak dipilih
+        else {
             $this->session->set_flashdata('gagal', 'Diubah');
             redirect('admin/akun/index', 'refresh');
         }

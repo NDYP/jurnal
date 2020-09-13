@@ -6,7 +6,8 @@
         parent::__construct();
         $this->load->model('M_Tentang');
         $this->load->model('M_User');
-        tidak();
+        login();
+        akses_editor();
         header('Cache-Control: no-cache,must-revalidate, max-age=0');
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');
@@ -122,6 +123,7 @@
                     redirect('admin/tentang/index', 'refresh');
                 }
             } else {
+                $isi = $this->input->post('isi');
                 $data = array(
                     'isi' => $isi,
                 );

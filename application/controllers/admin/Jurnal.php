@@ -4,17 +4,19 @@ class Jurnal extends CI_Controller
     function __construct()
     {
         parent::__construct();
+        login();
         $this->load->model('M_User');
         $this->load->model('M_Jurnal');
         $this->load->model('M_Komentar');
         $this->load->model('M_Kategori_Skripsi');
+        $this->load->library('Pdf');
         header('Cache-Control: no-cache,must-revalidate, max-age=0');
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');
     }
     function index()
     {
-
+        akses_editor();
         $data['title'] = 'ARTIKEL MAHASISWA SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->index();
         $data['akun'] = $this->M_User->login();
@@ -26,6 +28,7 @@ class Jurnal extends CI_Controller
     function review()
     {
 
+        akses_reviewer();
         $data['title'] = 'ARTIKEL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->bimbingan();
         $data['akun'] = $this->M_User->login();
@@ -45,6 +48,8 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/detail', $data);
         $this->load->view('admin/template/footer', $data);
     }
+
+    //menampilkan jurnal akun
     function jurnalakun()
     {
         akses_penulis();
@@ -56,6 +61,8 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/upload', $data);
         $this->load->view('admin/template/footer', $data);
     }
+
+    //upload jurnal jika belum ada
     function tambah()
     {
         $this->form_validation->set_rules('judul', 'judul', 'required|trim', [
@@ -103,7 +110,7 @@ class Jurnal extends CI_Controller
                     $judul = $this->input->post('judul');
 
                     $abstrak = $this->input->post('abstrak');
-                    $no_seri = base64_encode(random_bytes(7));
+                    $no_seri = random_string('nozero', 12);
 
                     date_default_timezone_set("ASIA/JAKARTA");
                     $date = date('Y-m-d H:i:s');
@@ -147,7 +154,7 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/template/footer', $data);
     }
 
-    function revisi_penulis()
+    function revisi()
     {
 
         $config['upload_path'] = './assets/jurnal/'; //path folder
@@ -244,7 +251,7 @@ class Jurnal extends CI_Controller
     {
         $data['akun'] = $this->M_User->login();
         $data['berkas'] = $this->M_User->berkas();
-        $this->load->library('Pdf');
+
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "laporan.pdf";
         $this->pdf->load_view('admin/jurnal/cetak', $data);

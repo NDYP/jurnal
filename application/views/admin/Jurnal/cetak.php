@@ -36,6 +36,9 @@
                         <br>UNIVERSITAS PALANGKA RAYA</font>
                     <font style="color:blue" face="Arial Rounded MT Bold" font size="5">
                         <br>FAKULTAS TEKNIK</font>
+                    <br>
+                    <font style="color:blue;line-height: 0.5;" face="Arial Rounded MT Bold" font size="5">
+                        <br>JURUSAN TEKNIK INFORMATIKA</font>
 
                 </span>
                 <p style="line-height: 1; margin:1px;">
@@ -53,7 +56,7 @@
     <p align="center">
         <font face="Arial Rounded MT Bold" font size="2"> <b> <u>
                     BUKTI PENGUMPULAN JURNAL SKRIPSI</u></b><br>
-            <b>NOMOR : <?= $berkas['no_seri']; ?></b>
+            <b>NOMOR REGISTRASI : <?= $berkas['no_seri']; ?></b>
     </p>
     <p align="justify">
         <font face="Arial Rounded MT Bold" font size="2">
@@ -126,7 +129,7 @@
                 <td width="300">
                     <center>
                         <font face="Arial Rounded MT Bold" font size="2">Mengetahui,<br>Ketua Jurusan Teknik Informatika <br> <br><br><br>
-                            <p><b><u>Abertun Sagit Sahay, ST.,M.Eng<br></u></b>NIP.
+                            <p><b><u>Abertun Sagit Sahay, ST.,M.Eng<br></u></b>NIP. 197512122003121002
                 </td>
                 <td width="190" height="120">
                     <center>

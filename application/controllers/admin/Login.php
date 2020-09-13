@@ -1,10 +1,14 @@
 <?php
+
 class Login extends CI_Controller
 {
     function __construct()
     {
         parent::__construct();
         $this->load->model('M_User');
+        header('Cache-Control: no-cache,must-revalidate, max-age=0');
+        header('Cache-Control: post-check=0, pre-check=0,false');
+        header('Pragma: no-cache');
     }
 
     function index()
@@ -29,138 +33,60 @@ class Login extends CI_Controller
         $nip_nim = $this->input->post('nip_nim');
         $password = $this->input->post('password');
 
-        $cek_dosen = $this->M_User->auth_dosen($nip_nim);
-        $cek = $cek_dosen->row_array();
-        if ($cek_dosen->num_rows() > 0) { //jika login sebagai dosen
+        $cek_dosen = $this->M_User->auth($nip_nim);
+        //cek apakah nim yang di input terdapat pada database
+        if ($data = $cek_dosen->row_array()) {
+            //cek status akun
+            if (($data['id_status'] == '1')) {
+                //cek password
+                if (password_verify($password, $data['password'])) {
+                    $all = [
+                        'id_user' => $data['id_user'],
+                        'nip_nim' => $data['nip_nim'],
+                        'nama' => $data['nama'],
+                        'tempat_lahir' => $data['tempat_lahir'],
+                        'tgl_lahir' => $data['tgl_lahir'],
+                        'alamat' => $data['alamat'],
+                        'no_hp' => $data['no_hp'],
+                        'email' => $data['email'],
+                        'nama_jk' => $data['nama_jk'],
+                        'nama_agama' => $data['nama_agama'],
+                        'foto' => $data['foto'],
+                        'tanggal_logout' => $data['tanggal_logout'],
+                        'nama_status' => $data['nama_status'],
+                        'id_kategori' => $data['id_kategori'],
+                        'online' => $data['online'],
+                    ];
+                    $this->session->set_userdata($all);
 
-            if ($cek['id_kategori'] == 3) { //Akses admin
-                if ($data = $cek_dosen->row_array()) {
-                    if (($cek['id_status'] == '1')) {
-                        if (password_verify($password, $data['password'])) {
-                            $all = [
-                                'id_user' => $data['id_user'],
-                                'nip_nim' => $data['nip_nim'],
-                                'nama' => $data['nama'],
-                                'tempat_lahir' => $data['tempat_lahir'],
-                                'tgl_lahir' => $data['tgl_lahir'],
-                                'alamat' => $data['alamat'],
-                                'no_hp' => $data['no_hp'],
-                                'email' => $data['email'],
-                                'nama_jk' => $data['nama_jk'],
-                                'nama_agama' => $data['nama_agama'],
-                                'foto' => $data['foto'],
-                                'tanggal_logout' => $data['tanggal_logout'],
-                                'nama_status' => $data['nama_status'],
-                                'id_kategori' => $data['id_kategori'],
-                                'online' => $data['online'],
-                            ];
-                            $this->session->set_userdata($all);
-                            $date = array(
-                                'online' => '1'
-                            );
-                            $id_user = $this->session->userdata('id_user');
-                            $this->M_User->logout($date, $id_user);
-                            redirect('admin/dashboard');
-                        } else {
-                            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
-                            redirect('admin/login');
-                        }
-                    } else {
-                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Belum Aktif</div>');
-                        redirect('admin/login');
+                    //status otomatis online//
+                    $date = array(
+                        'online' => '1'
+                    );
+                    $id_user = $this->session->userdata('id_user');
+                    $this->M_User->logout($date, $id_user);
+                    //status otomatis online
+
+                    //cek sesi kategori login
+                    //
+                    if ($this->session->userdata('id_kategori') == 3) {
+                        redirect('admin/dashboard', 'refresh');
+                    } else if ($this->session->userdata('id_kategori') == 1) {
+                        redirect('admin/jurnal/review', 'refresh');
+                    } else if ($this->session->userdata('id_kategori') == 2) {
+                        redirect('admin/jurnal/jurnalakun', 'refresh');
                     }
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Terdaftar</div>');
-                    redirect('admin/login');
-                }
-            } else { //akses dosen
-                if ($data = $cek_dosen->row_array()) {
-                    if (($data['id_status'] == '1')) {
-                        if (password_verify($password, $data['password'])) {
-                            $all = [
-                                'masuk' => TRUE,
-                                'akses' => '2',
-                                'id_user' => $data['id_user'],
-                                'nip_nim' => $data['nip_nim'],
-                                'nama' => $data['nama'],
-                                'tempat_lahir' => $data['tempat_lahir'],
-                                'tgl_lahir' => $data['tgl_lahir'],
-                                'alamat' => $data['alamat'],
-                                'no_hp' => $data['no_hp'],
-                                'email' => $data['email'],
-                                'nama_jk' => $data['nama_jk'],
-                                'nama_agama' => $data['nama_agama'],
-                                'foto' => $data['foto'],
-                                'tanggal_logout' => $data['tanggal_logout'],
-                                'nama_status' => $data['nama_status'],
-                                'id_kategori' => $data['id_kategori'],
-                                'online' => $data['online'],
-                            ];
-                            $this->session->set_userdata($all);
-                            $date = array(
-                                'online' => '1'
-                            );
-                            $id_user = $this->session->userdata('id_user');
-                            $this->M_User->logout($date, $id_user);
-                            redirect('admin/jurnal/review');
-                        } else {
-                            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
-                            redirect('admin/login');
-                        }
-                    } else {
-                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Aktif</div>');
-                        redirect('admin/login');
-                    }
-                } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Terdaftar</div>');
-                    redirect('admin/login');
-                }
-            }
-        } else { //jika login sebagai mahasiswa
-
-            $cek_mahasiswa = $this->M_User->auth_mahasiswa($nip_nim)->row_array();
-            if ($data = $cek_mahasiswa) {
-                if (($data['id_status'] == '1')) {
-                    if (password_verify($password, $data['password'])) {
-
-                        $all = [
-                            'masuk' => TRUE,
-                            'akses' => '3',
-                            'id_user' => $data['id_user'],
-                            'nip_nim' => $data['nip_nim'],
-                            'nama' => $data['nama'],
-                            'tempat_lahir' => $data['tempat_lahir'],
-                            'tgl_lahir' => $data['tgl_lahir'],
-                            'alamat' => $data['alamat'],
-                            'no_hp' => $data['no_hp'],
-                            'email' => $data['email'],
-                            'nama_jk' => $data['nama_jk'],
-                            'nama_agama' => $data['nama_agama'],
-                            'foto' => $data['foto'],
-                            'tanggal_logout' => $data['tanggal_logout'],
-                            'nama_status' => $data['nama_status'],
-                            'id_kategori' => $data['id_kategori'],
-                            'online' => $data['online'],
-                        ];
-                        $this->session->set_userdata($all);
-                        $date = array(
-                            'online' => '1'
-                        );
-                        $id_user = $this->session->userdata('id_user');
-                        $this->M_User->logout($date, $id_user);
-                        redirect('admin/jurnal/jurnalakun');
-                    } else {
-                        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
-                        redirect('admin/login');
-                    }
-                } else {  // jika nip_nim dan password tidak ditemukan atau salah
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Aktif</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Salah</div>');
                     redirect('admin/login');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Ditemukan</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Belum Aktif</div>');
                 redirect('admin/login');
             }
+        } else {
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Tidak Terdaftar</div>');
+            redirect('admin/login');
         }
     }
 
@@ -175,7 +101,7 @@ class Login extends CI_Controller
         $this->M_User->logout($date, $id_user);
 
         $this->session->sess_destroy();
-
+        echo "<script>alert('Silahkan Login Kembali')</script>";
         redirect('admin/login', 'refresh');
     }
     function lupa_password()
@@ -213,9 +139,8 @@ class Login extends CI_Controller
     {
         $config = [
             'protocol' => 'smtp',
-            'smtp_host' => 'ssl://smtp.gmail.com',
-            //'smtp_host' => 'ssl://smtp.googlemail.com',//
-            'smtp_user' => 'ndyp20062019@gmail.com',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'NDYP20062019@gmail.com',
             'smtp_pass' => 'yuliandi20062019',
             'smtp_port' => '465',
             'mailtype' => 'html',
@@ -224,7 +149,7 @@ class Login extends CI_Controller
         ];
 
         $this->load->library('email', $config);
-        $this->email->from('ndyp20062019@gmail.com');
+        $this->email->from('NDYP20062019@gmail.com');
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {
@@ -288,17 +213,17 @@ class Login extends CI_Controller
             $data['title'] = 'Ubah Password';
             $this->load->view('admin/login/ubah', $data);
         } else {
-
             $password = password_hash($this->input->post('password1'), PASSWORD_DEFAULT);
             $email = $this->session->userdata('reset_password');
 
             $x = $this->M_User->edit('user', ['password' =>  $password], array('email' => $email));
             if ($x) {
                 $this->session->unset_userdata('reset_password');
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Berhasil Direset</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-success" role="alert">Password Berhasil Direset</div>');
                 redirect('admin/login', 'refresh');
             } else {
-                echo "asu";
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Password Gagal Direset</div>');
+                redirect('admin/login', 'refresh');
             }
         }
     }

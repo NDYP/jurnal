@@ -7,7 +7,8 @@
         $this->load->model('M_Agama');
         $this->load->model('M_Jenis_Kelamin');
         $this->load->model('M_User');
-        tidak();
+        login();
+        akses_editor();
         header('Cache-Control: no-cache,must-revalidate, max-age=0');
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');
@@ -16,6 +17,7 @@
     {
         $data['title'] = "EDITOR JURNAL";
         $data['editor'] = $this->M_User->index_editor();
+        $data['jumlah'] = $this->M_User->jumlah_editor();
         $data['akun'] = $this->M_User->login();
         $this->load->view('admin/template/header', $data);
         $this->load->view('admin/template/sidebar', $data);
@@ -24,15 +26,16 @@
     }
     public function simpan()
     {
+        //setting form error password
         $this->form_validation->set_rules('password', 'password', 'required|trim', [
             'required' => 'Password Tidak Boleh Kosong!'
         ]);
         $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
             'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
         ]);
-        $this->form_validation->set_rules('nip_nim', 'nip_nim', 'required|trim|is_unique[user.nip_nim]', [
+        $this->form_validation->set_rules('nip_nim', 'nip_nim', 'required|trim', [
             'required' => 'NIP Tidak Boleh Kosong!',
-            'is_unique' => 'NIM Telah Terdaftar'
+
         ]);
         $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required|trim', [
             'required' => 'Tempat Lahir Tidak Boleh Kosong!'
@@ -45,8 +48,9 @@
             'required' => 'Jenis Kelamin Tidak Boleh Kosong!'
         ]);
 
-
+        //jika form validasi jalan atau terdapat error form
         if ($this->form_validation->run() == FALSE) {
+            //maka dijalankan baris code dibawah
             $data['title'] = "FORM TAMBAH DATA EDITOR";
             $data['jk'] = $this->M_Jenis_Kelamin->jk();
             $data['agama'] = $this->M_Agama->agama();
@@ -55,12 +59,16 @@
             $this->load->view('admin/template/sidebar', $data);
             $this->load->view('admin/editor/tambah', $data);
             $this->load->view('admin/template/footer', $data);
-        } else {
+        }
+        //sedangkan jika tidak
+        else {
+            //dijalankan code berikut untuk simpan data
             $config['upload_path'] = './assets/foto/mhs/'; //path folder
             $config['allowed_types'] = 'gif|jpg|png|jpeg|bmp'; //type yang dapat diakses bisa sesuaikan
             $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
 
             $this->upload->initialize($config);
+            //jika terdapat foto profil yang di input
             if (!empty($_FILES['foto']['name'])) {
                 if ($this->upload->do_upload('foto')) {
                     $gbr = $this->upload->data();
@@ -74,6 +82,7 @@
                     $this->image_lib->resize();
                     $file = $gbr['file_name'];
 
+                    //input form
                     $nip_nim = $this->input->post('nip_nim');
                     $nama = $this->input->post('nama');
                     $tempat_lahir = $this->input->post('tempat_lahir');
@@ -107,8 +116,10 @@
                     $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/editor/index', 'refresh');
                 }
-            } else {
-
+            }
+            //jika tidak terdapat input foto
+            else {
+                //input dari form
                 $nip_nim = $this->input->post('nip_nim');
                 $nama = $this->input->post('nama');
                 $tempat_lahir = $this->input->post('tempat_lahir');
@@ -118,10 +129,11 @@
                 $id_agama = $this->input->post('id_agama');
                 $alamat = $this->input->post('alamat');
                 $no_hp = $this->input->post('no_hp');
-
                 $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
-
+                //
+                //variabel dari input form dimasukkan ke dalam satu variabel array
                 $data = array(
+                    //variabel password dimasukkan ke dalam variabel data dengan nama password
                     'password' => $password,
                     'nip_nim' => $nip_nim,
                     'nama' => $nama,
@@ -135,17 +147,18 @@
                     'id_kategori' => '3',
                     'id_status' => '1',
                 );
+                //variabel data dimasukkan ke dalam tabel user
                 $this->M_User->tambah('user', $data);
                 $this->session->set_flashdata('flash', 'Ditambah');
                 redirect('admin/editor/index', 'refresh');
             }
         }
     }
+    //fungsi hapus data dengan id yang dipilih pada index
     public function hapus($id_user)
     {
         $data = $this->M_User->get_editor($id_user);
         if ($data) {
-
             $this->M_User->hapus($id_user);
             $this->session->set_flashdata('flash', 'Dihapus');
             redirect('admin/editor/index', 'refresh');

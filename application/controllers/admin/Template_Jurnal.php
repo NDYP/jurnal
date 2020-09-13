@@ -4,6 +4,8 @@ class Template_Jurnal extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        login();
+        akses_editor();
         $this->load->model('M_Template_Jurnal');
         $this->load->model('M_User');
     }

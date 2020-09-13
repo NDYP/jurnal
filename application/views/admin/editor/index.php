@@ -62,9 +62,11 @@
                           <span class="fa fa-edit"></span>
                           Edit |
                         </a>
-                        <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>">
-                          <span class="fa fa-trash"></span>
-                          Hapus</a>
+                        <?php if ($jumlah > 1) : ?>
+                          <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/editor/hapus/' . $row['id_user']); ?>">
+                            <span class="fa fa-trash"></span>
+                            Hapus</a>
+                        <?php endif; ?>
                       </center>
                     </td>
                   </tr>

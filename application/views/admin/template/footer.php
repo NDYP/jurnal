@@ -43,6 +43,7 @@
 <script src="<?= base_url('assets/') ?>bower_components/chart.js/Chart.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
 
+<!-- JAVASCRIPT UNTUK DATATABLES -->
 <script>
   $(function() {
     $('#example1').DataTable()
@@ -60,7 +61,7 @@
     format: "yyyy-mm-dd"
   })
 </script>
-
+<!-- JAVASCRIPT UNTUK ABSTRAK JURNAL -->
 <script type="text/javascript">
   $(document).ready(function() {
     $('#abstrak').summernote({
@@ -70,6 +71,8 @@
     });
   });
 </script>
+
+<!-- JAVASCRIPT UNTUK CHART DASHBOARD -->
 <script>
   $(function() {
     //get the bar chart canvas
@@ -109,7 +112,7 @@
           "#F4A460",
           "#2E8B57",
         ],
-        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+        borderWidth: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
       }]
     };
 
@@ -135,7 +138,7 @@
 
     //create bar Chart class object
     var chart1 = new Chart(ctx, {
-      type: "bar",
+      type: "pie",
       data: data,
       options: options
     });

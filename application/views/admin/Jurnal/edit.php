@@ -15,7 +15,7 @@
     <section class="content">
 
         <!-- SELECT2 EXAMPLE -->
-        <?= form_open_multipart('admin/jurnal/revisi_penulis') ?>
+        <?= form_open_multipart('admin/jurnal/revisi') ?>
         <div class="box box-default">
             <div class="box-header with-border bg-navy">
                 <center><?= $title; ?></center>

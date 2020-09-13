@@ -41,7 +41,8 @@ class M_User extends CI_Model
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
             ->join('jurnal', 'user.id_user=jurnal.id_penulis', 'right')
             ->join('komentar', 'jurnal.id_jurnal=komentar.id_jurnal', 'left')
-            ->join('status_jurnal', 'jurnal.id_status_jurnal=status_jurnal.id_status_jurnal', 'left')
+            ->join('status_jurnal as w', 'jurnal.id_status_jurnal=w.id_status_jurnal', 'left')
+            ->join('status_jurnal1 as a', 'jurnal.id_status_jurnal1=a.id_status_jurnal1', 'left')
             ->where('user.id_user=', $this->session->userdata('id_user'))->get()->row_array();
         return $query;
     }
@@ -58,34 +59,6 @@ class M_User extends CI_Model
     public function update($tabel, $data, $where)
     {
         return $this->db->update($tabel, $data, $where);
-    }
-    function auth_dosen($nip_nim)
-    {
-        $query = $this->db->select('*')
-            ->from('user')
-            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
-            ->join('status', 'user.id_status=status.id_status', 'right')
-            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
-            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
-            ->where('user.id_kategori !=', 2)
-            ->where('user.nip_nim', $nip_nim)
-            ->get();
-        return $query;
-    }
-
-    //cek nim dan password mahasiswa
-    function auth_mahasiswa($nip_nim)
-    {
-        $query = $this->db->select('*')
-            ->from('user')
-            ->join('kategori', 'user.id_kategori=kategori.id_kategori', 'right')
-            ->join('status', 'user.id_status=status.id_status', 'right')
-            ->join('agama', 'user.id_agama=agama.id_agama', 'right')
-            ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'right')
-            ->where('user.id_kategori=', 2)
-            ->where('user.nip_nim', $nip_nim)
-            ->get();
-        return $query;
     }
     function auth($nip_nim)
     {
@@ -180,6 +153,16 @@ class M_User extends CI_Model
 
             ->get()
             ->result_array();
+        return $query;
+    }
+    public function jumlah_editor()
+    {
+        $query = $this->db->select('*') // pilih semua
+            ->from('user') // dari tabel user
+            ->order_by('id_user', 'desc') // susun berdasarkan id
+            ->where('id_kategori="3"')
+            ->get()
+            ->num_rows();
         return $query;
     }
     public function get_editor($id_user)

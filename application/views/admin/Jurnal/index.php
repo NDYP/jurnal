@@ -37,9 +37,12 @@
                 foreach ($jurnal as $row) : $no++; ?>
                   <tr>
                     <td><?= $no; ?></td>
-                    <td> <?php if ($row['foto'] !== NULL) { ?>
+                    <td>
+                      <!-- Jika foto ada menampilkan foto akun -->
+                      <?php if ($row['foto'] !== NULL) { ?>
                         <img class="profile-user-img img-responsive img-box" src="<?= base_url('assets/foto/mhs/' . $row['foto']) ?>" style="width:70px;">
                       <?php } ?>
+                      <!-- Jika foto tidak ada menampilkan foto default -->
                       <?php if ($row['foto'] == NULL) { ?>
                         <img src="<?= base_url('assets/') ?>foto/default.png" class="profile-user-img img-responsive img-box" style="width:70px;">
                       <?php } ?>
@@ -55,6 +58,7 @@
                               <span class="fa fa-caret-down"></span></button>
 
                           <ul class="dropdown-menu">
+                            <!-- Jika jika kategori sedang login atau sesi login sebagai reviewer -->
                             <?php if ($this->session->userdata('id_kategori') == 1) { ?>
                               <li><a href="<?= site_url('admin/komentar/revisi_editor/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
                               <li><a href="<?= site_url('admin/komentar/revisi_penulis/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
@@ -91,7 +95,7 @@
                     <td>
                       <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
-                          <?php if ($row['id_status_jurnal'] == 2) { ?>
+                          <?php if ($row['id_status_jurnal'] == 2 || $row['id_status_jurnal1'] == 2) { ?>
                             <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
                           <?php } ?>
                         <?php } ?>
