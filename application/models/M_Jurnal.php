@@ -3,6 +3,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 class M_Jurnal extends CI_Model
 {
+    //pengunjung
     public function cari($cari, $limit, $offset)
     {
 
@@ -61,7 +62,6 @@ class M_Jurnal extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
-
             ->where('jurnal.id_status_jurnal=', 5)
             ->where('jurnal.id_status_jurnal1=', 6)
             ->get()

@@ -47,6 +47,7 @@ class Akun extends CI_Controller
         $this->load->view('admin/template/footer', $data);
     }
 
+    //revisi
     function edit($id_jurnal)
     {
         $data['title'] = 'REVISI JURNAL SKRIPSI';
@@ -207,13 +208,13 @@ class Akun extends CI_Controller
                 $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/akun/index', 'refresh');
             } else {
-                $this->session->set_flashdata('gagal', 'Diubah');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File Tidak Boleh Kosong</div>');
                 redirect('admin/akun/index', 'refresh');
             }
         }
         //jika file foto tidak dipilih
         else {
-            $this->session->set_flashdata('gagal', 'Diubah');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File Tidak Boleh Kosong</div>');
             redirect('admin/akun/index', 'refresh');
         }
     }

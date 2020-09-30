@@ -6,6 +6,9 @@ class Login extends CI_Controller
     {
         parent::__construct();
         $this->load->model('M_User');
+        $this->load->model('M_Agama');
+        $this->load->model('M_Jenis_Kelamin');
+        $this->load->model('M_User');
         header('Cache-Control: no-cache,must-revalidate, max-age=0');
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');
@@ -20,11 +23,75 @@ class Login extends CI_Controller
         $this->form_validation->set_rules('password', 'Password', 'required|trim', [
             'required' => 'Password Tidak Boleh Kosong!'
         ]);
+
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = 'Login Page';
             $this->load->view('admin/login/login', $data);
         } else {
             $this->auth();
+        }
+    }
+    function daftar()
+    {
+        $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
+            'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('password', 'password', 'required|trim', [
+            'required' => 'Password Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('nip_nim', 'nip_nim', 'required|trim|is_unique[user.nip_nim]', [
+            'required' => 'NIP Tidak Boleh Kosong!',
+            'is_unique' => 'NIM Telah Terdaftar'
+        ]);
+        $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required|trim', [
+            'required' => 'Tempat Lahir Tidak Boleh Kosong!'
+        ]);
+        $this->form_validation->set_rules('tgl_lahir', 'tgl_lahir', 'required|trim', [
+            'required' => 'Tanggal Lahir Tidak Boleh Kosong!'
+        ]);
+
+        $this->form_validation->set_rules('id_jk', 'id_jk', 'required|trim', [
+            'required' => 'Jenis Kelamin Tidak Boleh Kosong!'
+        ]);
+
+        if ($this->form_validation->run() == FALSE) {
+            $data['title'] = "FORM TAMBAH PENGUNJUNG WEB";
+            $data['jk'] = $this->M_Jenis_Kelamin->jk();
+            $data['agama'] = $this->M_Agama->agama();
+            $data['akun'] = $this->M_User->login();
+            $this->load->view('admin/login/daftar', $data);
+        } else {
+
+
+            $nip_nim = $this->input->post('nip_nim');
+            $nama = $this->input->post('nama');
+            $tempat_lahir = $this->input->post('tempat_lahir');
+            $tgl_lahir = $this->input->post('tgl_lahir');
+            $email = $this->input->post('email');
+            $id_jk = $this->input->post('id_jk');
+            $id_agama = $this->input->post('id_agama');
+            $alamat = $this->input->post('alamat');
+            $no_hp = $this->input->post('no_hp');
+
+            $password =
+                password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+            $data = array(
+                'password' => $password,
+                'nip_nim' => $nip_nim,
+                'nama' => $nama,
+                'id_jk' => $id_jk,
+                'tempat_lahir' => $tempat_lahir,
+                'tgl_lahir' => $tgl_lahir,
+                'alamat' => $alamat,
+                'no_hp' => $no_hp,
+                'email' => $email,
+                'id_agama' => $id_agama,
+                'id_kategori' => '2',
+                'id_status' => '2',
+            );
+            $this->M_User->tambah('user', $data);
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Segera Diaktifkan</div>');
+            redirect('admin/login', 'refresh');
         }
     }
 

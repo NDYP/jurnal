@@ -121,13 +121,16 @@
                                 </center>
 
                                 <br>
-                                <th>PDF</th>
+                                <th>DOC</th>
                                 <td> :
                                     <a class="btn btn-md" href="<?= site_url('assets/jurnal/' . $jurnal['file']) ?>"><span class="fa fa-file-pdf-o"></span></a>
                                     </a>
                                     <h4>ABSTRAK</h4>
 
                                     <small class="text"><?= $jurnal['abstrak']; ?></small>
+                                    <br>
+                                    <h4>KATA KUNCI</h4>
+                                    <small class="text"><?= $jurnal['kata_kunci']; ?></small>
                             </div>
                         </div>
                         <div class="col-md-4">

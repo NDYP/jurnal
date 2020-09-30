@@ -14,6 +14,7 @@ class Jurnal extends CI_Controller
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');
     }
+
     function index()
     {
         akses_editor();
@@ -25,9 +26,9 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/index', $data);
         $this->load->view('admin/template/footer', $data);
     }
+
     function review()
     {
-
         akses_reviewer();
         $data['title'] = 'ARTIKEL MAHASISWA BIMBINGAN SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->bimbingan();
@@ -70,9 +71,10 @@ class Jurnal extends CI_Controller
         ]);
         $this->form_validation->set_rules('abstrak', 'nip_nim', 'required|trim', [
             'required' => 'Abstrak Tidak Boleh Kosong!',
-
         ]);
-
+        $this->form_validation->set_rules('kata_kunci', 'kata_kunci', 'required|trim', [
+            'required' => 'Kata Kunci Tidak Boleh Kosong!',
+        ]);
         if ($this->form_validation->run() == FALSE) {
 
             $data['title'] = 'UPLOAD ARTIKEL';
@@ -86,7 +88,7 @@ class Jurnal extends CI_Controller
             $this->load->view('admin/template/footer', $data);
         } else {
             $config['upload_path'] = './assets/jurnal/'; //path folder
-            $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa sesuaikan
+            $config['allowed_types'] = 'doc|docx'; //type yang dapat diakses bisa sesuaikan
             $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
 
             $this->upload->initialize($config);
@@ -110,6 +112,7 @@ class Jurnal extends CI_Controller
                     $judul = $this->input->post('judul');
 
                     $abstrak = $this->input->post('abstrak');
+                    $kata_kunci = $this->input->post('kata_kunci');
                     $no_seri = random_string('nozero', 12);
 
                     date_default_timezone_set("ASIA/JAKARTA");
@@ -118,6 +121,7 @@ class Jurnal extends CI_Controller
                         'file' => $file,
                         'judul' => $judul,
                         'abstrak' => $abstrak,
+                        'kata_kunci' => $kata_kunci,
                         'id_pembimbing1' => $id_pembimbing1,
                         'id_pembimbing2' => $id_pembimbing2,
                         'id_penulis' => $id_penulis,
@@ -131,12 +135,11 @@ class Jurnal extends CI_Controller
                     $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    $this->session->set_flashdata('flash', 'Ditambah');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Diupload</div>');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 }
             } else {
-
-                $this->session->set_flashdata('flash', 'Ditambah');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File Tidak Boleh Kosong</div>');
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             }
         }
@@ -158,7 +161,7 @@ class Jurnal extends CI_Controller
     {
 
         $config['upload_path'] = './assets/jurnal/'; //path folder
-        $config['allowed_types'] = 'pdf'; //type yang dapat diakses bisa sesuaikan
+        $config['allowed_types'] = 'doc|docx'; //type yang dapat diakses bisa sesuaikan
         $config['file_name'] = $this->input->post('nip_nim'); //nama yang terupload nantinya
 
         $this->upload->initialize($config);
@@ -182,12 +185,14 @@ class Jurnal extends CI_Controller
                 $judul = $this->input->post('judul');
                 $id_kategori_skripsi = $this->input->post('id_kategori_skripsi');
                 $abstrak = $this->input->post('abstrak');
+                $kata_kunci = $this->input->post('kata_kunci');
                 date_default_timezone_set("ASIA/JAKARTA");
                 $date = date('Y-m-d H:i:s');
                 $data = array(
                     'file' => $file,
                     'judul' => $judul,
                     'abstrak' => $abstrak,
+                    'kata_kunci' => $kata_kunci,
                     'id_pembimbing1' => $id_pembimbing1,
                     'id_pembimbing2' => $id_pembimbing2,
                     'id_penulis' => $id_penulis,
@@ -204,7 +209,7 @@ class Jurnal extends CI_Controller
                     redirect('admin/jurnal/', 'refresh');
                 }
             } else {
-                $this->session->set_flashdata('flash', 'Diubah');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Tambah Data</div>');
                 if ($this->session->userdata('id_kategori') == 2) {
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
@@ -212,7 +217,7 @@ class Jurnal extends CI_Controller
                 }
             }
         } else {
-            $this->session->set_flashdata('flash', 'Gagal');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File Tidak Boleh Kosong</div>');
             if ($this->session->userdata('id_kategori') == 2) {
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             } else {
@@ -235,9 +240,7 @@ class Jurnal extends CI_Controller
             date_default_timezone_set("ASIA/JAKARTA");
             $date = date('Y-m-d H:i:s');
             $data = array(
-
                 'id_jurnal' => $id_jurnal,
-
                 'id_user' => $id_user,
                 'komentar' => $komentar,
                 'tanggal' => $date,
@@ -251,9 +254,8 @@ class Jurnal extends CI_Controller
     {
         $data['akun'] = $this->M_User->login();
         $data['berkas'] = $this->M_User->berkas();
-
         $this->pdf->setPaper('A4', 'potrait');
-        $this->pdf->filename = "laporan.pdf";
+        $this->pdf->filename = "Surat Registrasi Jurnal.pdf";
         $this->pdf->load_view('admin/jurnal/cetak', $data);
     }
 }

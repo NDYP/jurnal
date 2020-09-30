@@ -10,13 +10,14 @@ function login()
         redirect('admin/login');
     }
 }
+
 function akses_penulis()
 {
     $ci = &get_instance();
     $user_session = $ci->session->userdata('id_kategori');
     //jika bukan penulis
     if ($user_session != 2) {
-        //maka kemabli ke akun
+        //maka kembali ke akun
         redirect('admin/akun/index');
     }
 }
@@ -40,6 +41,7 @@ function akses_reviewer()
         redirect('admin/akun/index');
     }
 }
+
 function akses_dashboard()
 {
     $ci = &get_instance();

@@ -61,13 +61,14 @@
     format: "yyyy-mm-dd"
   })
 </script>
+
+
 <!-- JAVASCRIPT UNTUK ABSTRAK JURNAL -->
 <script type="text/javascript">
   $(document).ready(function() {
     $('#abstrak').summernote({
       height: "200px",
       styleWithSpan: false
-
     });
   });
 </script>
@@ -145,6 +146,8 @@
 
   });
 </script>
+
+<!-- FLASHDATA-->
 <script src="<?= base_url('assets') ?>/dist/js/sweetalert2.all.min.js"></script>
 <script src="<?= base_url('assets') ?>/dist/js/myscript.js"></script>
 </body>

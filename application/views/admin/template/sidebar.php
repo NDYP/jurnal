@@ -48,7 +48,7 @@
         </li>
       <?php } ?>
       <?php if ($this->session->userdata('id_kategori') == 3) { ?>
-        <li class="treeview <?= ($hal == 'editor' ||  $hal == 'reviewer' || $hal == 'penulis') ? 'active' : ''; ?>">
+        <li class="treeview <?= ($hal == 'editor' ||  $hal == 'reviewer' || $hal == 'penulis' || $hal == 'pengunjung') ? 'active' : ''; ?>">
           <a href="#">
             <i class="fa fa-users"></i> <span>User</span>
             <span class="pull-right-container">
@@ -60,6 +60,7 @@
             <li class="<?= ($hal == 'editor') ? 'active' : ''; ?>"><a href="<?= base_url('admin/editor') ?>"><i class="fa fa-circle-o"></i> Editor</a></li>
             <li class="<?= ($hal == 'reviewer') ? 'active' : ''; ?>"><a href="<?= base_url('admin/reviewer') ?>"><i class=" fa fa-circle-o"></i> Reviewer</a></li>
             <li class="<?= ($hal == 'penulis') ? 'active' : ''; ?>"><a href="<?= base_url('admin/penulis') ?>"><i class="fa fa-circle-o"></i> Penulis</a></li>
+            <li class="<?= ($hal == 'pengunjung') ? 'active' : ''; ?>"><a href="<?= base_url('admin/pengunjung') ?>"><i class="fa fa-circle-o"></i> Pengunjung</a></li>
           </ul>
         </li>
       <?php } ?>

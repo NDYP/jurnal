@@ -2,7 +2,7 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <h4>
-            Dashboard
+            <a class="" href="<?= base_url('admin/dashboard/cetak'); ?>" title="cetak"><span class="fa fa-print"></span> Laporan</a>
         </h4>
     </section>
     <!-- Main content -->

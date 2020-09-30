@@ -39,6 +39,10 @@
                                 </form>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>Kata Kunci</label>
+                            <input type="text" class="form-control" name="kata_kunci" id="kata_kunci" value="<?= $jurnal['kata_kunci']; ?>">
+                        </div>
                     </div>
                     <!-- /.col -->
                     <div class="col-md-6">

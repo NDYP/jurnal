@@ -64,8 +64,10 @@
                               <li><a href="<?= site_url('admin/komentar/revisi_penulis/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
                             <?php  } ?>
 
-                            <li><a href="<?= site_url('admin/komentar/tidak_publish/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
-                            <li><a href="<?= site_url('admin/komentar/publish/' . $row['id_jurnal']); ?>">Publish</a></li>
+                            <?php if ($this->session->userdata('id_kategori') == 3) { ?>
+                              <li><a href="<?= site_url('admin/komentar/tidak_publish1/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
+                              <li><a href="<?= site_url('admin/komentar/publish1/' . $row['id_jurnal']); ?>">Publish</a></li>
+                            <?php  } ?>
                           </ul>
                         <?php  } ?>
                         </div>
@@ -82,22 +84,25 @@
                               <li><a href="<?= site_url('admin/komentar/revisi_editor1/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
                               <li><a href="<?= site_url('admin/komentar/revisi_penulis1/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
                             <?php  } ?>
-                            <li><a href="<?= site_url('admin/komentar/tidak_publish1/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
-                            <li><a href="<?= site_url('admin/komentar/publish1/' . $row['id_jurnal']); ?>">Publish</a></li>
+                            <?php if ($this->session->userdata('id_kategori') == 3) { ?>
+                              <li><a href="<?= site_url('admin/komentar/tidak_publish1/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
+                              <li><a href="<?= site_url('admin/komentar/publish1/' . $row['id_jurnal']); ?>">Publish</a></li>
+                            <?php  } ?>
                           </ul>
                         <?php  } ?>
                         </div>
                       </center>
                     </td>
-                    <td><?= $row['no_seri']; ?></td>
+                    <td>
+                      <?= $row['no_seri']; ?>
+                      <center><button type="button" class="btn btn-info btn-sm" href=""><span class="fa fa-file-pdf-o"></span> Cetak</button></center>
+                    </td>
                     <td><a class="btn btn-md" href="<?= site_url('assets/jurnal/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a>
 
                     <td>
                       <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
-                          <?php if ($row['id_status_jurnal'] == 2 || $row['id_status_jurnal1'] == 2) { ?>
-                            <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit">| Edit </span></a>
-                          <?php } ?>
+                          <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit"> Edit </span></a>
                         <?php } ?>
                       </center>
                     </td>

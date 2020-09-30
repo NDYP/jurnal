@@ -160,10 +160,11 @@ class Beranda extends CI_Controller
             $this->M_Jurnal->tambah('statistik', $data);
         }
 
+        //konfigurasi pagination
         $perpage = 5;
         $offset = $this->uri->segment(3);
         $config['total_rows'] = $this->M_Jurnal->getAll()->num_rows();
-        $config['per_page'] = $perpage;
+        $config['per_page'] = $perpage; //show record perhalaman
         $config['base_url'] = site_url('beranda/index');
         $config['first_link']       = 'Pertama';
         $config['last_link']        = 'Terakhir';
@@ -200,7 +201,6 @@ class Beranda extends CI_Controller
         $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
 
         $this->load->view('pengunjung/template/header1', $data);
-
         $this->load->view('pengunjung/beranda/index1', $data);
         $this->load->view('pengunjung/template/sidebar1', $data);
         $this->load->view('pengunjung/template/footer1', $data);
@@ -272,6 +272,7 @@ class Beranda extends CI_Controller
         $this->load->view('pengunjung/template/sidebar1', $data);
         $this->load->view('pengunjung/template/footer1', $data);
     }
+
     public function cari()
     {
         $ip      = $this->ip_user();
@@ -340,6 +341,7 @@ class Beranda extends CI_Controller
         $data['template'] = $this->M_Template_Jurnal->index()->result_array();
 
         $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+
         $cari = $this->input->post('cari');
         $data['jurnal'] = $this->M_Jurnal->cari($cari, $perpage, $offset);
         $this->load->view('pengunjung/template/header1', $data);

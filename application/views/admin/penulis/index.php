@@ -52,7 +52,20 @@
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['tempat_lahir']; ?>, <?= date('d-m-Y', strtotime($row['tgl_lahir'])); ?> </td>
                     <td><?= $row['email']; ?></td>
-                    <td><?= $row['nama_status']; ?></td>
+                    <td>
+                      <center>
+                        <div class="input-group-btn">
+                          <button type="button" class="btn btn-info dropdown-toggle btn-sm" data-toggle="dropdown"><?= $row['nama_status']; ?>
+                            <span class="fa fa-caret-down"></span>
+                          </button>
+                          <ul class="dropdown-menu">
+                            <li><a href="<?= site_url('admin/penulis/aktif/' . $row['id_user']); ?>">Aktif</a></li>
+                            <li><a href="<?= site_url('admin/penulis/nonaktif/' . $row['id_user']); ?>">Nonaktif</a></li>
+                          </ul>
+
+                        </div>
+                      </center>
+                    </td>
                     <td>
                       <center> <a class="" title="Detail" href="<?= base_url('admin/penulis/detail/' . $row['id_user']); ?>"><span class="fa fa-eye"></span> Lihat |</a>
                         <a class="" title="Edit" href="<?= base_url('admin/penulis/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span> Edit |</a>

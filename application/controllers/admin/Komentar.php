@@ -151,6 +151,7 @@ class Komentar extends CI_Controller
             'id_status_jurnal1' => 2,
         );
         $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));
+
         if ($this->session->userdata('id_kategori') == 3) {
             redirect("admin/jurnal/");    # code...
         } else {

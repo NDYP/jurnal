@@ -21,6 +21,8 @@
                         <h5 class="card-title"><?= $row['judul']; ?></h5>
                         <p class="card-text" align="justify"><?= substr($row['abstrak'], 0, 800);
                                                                 echo "..................."; ?></p>
+                        <h5>Kata Kunci</h5>
+                        <p><?= $row['kata_kunci']; ?></p>
                     </div>
                     <div class="card-footer">
                         <p>

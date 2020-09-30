@@ -31,11 +31,15 @@
                   <textarea id="abstrak" name="abstrak" rows="10" cols="80"></textarea>
                 </form>
               </div>
-
+              <?= form_error('abstrak', '<small class="text-danger pl-1">', '</small>'); ?>
             </div>
-            <?= form_error('abstrak', '<small class="text-danger pl-1">', '</small>'); ?>
-            <!-- /.form-group -->
 
+            <!-- /.form-group -->
+            <div class="form-group">
+              <label>Kata Kunci</label>
+              <input type="textarea" class="form-control" name="kata_kunci" id="kata_kunci">
+              <?= form_error('kata_kunci', '<small class="text-danger pl-1">', '</small>'); ?>
+            </div>
           </div>
           <!-- /.col -->
           <div class="col-md-6">

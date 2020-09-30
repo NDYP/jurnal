@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Login Admin | E-Journal Teknik Informatika</title>
+    <link rel="shortcut icon" href="<?= base_url('assets/foto/upr.png'); ?>">
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
@@ -66,7 +67,7 @@
 
             </div>
             <!-- /.social-auth-links -->
-
+            <a href="<?= base_url('admin/login/daftar'); ?>">Daftar Penulis</a><br>
             <a href="<?= base_url('admin/login/lupa_password'); ?>">Lupa Password</a><br>
 
         </div>

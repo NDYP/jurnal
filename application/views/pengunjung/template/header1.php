@@ -9,7 +9,7 @@
     <meta name="author" content="">
 
     <title>E-Journal - Skripsi TI</title>
-
+    <link rel="shortcut icon" href="<?= base_url('assets/foto/upr.png'); ?>">
     <!-- Bootstrap core CSS -->
     <link href="<?= base_url('assets/template/'); ?>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -51,7 +51,9 @@
                             <a class="nav-link" href="<?= base_url('Login_Pengunjung') ?>">Login</a>
                         </li>
                     <?php endif ?>
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="<?= base_url('pengunjung') ?>">Daftar</a>
+                    </li>
                 </ul>
             </div>
         </div>

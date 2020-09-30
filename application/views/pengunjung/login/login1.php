@@ -1,3 +1,4 @@
+<link rel="shortcut icon" href="<?= base_url('assets/foto/upr.png'); ?>">
 <link href="<?= base_url('assets/') ?>bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!------ Include the above in your HEAD tag ---------->
 

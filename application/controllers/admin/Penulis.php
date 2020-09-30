@@ -258,4 +258,34 @@
       redirect('admin/penulis', 'refresh');
     }
   }
+
+
+  public function aktif($id)
+  {
+    $id_user = $this->uri->segment(4);
+    $data = array(
+      'id_status' => 1,
+    );
+    $this->M_User->edit('user', $data, array('id_user' => $id_user));
+
+    if ($this->session->userdata('id_kategori') == 3) {
+      redirect("admin/penulis");    # code...
+    } else {
+      redirect("admin/penulis");
+    }
+  }
+  public function nonaktif($id)
+  {
+    $id_user = $this->uri->segment(4);
+    $data = array(
+      'id_status' => 2,
+    );
+    $this->M_User->edit('user', $data, array('id_user' => $id_user));
+
+    if ($this->session->userdata('id_kategori') == 3) {
+      redirect("admin/penulis");
+    } else {
+      redirect("admin/penulis");
+    }
+  }
 }

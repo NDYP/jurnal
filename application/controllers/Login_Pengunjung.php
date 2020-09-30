@@ -29,7 +29,7 @@ class Login_Pengunjung extends CI_Controller
         $nip_nim = $this->input->post('nip_nim');
         $password = $this->input->post('password');
 
-        $cek_dosen = $this->M_User->auth_mahasiswa($nip_nim);
+        $cek_dosen = $this->M_User->auth_pengunjung($nip_nim);
         $cek = $cek_dosen->row_array();
         if ($cek_dosen->row_array()) {
             if (($cek['id_status'] == '1')) {
