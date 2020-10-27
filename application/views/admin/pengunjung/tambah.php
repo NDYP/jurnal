@@ -80,7 +80,7 @@
               <div class="form-group">
                 <label>Email</label>
                 <input type="text" class="form-control" name="email">
-
+                <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
               </div>
             </div>
             <!-- /.form-group -->

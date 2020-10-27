@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="<?= site_url('assets'); ?>/dist/css/AdminLTE.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="<?= site_url('assets'); ?>/plugins/iCheck/square/blue.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="<?= base_url('assets/') ?>/bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -64,12 +66,11 @@
                         <!-- /.form-group -->
                         <div class="col-md-6">
                             <div class="form-group">
-                                <?= form_error('tgl_lahir', '<small class="text-danger pl-1">', '</small>'); ?>
-                                <input type="text" class="form-control" id="datepicker" name="tgl_lahir" placeholder="Tanggal Lahir">
+                                <input type="text" class="form-control" id="datepicker" name="tgl_lahir" placeholder="YYYY/MM/DD">
                             </div>
                         </div>
                         <div class="col-md-12">
-
+                            <?= form_error('email', '<small class="text-danger pl-1">', '</small>'); ?>
                             <div class="form-group has-feedback">
                                 <input type="email" class="form-control" placeholder="Email" name="email">
                             </div>
@@ -154,6 +155,10 @@
     <script src="<?= site_url('assets'); ?>/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <!-- iCheck -->
     <script src="<?= site_url('assets'); ?>/plugins/iCheck/icheck.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="<?= base_url('assets/') ?>/bower_components/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js"></script>
+    <script src="<?= base_url('assets/') ?>bower_components/raphael/raphael.min.js"></script>
+    <script src="<?= base_url('assets/') ?>bower_components/morris.js/morris.min.js"></script>
     <script>
         $(function() {
             $('input').iCheck({
@@ -162,6 +167,23 @@
                 increaseArea: '20%' /* optional */
             });
         });
+    </script>
+    <script>
+        $(function() {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+                'paging': true,
+                'lengthChange': true,
+                'searching': true,
+                'ordering': true,
+                'info': true,
+                'autoWidth': true
+            })
+        })
+        $('#datepicker').datepicker({
+            autoclose: true,
+            format: "yyyy-mm-dd"
+        })
     </script>
 </body>
 

@@ -15,8 +15,8 @@
                             <h3 class="text-center text-info">Login</h3>
                             <?= $this->session->flashdata('message'); ?>
                             <div class="form-group">
-                                <label for="username" class="text-info">Username:</label><br>
-                                <input type="text" name="nip_nim" id="username" class="form-control">
+                                <label for="nama" class="text-info">Username:</label><br>
+                                <input type="text" name="nama" id="nama" class="form-control">
                                 <?= form_error('nip_nim', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                             <div class="form-group">

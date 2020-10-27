@@ -1,6 +1,5 @@
 <?php class Penulis extends CI_Controller
 {
-
   public function __construct()
   {
     parent::__construct();
@@ -14,7 +13,6 @@
     header('Pragma: no-cache');
     akses_editor();
   }
-
   public function index()
   {
     $data['title'] = "MAHASISWA SKRIPSI";
@@ -27,6 +25,10 @@
   }
   public function simpan()
   {
+    $this->form_validation->set_rules('email', 'email', 'required|trim|is_unique[user.email]', [
+      'required' => 'Email Tidak Boleh Kosong!',
+      'is_unique' => 'Email Telah Terdaftar'
+    ]);
     $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
       'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
     ]);
@@ -258,8 +260,6 @@
       redirect('admin/penulis', 'refresh');
     }
   }
-
-
   public function aktif($id)
   {
     $id_user = $this->uri->segment(4);

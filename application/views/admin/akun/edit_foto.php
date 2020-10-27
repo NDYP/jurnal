@@ -13,6 +13,7 @@
                 <div class="form-group">
                     <input type="hidden" class="form-control" name="id_user" value="<?= $akun['id_user']; ?>">
                     <input type="hidden" class="form-control" name="nip_nim" value="<?= $akun['nip_nim']; ?>">
+                    <small class="text-danger">*Format File GIF, JPG, PNG, JPEG*</small>
                     <div>
                         <?= form_upload('foto'); ?>
                     </div>

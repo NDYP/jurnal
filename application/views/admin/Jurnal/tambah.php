@@ -70,7 +70,7 @@
               </select>
             </div>
             <div class="form-group">
-              <label>File Jurnal</label>
+              <label>File Jurnal <small class="text-danger">*Format File DOC/DOCX*</small> </label>
               <div>
                 <?= form_upload('file'); ?>
               </div>

@@ -72,7 +72,7 @@ class M_User extends CI_Model
             ->get();
         return $query;
     }
-    function auth_pengunjung($nip_nim)
+    function auth_pengunjung($nama)
     {
         $query = $this->db->select('*')
             ->from('user')
@@ -80,7 +80,7 @@ class M_User extends CI_Model
             ->join('status', 'user.id_status=status.id_status', 'left')
             ->join('agama', 'user.id_agama=agama.id_agama', 'left')
             ->join('jenis_kelamin', 'user.id_jk=jenis_kelamin.id_jk', 'left')
-            ->where('user.nip_nim', $nip_nim)
+            ->where('user.nama', $nama)
             ->where('kategori.nama_kategori="Pengunjung"')
             ->get();
         return $query;

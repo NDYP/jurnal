@@ -46,7 +46,10 @@
         $this->form_validation->set_rules('id_jk', 'id_jk', 'required|trim', [
             'required' => 'Jenis Kelamin Tidak Boleh Kosong!'
         ]);
-
+        $this->form_validation->set_rules('email', 'email', 'required|trim|is_unique[user.email]', [
+            'required' => 'Email Tidak Boleh Kosong!',
+            'is_unique' => 'Email Telah Terdaftar'
+        ]);
 
         if ($this->form_validation->run() == FALSE) {
             $data['title'] = "FORM TAMBAH DATA DOSEN";

@@ -1,9 +1,11 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <h4>
-            <a class="" href="<?= base_url('admin/dashboard/cetak'); ?>" title="cetak"><span class="fa fa-print"></span> Laporan</a>
-        </h4>
+        <?php if ($this->session->userdata('id_kategori') == 3) { ?>
+            <h4>
+                <a class="" href="<?= base_url('admin/jurnal/report'); ?>" title="cetak"><span class="fa fa-print"></span> Laporan</a>
+            </h4>
+        <?php } ?>
     </section>
     <!-- Main content -->
     <section class="content">

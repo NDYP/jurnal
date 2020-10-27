@@ -26,6 +26,10 @@
     }
     public function simpan()
     {
+        $this->form_validation->set_rules('email', 'email', 'required|trim|is_unique[user.email]', [
+            'required' => 'Email Tidak Boleh Kosong!',
+            'is_unique' => 'Email Telah Terdaftar'
+        ]);
         $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
             'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
         ]);

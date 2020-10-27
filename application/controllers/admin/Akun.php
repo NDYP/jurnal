@@ -208,7 +208,7 @@ class Akun extends CI_Controller
                 $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/akun/index', 'refresh');
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File Tidak Boleh Kosong</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
                 redirect('admin/akun/index', 'refresh');
             }
         }

@@ -14,17 +14,10 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="box box-default">
-
                     <div class="box-header with-border">
                         <a class="" href="<?= base_url('admin/jurnal/tambah'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
                     </div>
-
-                    <div class="box-header with-border">
-                        <a class="" href="<?= base_url('admin/jurnal/cetak'); ?>" title="cetak"><span class="fa fa-print"></span> Cetak</a>
-                    </div>
-
                     <!-- /.box-header -->
-
                     <div class="box-body">
                         <table id="example1" class="table table-bordered table-striped">
                             <thead>
@@ -57,6 +50,9 @@
                                                 <a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $x['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                                                 <?php if ($x['id_status_jurnal'] == 3 || $x['id_status_jurnal1'] == 3) { ?>
                                                     <a class="" title="Edit" href="<?= base_url('admin/jurnal/edit/' . $x['id_jurnal']); ?>">| <span class="fa fa-edit"> Edit </span></a>
+                                                <?php } ?>
+                                                <?php if ($x['id_status_jurnal'] == 1 && $x['id_status_jurnal1'] == 1) { ?>
+                                                    <a class="" title="Hapus" href="<?= base_url('admin/jurnal/hapus/' . $x['id_jurnal']); ?>">| <span class="fa fa-edit"> Hapus </span></a>
                                                 <?php } ?>
                                             </center>
                                         </td>

@@ -14,7 +14,6 @@ class Jurnal extends CI_Controller
         header('Cache-Control: post-check=0, pre-check=0,false');
         header('Pragma: no-cache');
     }
-
     function index()
     {
         akses_editor();
@@ -26,7 +25,6 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/index', $data);
         $this->load->view('admin/template/footer', $data);
     }
-
     function review()
     {
         akses_reviewer();
@@ -49,7 +47,6 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/detail', $data);
         $this->load->view('admin/template/footer', $data);
     }
-
     //menampilkan jurnal akun
     function jurnalakun()
     {
@@ -62,7 +59,6 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/upload', $data);
         $this->load->view('admin/template/footer', $data);
     }
-
     //upload jurnal jika belum ada
     function tambah()
     {
@@ -110,10 +106,8 @@ class Jurnal extends CI_Controller
                     $id_pembimbing2 = $this->input->post('id_pembimbing2');
                     $id_kategori_skripsi = $this->input->post('id_kategori_skripsi');
                     $judul = $this->input->post('judul');
-
                     $abstrak = $this->input->post('abstrak');
                     $kata_kunci = $this->input->post('kata_kunci');
-                    $no_seri = random_string('nozero', 12);
 
                     date_default_timezone_set("ASIA/JAKARTA");
                     $date = date('Y-m-d H:i:s');
@@ -129,24 +123,117 @@ class Jurnal extends CI_Controller
                         'id_status_jurnal1' => 1,
                         'id_kategori_skripsi' => $id_kategori_skripsi,
                         'tgl_upload' => $date,
-                        'no_seri' => $no_seri,
                     );
                     $this->M_Jurnal->tambah('jurnal', $data);
+
+                    $this->_sendDospem1();
+                    $this->_sendDospem2();
+                    $this->_sendEditor();
                     $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
-                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Diupload</div>');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">ARTIKEL GAGAL DIUPLOAD, FORMAT FILE HARUS DOC/DOCX</div>');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">File Tidak Boleh Kosong</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">PILIH FILE DIUPLOAD</div>');
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             }
         }
     }
+    private function _sendDospem1()
+    {
+        $id_pembimbing1 = $this->input->post('id_pembimbing1');
+        $id_pembimbing2 = $this->input->post('id_pembimbing2');
+        $user = $this->db->get_where('user', ['nama' => $id_pembimbing1])->row_array();
+        $user2 = $this->db->get_where('user', ['nama' => $id_pembimbing2])->row_array();
+
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'NDYP20062019@gmail.com',
+            'smtp_pass' => 'yuliandi20062019',
+            'smtp_port' => '465',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->from('NDYP20062019@gmail.com');
+        $this->email->to($user['email']);
+        $this->email->subject('Artikel Jurnal Belum Review | E-journal TI UPR');
+        $this->email->message('Klik Link Berikut : <a href="' . base_url() . 'admin/jurnal/review' . '">Review </a>');
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
+    }
+    private function _sendDospem2()
+    {
+        $id_pembimbing1 = $this->input->post('id_pembimbing1');
+        $id_pembimbing2 = $this->input->post('id_pembimbing2');
+        $user = $this->db->get_where('user', ['nama' => $id_pembimbing1])->row_array();
+        $user2 = $this->db->get_where('user', ['nama' => $id_pembimbing2])->row_array();
+
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'NDYP20062019@gmail.com',
+            'smtp_pass' => 'yuliandi20062019',
+            'smtp_port' => '465',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->from('NDYP20062019@gmail.com');
+        $this->email->to($user2['email']);
+        $this->email->subject('Artikel Jurnal Belum Review | E-journal TI UPR');
+        $this->email->message('Klik Link Berikut : <a href="' . base_url() . 'admin/jurnal/review' . '">Review </a>');
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
+    }
+    private function _sendEditor()
+    {
+        $data = $this->M_User->index_editor();
+
+        $config = [
+            'protocol' => 'smtp',
+            'smtp_host' => 'ssl://smtp.googlemail.com',
+            'smtp_user' => 'NDYP20062019@gmail.com',
+            'smtp_pass' => 'yuliandi20062019',
+            'smtp_port' => '465',
+            'mailtype' => 'html',
+            'charset' => 'utf-8',
+            'newline' => "\r\n"
+        ];
+
+        $this->load->library('email', $config);
+        $this->email->from('NDYP20062019@gmail.com');
+        $this->email->to($data['email']);
+        $this->email->subject('Artikel Jurnal Baru | E-journal TI UPR');
+        $this->email->message('Klik Link Berikut : <a href="' . base_url() . 'admin/jurnal' . '">Review </a>');
+
+        if ($this->email->send()) {
+            return true;
+        } else {
+            echo $this->email->print_debugger();
+            die;
+        }
+    }
     function edit($id_jurnal)
     {
-        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index();
+        $data['kategori_skripsi'] = $this->M_Kategori_Skripsi->index1();
         $data['title'] = 'REVISI ARTIKEL SKRIPSI';
         $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
         $data['reviewer'] = $this->M_User->index_reviewer();
@@ -156,7 +243,6 @@ class Jurnal extends CI_Controller
         $this->load->view('admin/jurnal/edit', $data);
         $this->load->view('admin/template/footer', $data);
     }
-
     function revisi()
     {
 
@@ -250,12 +336,64 @@ class Jurnal extends CI_Controller
             redirect('admin/jurnal/review');
         }
     }
+    public function no_surat($id_jurnal)
+    {
+        $data['title'] = 'CETAK SURAT';
+        $data['akun'] = $this->M_User->login();
+        $data['jurnal'] = $this->M_Jurnal->get($id_jurnal);
+        $this->load->view('admin/template/header', $data);
+        $this->load->view('admin/template/sidebar', $data);
+        $this->load->view('admin/jurnal/form_cetak', $data);
+        $this->load->view('admin/template/footer', $data);
+    }
     public function cetak()
     {
-        $data['akun'] = $this->M_User->login();
-        $data['berkas'] = $this->M_User->berkas();
+        $no_Seri = $this->input->post('no_seri');
+        $id_jurnal = $this->input->post('id_jurnal');
+        $data = array('no_seri' => $no_Seri);
+        $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
+        $data['berkas'] = $this->M_Jurnal->get($id_jurnal);
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "Surat Registrasi Jurnal.pdf";
         $this->pdf->load_view('admin/jurnal/cetak', $data);
+    }
+    public function report()
+    {
+        $data = array(
+            'publish' => $this->M_Jurnal->jumlahpublish()->result(),
+            'jumlahpublish' => $this->M_Jurnal->jumlahpublish()->num_rows(),
+            //'jumlahpublishSI' => $this->M_Jurnal->jumlahpublishSI(),
+            //'jumlahpublishSISDIG' => $this->M_Jurnal->jumlahpublishSISDIG(),
+            //'jumlahpublishSENSOR' => $this->M_Jurnal->jumlahpublishSENSOR(),
+            //'jumlahpublishIOT' => $this->M_Jurnal->jumlahpublishIOT(),
+            // 'jumlahpublishMCN' => $this->M_Jurnal->jumlahpublishMCN(),
+            //'jumlahpublishAI' => $this->M_Jurnal->jumlahpublishAI(),
+            //'jumlahpublishDS' => $this->M_Jurnal->jumlahpublishDS(),
+            // 'jumlahpublishMULTIMEDIA' => $this->M_Jurnal->jumlahpublishMULTIMEDIA(),
+            // 'tidakpublish' => $this->M_Jurnal->tidakpublish(),
+            // 'tidakpublishSI' => $this->M_Jurnal->tidakpublishSI(),
+            // 'tidakpublishSISDIG' => $this->M_Jurnal->tidakpublishSISDIG(),
+            // 'tidakpublishSENSOR' => $this->M_Jurnal->tidakpublishSENSOR(),
+            // 'tidakpublishIOT' => $this->M_Jurnal->tidakpublishIOT(),
+            // 'tidakpublishMCN' => $this->M_Jurnal->tidakpublishMCN(),
+            // 'tidakpublishAI' => $this->M_Jurnal->tidakpublishAI(),
+            // 'tidakpublishDS' => $this->M_Jurnal->tidakpublishDS(),
+        );
+
+        $this->pdf->setPaper('A4', 'potrait');
+        $this->pdf->filename = "Monthly_Report.pdf";
+        $this->pdf->load_view('admin/jurnal/report', $data);
+    }
+    public function hapus($id_jurnal)
+    {
+        $data = $this->M_Jurnal->get($id_jurnal);
+        if ($data) {
+            $this->M_Jurnal->hapus($id_jurnal);
+            $this->session->set_flashdata('flash', 'Dihapus');
+            redirect('admin/jurnal/jurnalakun', 'refresh');
+        } else {
+            $this->session->set_flashdata('flash', 'Dihapus');
+            redirect('admin/jurnal/jurnalakun', 'refresh');
+        }
     }
 }

@@ -49,7 +49,7 @@
                         <div class="form-group">
                             <div class="form-group">
                                 <label>Pembimbing 1</label>
-                                <select name="id_pembimbing1" class="form-control select2" style="width: 100%;">
+                                <select disabled name="id_pembimbing1" class="form-control select2" style="width: 100%;">
                                     <?php foreach ($reviewer as $akun) : ?>
                                         <?php if ($jurnal['id_pembimbing1'] == $akun['nama']) : ?>
                                             <option name="id_pembimbing1" value="<?= $akun['nama']; ?>" selected><?= $akun['nama']; ?></option>
@@ -62,7 +62,7 @@
                             <?= form_error('id_jk', '<small class="text-danger pl-1">', '</small>'); ?>
                             <div class="form-group">
                                 <label>Pembimbing 2</label>
-                                <select name="id_pembimbing2" class="form-control select2" style="width: 100%;">
+                                <select disabled name="id_pembimbing2" class="form-control select2" style="width: 100%;">
                                     <?php foreach ($reviewer as $akun) : ?>
                                         <?php if ($jurnal['id_pembimbing2'] == $akun['nama']) : ?>
                                             <option name="id_pembimbing2" value="<?= $akun['nama']; ?>" selected><?= $akun['nama']; ?></option>

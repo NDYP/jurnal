@@ -10,6 +10,7 @@
 
   <!-- Main content -->
   <section class="content">
+    <?= $this->session->flashdata('message'); ?>
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <div class="flash-data1" data-flashdata="<?= $this->session->flashdata('error'); ?>"></div>
     <div class="row">
@@ -27,7 +28,6 @@
                   <th>Penulis</th>
                   <th>Pembimbing 1</th>
                   <th>Pembimbing 2</th>
-                  <th>No. Seri</th>
                   <th>File</th>
                   <th>Aksi</th>
                 </tr>
@@ -65,8 +65,8 @@
                             <?php  } ?>
 
                             <?php if ($this->session->userdata('id_kategori') == 3) { ?>
-                              <li><a href="<?= site_url('admin/komentar/tidak_publish1/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
-                              <li><a href="<?= site_url('admin/komentar/publish1/' . $row['id_jurnal']); ?>">Publish</a></li>
+                              <li><a href="<?= site_url('admin/komentar/tidak_publish/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
+                              <li><a href="<?= site_url('admin/komentar/publish/' . $row['id_jurnal']); ?>">Publish</a></li>
                             <?php  } ?>
                           </ul>
                         <?php  } ?>
@@ -93,16 +93,15 @@
                         </div>
                       </center>
                     </td>
-                    <td>
-                      <?= $row['no_seri']; ?>
-                      <center><button type="button" class="btn btn-info btn-sm" href=""><span class="fa fa-file-pdf-o"></span> Cetak</button></center>
-                    </td>
+
                     <td><a class="btn btn-md" href="<?= site_url('assets/jurnal/' . $row['file']) ?>"><span class="fa fa-file-pdf-o"></span></a>
 
                     <td>
                       <center><a class="" title="Detail" href="<?= base_url('admin/jurnal/detail/' . $row['id_jurnal']); ?>"><span class="fa fa-eye"></span> Lihat</a>
                         <?php if ($akun['id_kategori'] == 3) { ?>
                           <a class="" title="Hapus" href="<?= base_url('admin/jurnal/edit/' . $row['id_jurnal']); ?>"><span class="fa fa-edit"> Edit </span></a>
+                          <br>
+                          <a type="" class="" href="<?= base_url('admin/jurnal/no_surat/' . $row['id_jurnal']); ?>"><span class="fa fa-file-pdf-o"></span> Cetak</a>
                         <?php } ?>
                       </center>
                     </td>

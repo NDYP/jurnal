@@ -43,6 +43,10 @@ class Login extends CI_Controller
             'required' => 'NIP Tidak Boleh Kosong!',
             'is_unique' => 'NIM Telah Terdaftar'
         ]);
+        $this->form_validation->set_rules('email', 'email', 'required|trim|is_unique[user.email]', [
+            'required' => 'Email Tidak Boleh Kosong!',
+            'is_unique' => 'Email Telah Terdaftar'
+        ]);
         $this->form_validation->set_rules('tempat_lahir', 'Tempat Lahir', 'required|trim', [
             'required' => 'Tempat Lahir Tidak Boleh Kosong!'
         ]);
@@ -73,8 +77,7 @@ class Login extends CI_Controller
             $alamat = $this->input->post('alamat');
             $no_hp = $this->input->post('no_hp');
 
-            $password =
-                password_hash($this->input->post('password'), PASSWORD_DEFAULT);
+            $password = password_hash($this->input->post('password'), PASSWORD_DEFAULT);
             $data = array(
                 'password' => $password,
                 'nip_nim' => $nip_nim,
@@ -90,7 +93,19 @@ class Login extends CI_Controller
                 'id_status' => '2',
             );
             $this->M_User->tambah('user', $data);
-            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Akun Segera Diaktifkan</div>');
+
+
+            date_default_timezone_set("ASIA/JAKARTA");
+            $date = date('Y-m-d H:i:s');
+            $token = base64_encode(random_bytes(32));
+            $user_token = [
+                'email' => $email,
+                'token' => $token,
+                'tanggal_buat' => $date,
+            ];
+            $this->db->insert('token', $user_token);
+            $this->_sendEmail($token, 'verify');
+            $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Cek Email Untuk Aktivasi Akun</div>');
             redirect('admin/login', 'refresh');
         }
     }
@@ -168,7 +183,6 @@ class Login extends CI_Controller
         $this->M_User->logout($date, $id_user);
 
         $this->session->sess_destroy();
-        echo "<script>alert('Silahkan Login Kembali')</script>";
         redirect('admin/login', 'refresh');
     }
     function lupa_password()
@@ -220,10 +234,9 @@ class Login extends CI_Controller
         $this->email->to($this->input->post('email'));
 
         if ($type == 'verify') {
-            $this->email->subject('Reset Passwword | E-journal TI UPR');
-            $this->email->message('Klik Link Berikut : <a href="' . base_url('admin/login/verify?email=') . $this->input->post('email') . '&token=' . urlencode($token) . '">Reset </a>');
+            $this->email->subject('Aktivasi Akun | E-journal TI UPR');
+            $this->email->message('Klik Link Berikut : <a href="' . base_url('admin/login/aktif?email=') . $this->input->post('email') . '&token=' . urlencode($token) . '">Link </a>');
         } else if ($type == 'forgot') {
-
             $this->email->subject('Reset Passwword | E-journal TI UPR');
             $this->email->message('Klik Link Berikut : <a href="' . base_url() . 'admin/login/resetpassword?email=' . $this->input->post('email') . '&token=' . urlencode($token) . '">Reset </a>');
         }
@@ -262,6 +275,20 @@ class Login extends CI_Controller
             $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">Reset Password Gagal!Email Salah</div>');
 
             redirect('admin/login/lupa_password', 'refresh');
+        }
+    }
+    public function aktif()
+    {
+        $email = $this->input->get('email');
+        $user = $this->db->get_where('user', ['email' => $email])->row_array();
+        $id_user = $user['id_user'];
+
+        $yes = $this->M_User->edit('user', array('id_status' => 1), array('id_user' => $id_user));
+        if ($yes) {
+            $this->session->set_flashdata('message', '<div class="alert alert-warning" role="alert">YES</div>');
+            redirect("admin/login");    # code...
+        } else {
+            redirect("admin/login/daftar");
         }
     }
     public function ubahpassword()

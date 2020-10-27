@@ -9,7 +9,7 @@ class Login_Pengunjung extends CI_Controller
 
     function index()
     {
-        $this->form_validation->set_rules('nip_nim', 'nip_nim', 'required|trim', [
+        $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
             'required' => ' Tidak Boleh Kosong!'
         ]);
 
@@ -26,14 +26,14 @@ class Login_Pengunjung extends CI_Controller
 
     function auth()
     {
-        $nip_nim = $this->input->post('nip_nim');
+        $nama = $this->input->post('nama');
         $password = $this->input->post('password');
 
-        $cek_dosen = $this->M_User->auth_pengunjung($nip_nim);
+        $cek_dosen = $this->M_User->auth_pengunjung($nama);
         $cek = $cek_dosen->row_array();
         if ($cek_dosen->row_array()) {
             if (($cek['id_status'] == '1')) {
-                if ($password == $cek['password']) {
+                if (password_verify($password, $cek['password'])) {
                     $all = [
                         'id_user' => $cek['id_user'],
                         'nip_nim' => $cek['nip_nim'],
