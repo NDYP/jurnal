@@ -58,12 +58,10 @@
                               <span class="fa fa-caret-down"></span></button>
 
                           <ul class="dropdown-menu">
-                            <!-- Jika jika kategori sedang login atau sesi login sebagai reviewer -->
                             <?php if ($this->session->userdata('id_kategori') == 1) { ?>
                               <li><a href="<?= site_url('admin/komentar/revisi_editor/' . $row['id_jurnal']); ?>">Revisi Editor</a></li>
                               <li><a href="<?= site_url('admin/komentar/revisi_penulis/' . $row['id_jurnal']); ?>">Revisi Penulis</a></li>
                             <?php  } ?>
-
                             <?php if ($this->session->userdata('id_kategori') == 3) { ?>
                               <li><a href="<?= site_url('admin/komentar/tidak_publish/' . $row['id_jurnal']); ?>">Tidak Publish</a></li>
                               <li><a href="<?= site_url('admin/komentar/publish/' . $row['id_jurnal']); ?>">Publish</a></li>

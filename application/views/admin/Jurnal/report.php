@@ -60,8 +60,10 @@
         </tr>
         <hr class="line-title">
     </table>
+    <br>
     <p align="center">
-        Artikel Jurnal Status Publish<br>
+        <font face="Arial Rounded MT Bold" font size="2">
+            Laporan Artikel Publish Bulan <?= bulan(); ?><br>
     </p>
     <table class="table table-bordered">
         <tr>

@@ -11,12 +11,8 @@
   <!-- Main content -->
   <section class="content">
 
-
+    <?= $this->session->flashdata('message'); ?>
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
-
-
-
-
     <div class="row">
       <div class="col-xs-12">
         <!-- /.box -->
@@ -39,7 +35,7 @@
                 </tr>
               </thead>
               <tbody>
-                <?php $no = 0;
+                <?php $no = 1;
                 foreach ($editor as $row) :  ?>
                   <tr>
                     <td><?= $no++; ?></td>

@@ -23,7 +23,7 @@
     public function simpan()
     {
         $this->form_validation->set_rules('nama', 'nama', 'required|trim', [
-            'required' => 'Nama Lengkap Beserta Title Tidak Boleh Kosong!'
+            'required' => 'Nama Lengkap Tidak Boleh Kosong!'
         ]);
         $this->form_validation->set_rules('password', 'password', 'required|trim', [
             'required' => 'Password Tidak Boleh Kosong!'

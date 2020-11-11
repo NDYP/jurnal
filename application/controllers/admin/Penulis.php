@@ -110,7 +110,7 @@
           $this->session->set_flashdata('flash', 'Ditambah');
           redirect('admin/penulis', 'refresh');
         } else {
-          $this->session->set_flashdata('flash', 'Ditambah');
+          $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
           redirect('admin/penulis', 'refresh');
         }
       } else {
@@ -228,7 +228,7 @@
         $this->session->set_flashdata('flash', 'Diubah');
         redirect('admin/penulis', 'refresh');
       } else {
-        $this->session->set_flashdata('flash', 'Diubah');
+        $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
         redirect('admin/penulis', 'refresh');
       }
     } else {

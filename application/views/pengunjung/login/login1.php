@@ -17,7 +17,7 @@
                             <div class="form-group">
                                 <label for="nama" class="text-info">Username:</label><br>
                                 <input type="text" name="nama" id="nama" class="form-control">
-                                <?= form_error('nip_nim', '<small class="text-danger pl-1">', '</small>'); ?>
+                                <?= form_error('nama', '<small class="text-danger pl-1">', '</small>'); ?>
                             </div>
                             <div class="form-group">
                                 <label for="password" class="text-info">Password:</label><br>

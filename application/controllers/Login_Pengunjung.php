@@ -67,6 +67,7 @@ class Login_Pengunjung extends CI_Controller
         }
     }
 
+
     function logout()
     {
         date_default_timezone_set("ASIA/JAKARTA");

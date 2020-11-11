@@ -65,8 +65,6 @@ class Login extends CI_Controller
             $data['akun'] = $this->M_User->login();
             $this->load->view('admin/login/daftar', $data);
         } else {
-
-
             $nip_nim = $this->input->post('nip_nim');
             $nama = $this->input->post('nama');
             $tempat_lahir = $this->input->post('tempat_lahir');
@@ -93,7 +91,6 @@ class Login extends CI_Controller
                 'id_status' => '2',
             );
             $this->M_User->tambah('user', $data);
-
 
             date_default_timezone_set("ASIA/JAKARTA");
             $date = date('Y-m-d H:i:s');

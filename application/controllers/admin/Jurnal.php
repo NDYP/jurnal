@@ -128,7 +128,7 @@ class Jurnal extends CI_Controller
 
                     $this->_sendDospem1();
                     $this->_sendDospem2();
-                    $this->_sendEditor();
+                    //$this->_sendEditor();//
                     $this->session->set_flashdata('flash', 'Ditambah');
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 } else {
@@ -136,7 +136,7 @@ class Jurnal extends CI_Controller
                     redirect('admin/jurnal/jurnalakun', 'refresh');
                 }
             } else {
-                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">PILIH FILE DIUPLOAD</div>');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">PILIH FILE UNTUK DIUPLOAD</div>');
                 redirect('admin/jurnal/jurnalakun', 'refresh');
             }
         }
@@ -266,8 +266,7 @@ class Jurnal extends CI_Controller
                 $file = $gbr['file_name'];
                 $id_jurnal = $this->input->post('id_jurnal');
                 $id_penulis = $this->input->post('id_penulis');
-                $id_pembimbing1 = $this->input->post('id_pembimbing1');
-                $id_pembimbing2 = $this->input->post('id_pembimbing2');
+
                 $judul = $this->input->post('judul');
                 $id_kategori_skripsi = $this->input->post('id_kategori_skripsi');
                 $abstrak = $this->input->post('abstrak');
@@ -279,12 +278,11 @@ class Jurnal extends CI_Controller
                     'judul' => $judul,
                     'abstrak' => $abstrak,
                     'kata_kunci' => $kata_kunci,
-                    'id_pembimbing1' => $id_pembimbing1,
-                    'id_pembimbing2' => $id_pembimbing2,
+
                     'id_penulis' => $id_penulis,
                     'id_status_jurnal' => 6,
                     'id_status_jurnal1' => 5,
-                    'tgl_edit' => $date,
+                    'tgl_upload' => $date,
                     'id_kategori_skripsi' => $id_kategori_skripsi,
                 );
                 $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
@@ -350,8 +348,11 @@ class Jurnal extends CI_Controller
     {
         $no_Seri = $this->input->post('no_seri');
         $id_jurnal = $this->input->post('id_jurnal');
-        $data = array('no_seri' => $no_Seri);
+        $data = array(
+            'no_seri' => $no_Seri
+        );
         $this->M_Jurnal->update('jurnal', $data, array('id_jurnal' => $id_jurnal));
+
         $data['berkas'] = $this->M_Jurnal->get($id_jurnal);
         $this->pdf->setPaper('A4', 'potrait');
         $this->pdf->filename = "Surat Registrasi Jurnal.pdf";
@@ -381,7 +382,7 @@ class Jurnal extends CI_Controller
         );
 
         $this->pdf->setPaper('A4', 'potrait');
-        $this->pdf->filename = "Monthly_Report.pdf";
+        $this->pdf->filename = "Laporan Artikel Publish Perbulan.pdf";
         $this->pdf->load_view('admin/jurnal/report', $data);
     }
     public function hapus($id_jurnal)

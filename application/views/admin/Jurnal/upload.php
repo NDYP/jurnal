@@ -15,6 +15,7 @@
             <div class="col-xs-12">
                 <div class="box box-default">
                     <div class="box-header with-border">
+
                         <a class="" href="<?= base_url('admin/jurnal/tambah'); ?>" title="tambah"><span class="fa fa-plus"></span> Tambah</a>
                     </div>
                     <!-- /.box-header -->

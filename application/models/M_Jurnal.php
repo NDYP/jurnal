@@ -23,6 +23,9 @@ class M_Jurnal extends CI_Model
             ->where('jurnal.id_status_jurnal=', 5)
             ->where('jurnal.id_status_jurnal1=', 6)
             ->or_like('jurnal.no_seri', $cari)
+            ->where('jurnal.id_status_jurnal=', 5)
+            ->where('jurnal.id_status_jurnal1=', 6)
+            ->or_like('jurnal.kata_kunci', $cari)
             ->order_by('id_jurnal', 'desc')
             ->limit($limit, $offset)
             ->get()
@@ -188,7 +191,6 @@ class M_Jurnal extends CI_Model
             ->join('kategori_skripsi', 'jurnal.id_kategori_skripsi=kategori_skripsi.id_kategori_skripsi', 'left')
             ->join('status_jurnal1', 'jurnal.id_status_jurnal1=status_jurnal1.id_status_jurnal1', 'left')
             ->join('user', 'jurnal.id_penulis=user.id_user', 'left')
-
             ->where('MONTH(tgl_upload)=', date('m'))
             ->where('jurnal.id_status_jurnal=', 5)
             ->where('jurnal.id_status_jurnal1=', 6)

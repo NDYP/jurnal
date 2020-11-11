@@ -5,11 +5,10 @@
     <h4>
       <?= $title; ?>
     </h4>
-
   </section>
-
   <!-- Main content -->
   <section class="content">
+    <?= $this->session->flashdata('message'); ?>
     <div class="flash-data" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
     <div class="row">
       <div class="col-xs-12">
@@ -29,7 +28,6 @@
                   <th>Nama</th>
                   <th>TTL</th>
                   <th>Email</th>
-
                   <th>Aksi</th>
                 </tr>
               </thead>
@@ -49,11 +47,10 @@
                     <td><?= $row['nama']; ?></td>
                     <td><?= $row['tempat_lahir']; ?>, <?= date('d-m-Y', strtotime($row['tgl_lahir'])); ?> </td>
                     <td><?= $row['email']; ?></td>
-
                     <td>
                       <center> <a class="" title="Detail" href="<?= base_url('admin/reviewer/detail/' . $row['id_user']); ?>"><span class="fa fa-eye"></span> Lihat |</a>
                         <a class="" title="Edit" href="<?= base_url('admin/reviewer/edit/' . $row['id_user']); ?>"><span class="fa fa-edit"></span> Edit |</a>
-                        <a class="" title="Hapus" href="<?= base_url('admin/reviewer/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span> Hapus</a>
+                        <a class="tombol-hapus" title="Hapus" href="<?= base_url('admin/reviewer/hapus/' . $row['id_user']); ?>"><span class="fa fa-trash"></span> Hapus</a>
                       </center>
                     </td>
                   </tr>

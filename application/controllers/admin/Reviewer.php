@@ -108,10 +108,9 @@
                     $this->M_User->tambah('user', $data);
                     $this->session->set_flashdata('flash', 'Ditanbah');
                     redirect('admin/reviewer', 'refresh');
-                } else {
-                    $this->session->set_flashdata('flash', 'Ditanbah');
-                    redirect('admin/reviewer', 'refresh');
                 }
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
+                redirect('admin/reviewer', 'refresh');
             } else {
 
                 $nip_nim = $this->input->post('nip_nim');
@@ -140,7 +139,7 @@
                     'id_status' => '1',
                 );
                 $this->M_User->tambah('user', $data);
-                $this->session->set_flashdata('flash', 'Ditanbah');
+                $this->session->set_flashdata('flash', 'Ditambah');
                 redirect('admin/reviewer', 'refresh');
             }
         }
@@ -230,7 +229,7 @@
                 $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/reviewer', 'refresh');
             } else {
-                $this->session->set_flashdata('flash', 'Diubah');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
                 redirect('admin/reviewer', 'refresh');
             }
         } else {

@@ -117,7 +117,7 @@
 
                     redirect('admin/editor/index', 'refresh');
                 } else {
-                    $this->session->set_flashdata('flash', 'Ditambah');
+                    $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
                     redirect('admin/editor/index', 'refresh');
                 }
             }
@@ -194,6 +194,7 @@
         $this->load->view('admin/editor/edit', $data);
         $this->load->view('admin/template/footer', $data);
     }
+
     public function ubah()
     {
 
@@ -242,7 +243,7 @@
                 $this->session->set_flashdata('flash', 'Diubah');
                 redirect('admin/editor/index', 'refresh');
             } else {
-                $this->session->set_flashdata('flash', 'Diubah');
+                $this->session->set_flashdata('message', '<div class="alert alert-danger" role="alert">Gagal Upload, Format File GIF, JPG, PNG, JPEG!</div>');
                 redirect('admin/editor/index', 'refresh');
             }
         } else {

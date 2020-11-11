@@ -27,6 +27,9 @@
           <?php endif ?>
           <h5 align="center">ABSTRAK</h5>
           <p class="lead" align="justify"><?= $jurnal['abstrak']; ?></p>
+          <br>
+          <h6 align="justify">Kata Kunci : <small> <?= $jurnal['kata_kunci']; ?></small></h6>
+
         </div>
         <hr>
         <!-- Comments Form -->

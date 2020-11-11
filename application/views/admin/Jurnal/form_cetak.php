@@ -3,8 +3,6 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
         <?php if ($akun['id_kategori'] == 2) { ?>
-
-
             <a class="" href="<?= base_url('admin/jurnal/jurnalakun'); ?>"><i class="fa fa-arrow-circle-left"></i> Kembali</a>
         <?php  } ?>
         <?php if ($akun['id_kategori'] == 3) { ?>
@@ -30,7 +28,7 @@
                             <input type="hidden" class="form-control" name="id_penulis" id="id_penulis" value="<?= $jurnal['id_penulis']; ?>">
                             <input type="hidden" class="form-control" name="id_jurnal" id="id_jurnal" value="<?= $jurnal['id_jurnal']; ?>">
                             <label>Nomor Surat</label> <small class="text-danger">*isi titik-titik*</small>
-                            <input type="text" class="form-control" name="no_seri" id="no_seri" value=". . . ./ND/YP-20072019">
+                            <input type="text" class="form-control" name="no_seri" id="no_seri" value=". . ./UN24.6.4/. . .-2020">
                         </div>
                     </div>
                     <!-- /.col -->

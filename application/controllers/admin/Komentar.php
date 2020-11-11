@@ -113,7 +113,10 @@ class Komentar extends CI_Controller
     public function publish($id)
     {
         $id_jurnal = $this->uri->segment(4);
+        date_default_timezone_set("ASIA/JAKARTA");
+        $date = date('Y-m-d H:i:s');
         $data = array(
+            'tgl_upload' => $date,
             'id_status_jurnal' => 5,
         );
         $this->M_Status_Jurnal->edit('jurnal', $data, array('id_jurnal' => $id_jurnal));

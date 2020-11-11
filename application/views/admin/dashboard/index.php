@@ -1,9 +1,9 @@
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-        <?php if ($this->session->userdata('id_kategori') == 3) { ?>
+        <?php if ($this->session->userdata('id_kategori') == 3 || $this->session->userdata('id_kategori') == 1) { ?>
             <h4>
-                <a class="" href="<?= base_url('admin/jurnal/report'); ?>" title="cetak"><span class="fa fa-print"></span> Laporan</a>
+                <a class="" href="<?= base_url('admin/jurnal/report'); ?>" title="cetak"><span class="fa fa-print"></span> Laporan Artikel Publish Perbulan</a>
             </h4>
         <?php } ?>
     </section>
